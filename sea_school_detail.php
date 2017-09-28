@@ -19,7 +19,7 @@ define('IN_DOUCO', true);
 //     if ($_COOKIE['client'] != 'pc') $_COOKIE['client'] = 'pc';
 // }
 require (dirname(__FILE__) . '/include/init.php');
-
+ 
 if(!isset($_SESSION['pass'])){
 	echo '';
 	exit;
