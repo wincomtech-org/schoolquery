@@ -83,7 +83,7 @@ $smarty->assign('course', $course);//获取学科
 $sql = "SELECT * FROM " . $dou->table('taste').'where news_show=1 order by sort desc limit 2';
 $query = $dou->query($sql);
 while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
-		$row['content']=mb_substr($row['content'],0,60,'UTF-8');
+		$row['content']=mb_substr($row['content'],0,40,'UTF-8');
 	   $news[]=$row;
 }
 $smarty->assign('news', $news);//获取新闻
