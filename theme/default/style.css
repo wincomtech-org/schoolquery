@@ -272,7 +272,7 @@ td.subject-deadline{width:auto;}
 .school_main .search span{float:left;width:78px;text-align:left;line-height:23px;}
 .school_main .search div{float:left;position:relative;}
 .school_main .search div input{width:220px;height:25px;line-height:25px;border:1px solid #ddd;box-sizing:border-box;-o-box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;padding-left:5px;padding-right:32px;}
-.school_main .search div a{position:absolute;top:1px;right:0;display:block;width:32px;height:24px;text-align:center;line-height:23px;background-color:#1452c8;font-size:12px;color:#fff;}
+.school_main .search div a,.school_main .search div .ser{position:absolute;top:1px;right:0;display:block;width:32px;height:24px;text-align:center;line-height:23px;background-color:#1452c8;font-size:12px;color:#fff;}
 .local_stuidies_a a{font-size:18px;padding:7px 12px;border-right:1px solid #ddd;margin:5px 0;display:inline-block;}
 .local_stuidies_a a.active{background-color:#1452c8;color:#fff;}
 .local_stuidies{width:100%;}
@@ -337,7 +337,7 @@ td.subject-deadline{width:auto;}
 
 /**本地学位**/
 .nav_brash .search{line-height:23px;display:inline-block;vertical-align:middle;}
-.nav_brash .search div a{top:1px;}
+.nav_brash .search div .ser,.nav_brash .search div a{top:1px;}
 .local_school{width:100%;}
 .local_school_nav{width:80%;display:table;margin:30px auto 40px;}
 .local_school_nav  .local_shool_list{text-align:center;display:table-cell;background-color:#e1e1e1;}
@@ -349,6 +349,7 @@ td.subject-deadline{width:auto;}
 .local_school{width:100%;}
 .local_shool_content{width:100%;}
 .local_shool_content:not(:first-child){display:none;}
+.local_shool_content:after{content:"";display:block;clear:both;}
 .xuewei_list{width:100%;}
 .xuewei_list:after{content:"";display:block;clear:both;}
 .xuewei_item{float:left;text-align:center;width:16.66666%;}
@@ -465,15 +466,19 @@ td.subject-deadline{width:auto;}
 .chulu_nav_list  li{font-size:16px;padding-left:20px;line-height:42px;background-color:#fff;width:90%;}
 .chulu_nav_list  li.active{background-color:#1452c8;color:#fff;position:relative;width:calc( 90% + 10px);width:-webkit-calc( 90% + 10px);width:-moz-calc( 90% + 10px);width:-o-calc( 90% + 10px);box-shadow:rgba(0,0,0,.7) 1px 3px 5px;}
 .chulu_nav_list  li.active:after{content:"";display:block;position:absolute;right:0;bottom:-10px;border-left:10px solid #001a4b;border-bottom:10px solid transparent;}
-.chulu_con_uni{width:90%;padding:0 5%;margin:30px 0;border-left:1px dashed #ddd;}
-.chulu_con_item{position:relative;}
+.chulu_con_uni{width:90%;margin:30px 5%;background-color:#fff;}
+.chulu_con_item{position:relative;border-left:1px dashed #ddd;}
 .chulu_con_item>span.icon{position:absolute;left:-17px;top:-17px;display:block;width:34px;height:34px;border-radius:50%;-moz-border-radius:50%;-webkit-border-radius:50%;-o-border-radius:50%;background-color:#538eff;text-align:center;line-height:34px;color:#fff;font-size:12px;}
 .chulu_con_uni .img{width:39%;float:left;}
 .chulu_con_uni .img img{vertical-align:middle;width:100%;}
 .chulu_con_uni .txt{float:left;width:61%;padding:30px 20px;background-color:#fff;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;}
 .chulu_con_uni .txt p.tit{font-size:18px;display:block;}
-.chulu_con_uni .txt p{font-size:12px;line-height:30px;color:#333;display:inline-block;max-height:91px;overflow:hidden;}
+.chulu_con_uni .txt p{font-size:12px;line-height:30px;color:#333;display:inline-block;max-height:91px;min-width:90px;overflow:hidden;}
 .chulu_con_uni:after{content:"";display:block;clear:both;}
+
+@media screen and (min-width:1200px){
+	.chulu_con_uni .img img{width:328px;height:184px;}
+	}
 
 @media screen and (max-width:1200px){
 	.chulu_nav{width:100%;}
@@ -648,3 +653,12 @@ label.custorm_address {height:30px;line-height:30px;display:inline-block;width:9
 .uploading{width:78px;height:30px;line-height:30px;background-color:#1452c8;color:#fff;position:relative;color:#fff;text-align:center;margin:5px 5px;display:inline-block;}
 .uploading input{width:100%;height:100%;position:absolute;top:0;left:0;z-index:-1;}
 .uploading_name{width:100%;color:#fff;}
+
+
+/*单页面*/
+@media screen and  (min-width:1200px){
+	.wrap.mb{width:1200px;margin:20px auto;}
+}
+@media screen and  (max-width:1199px){
+	.wrap.mb{width:100%;}
+}

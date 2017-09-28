@@ -11,18 +11,44 @@
 	<link href="common.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<div id="wrapper"> {include file="inc/header.tpl"}
- <div class="wrap mb">
-  <div id="pageLeft"> {include file="inc/page_tree.tpl"} </div>
-  <div id="pageIn"> {include file="inc/ur_here.tpl"}
-   <div id="page">
-    <h1>{$page.page_name}</h1>
-    <div class="content"> {$page.content} </div>
-   </div>
-  </div>
-  <div class="clear"></div>
- </div>
- {include file="inc/online_service.tpl"}
- {include file="inc/footer.tpl"} </div>
+<div id="wrapper"> 
+	{include file="inc/header.tpl"}
+<!--  <div class="wrap mb">
+	  	<div id="pageLeft"> {include file="inc/page_tree.tpl"} </div>
+	  	<div id="pageIn"> {include file="inc/ur_here.tpl"}
+		   	<div id="page">
+		    	<h1>{$page.page_name}</h1>
+		    	<div class="content"> {$page.content} </div>
+		   	</div>
+	  	</div>
+	  <div class="clear"></div>
+ </div> -->
+
+	 <div class="local_main">
+				<div class="school_tit">
+					<div class="headline ">{$page.page_name}</div>
+					
+				</div>
+				<div class="local_school">
+					<p class="video_tit">{$page.page_name}</p>
+					<div class="news_con">
+						<div class="news_video biography" style="width:100%;">
+							<div class="txt">
+								<p style="font-size:14px;line-height:25px;margin-bottom:20px">{$page.content}</p>
+								 
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+
+	 {include file="inc/online_service.tpl"}
+ 	{include file="inc/footer.tpl"} 		
+</div>
+
+
+
+
 </body>
 </html>

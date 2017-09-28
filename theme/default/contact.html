@@ -29,7 +29,44 @@
 			</div>
 			<div class="contact-main">
 				<div class="map-container">	
-					<div id="allmap" style="width:100%;height:100%;"></div>
+					<div id="allmap" style="width:100%;height:100%;">
+						 {literal}
+							<script type="text/javascript">
+									// 百度地图API功能
+								    var map = new BMap.Map('allmap');
+								    var poi = new BMap.Point(114.172061,22.285733);
+								    map.centerAndZoom(poi, 16);
+								    map.enableScrollWheelZoom();
+
+								    var content = '<div style="margin:0;line-height:20px;padding:2px;">' +
+								                    '地址：<br/>電話：<br/>簡介：<br/>' +
+								                  '</div>';
+
+								    //创建检索信息窗口对象
+								    var searchInfoWindow = null;
+									searchInfoWindow = new BMapLib.SearchInfoWindow(map, content, {
+											title  : "香港升學中心",      //标题
+											width  : 290,             //宽度
+											height : 60,              //高度
+											panel  : "panel",         //检索结果面板
+											enableAutoPan : true,     //自动平移
+											searchTypes   :[
+												BMAPLIB_TAB_SEARCH,   //周边检索
+												BMAPLIB_TAB_TO_HERE,  //到这里去
+												BMAPLIB_TAB_FROM_HERE //从这里出发
+											]
+										});
+								    var marker = new BMap.Marker(poi); //创建marker对象
+								    marker.enableDragging(); //marker可拖拽
+								    searchInfoWindow.open(marker);
+								    marker.addEventListener("click", function(e){
+								    searchInfoWindow.open(marker);
+							   		 })
+								    map.addOverlay(marker); //在地图中添加marker
+							</script>
+
+						{/literal}
+					</div>
 				</div>
 				<div class="contact-cont">
 					<p style="font-size:22px;line-height:2;">關於我們</p>
@@ -45,6 +82,7 @@
 
 <!-- 底部 -->
 	{include file="inc/footer.tpl"}
+
 
 </body>
 </html>
