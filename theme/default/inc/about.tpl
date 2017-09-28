@@ -12,7 +12,7 @@
 				</div>
 				<div>
 					<p class="contact-left">英國公司 YS International (UK) <br>公司地址:37 Greenhill Court Banbury Oxfordshire OX169DF <br>聯絡電話:01295369722 / 07446882283 <br>郵箱 E-mail: zxscmh@hotmail.com <br>聯絡人名稱: Vincent Zhong</p>
-					<p class="contact-right">微信WECHAT<br><img src="img/weixin.jpg" alt="" title=""></p>
+					<p class="contact-right">微信WECHAT<br><img src="../images/weixin.jpg" alt="" title=""></p>
 				</div>
 			</div>
 		</div>
