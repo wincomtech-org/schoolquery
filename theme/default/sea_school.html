@@ -54,11 +54,23 @@
 						<ul>
 						<!-- {if $pass} -->
 							<!-- {foreach from=$scho item=sch} -->
-							<li class="xuewei_item"><img src="{$sch.school_logo}" alt=""><p><a href="sea_school_detail.php?id={$sch.id}">{$sch.name}<br/>{$sch.engname}</a></p></li>
+							<li class="xuewei_item">
+								<!-- {if $sch.school_logo} -->
+								<img src="{$sch.school_logo}" alt="">
+								<!-- {else} -->
+								<img src="images/xuewei1.jpg" alt="">
+								<!-- {/if} -->
+							<p><a href="sea_school_detail.php?id={$sch.id}">{$sch.name}<br/>{$sch.engname}</a></p></li>
 						<!--{/foreach}-->
 						<!-- {else} -->
 							<!-- {foreach from=$scho item=sch} -->
-							<li class="xuewei_item"><img src="{$sch.school_logo}" alt=""><p><a>{$sch.name}<br/>{$sch.engname}</a></p></li>
+							<li class="xuewei_item">
+								<!-- {if $sch.school_logo} -->
+								<img src="{$sch.school_logo}" alt="">
+								<!-- {else} -->
+								<img src="images/xuewei1.jpg" alt="">
+								<!-- {/if} -->
+							<p><a>{$sch.name}<br/>{$sch.engname}</a></p></li>
 							<!--{/foreach}-->
 						<!-- {/if} -->
 						

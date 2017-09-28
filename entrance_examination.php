@@ -47,7 +47,6 @@ while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
     $course[]=$row;
 }
 
-echo $type[0][id];
 $smarty->assign('type', $type);
 $smarty->assign('course', $course);
 
