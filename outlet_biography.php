@@ -29,7 +29,6 @@ $id = $check->is_number($_REQUEST['id']) ? $_REQUEST['id'] : '';
 $sql = "SELECT * FROM " . $dou->table('school')."where id='$id'";
 $query = $dou->query($sql);
 $school=$GLOBALS['dou']->fetch_assoc($query);
-print_r($school);
 $smarty->assign('school', $school);
 $smarty->assign('index', 'process');
 $smarty->display('outlet_biography.html');
