@@ -118,7 +118,7 @@ elseif ($rec == 'update') {
         $basename = addslashes(basename($_POST['show_img']));
         $file_name = substr($basename, 0, strrpos($basename, '.'));
         
-        $upfile = $img->upload_image('show_img', "$file_name"); // 上传的文件域
+        $upfile = $img->upload_image('show_img'); // 上传的文件域
         $file = $images_dir . $upfile;
         $img->to_file = true;
         $img->make_thumb($upfile, 100, 100);
