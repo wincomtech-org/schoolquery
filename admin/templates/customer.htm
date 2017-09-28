@@ -1,0 +1,474 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>{$lang.home}{if $ur_here} - {$ur_here} {/if}</title>
+<meta name="Copyright" content="Douco Design." />
+<link href="templates/public.css" rel="stylesheet" type="text/css">
+{include file="javascript.htm"}
+<script type="text/javascript" src="images/jquery.autotextarea.js"></script>
+{literal}
+  <style>
+    .school_tab{border-collapse:collapse;text-align:center;border:1px dotted #ddd;} 
+    .school_tab th{width:16.66%;}
+    .school_tab td{padding:6px 4px;height:42px;}
+  </style>
+{/literal}
+</head>
+<body>
+<div id="dcWrap">
+ {include file="header.htm"}
+ <div id="dcLeft">{include file="menu.htm"}</div>
+ <div id="dcMain">
+   {include file="ur_here.htm"}
+   <div class="mainBox" style="{$workspace.height}">
+    <!-- {if $rec eq 'default'} 商品列表 -->
+    <h3></h3>
+    <div class="filter">
+    <form action="customer.php" method="post">
+    
+     <input name="keyword" type="text" class="inpMain" value="{$keyword}" size="20" />
+     <input name="submit" class="btnGray" type="submit" value="{$lang.btn_filter}" />
+    </form>
+    
+    </div>
+   
+  
+    <div id="list"{if $if_sort} class="homeSortLeft"{/if}>
+    <form name="action" method="post" action="customer.php?rec=action">
+    <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+      <tr>
+        <th width="22" align="center"><input name='chkall' type='checkbox' id='chkall' onclick='selectcheckbox(this.form)' value='check'></th>
+        <th width="40" align="center">{$lang.customer_id}</th>
+        <th align="center" width="150">{$lang.customer_name}</th>
+        <th width="150" align="center">{$lang.customer_engname}</th>
+       <th width="80" align="center">{$lang.customer_sex}</th>
+       <th width="100" align="center">{$lang.customer_nation}</th>
+        <th  align="center">{$lang.customer_date}</th>
+        <th  align="center">{$lang.customer_phone}</th>
+        <th width="80" align="center">{$lang.handler}</th>
+      </tr>
+      <!-- {foreach from=$customer item=customer} -->
+      <tr>
+        <td align="center"><input type="checkbox" name="checkbox[]" value="{$customer.id}" /></td>
+        <td align="center">{$customer.id}</td>
+        <td align="center">{$customer.name}</td>
+        <td align="center">{$customer.engname}</td>
+        <!-- {if $customer.sex eq 0} -->
+         <td align="center">男</td> 
+          <!-- {else} -->
+          <td align="center">女</td> 
+           <!-- {/if} -->
+        <td align="center">{$customer.nation}</td>
+        <td align="center">{$customer.data}</td>
+        <td align="center">{$customer.phone}</td>
+        <td align="center">
+         <a href="customer.php?rec=edit&id={$customer.id}">查看</a> | <a href="customer.php?rec=del&id={$customer.id}">{$lang.del}</a>
+        </td>
+      </tr>
+      <!-- {/foreach} -->
+    </table>
+    <div class="action">
+     <select name="action" onchange="douAction()">
+      <option value="0">{$lang.select}</option>
+      <option value="del_all">{$lang.del}</option>
+     </select>
+     <select name="new_cat_id" style="display:none">
+      <option value="0">{$lang.uncategorized}</option>
+      <!-- {foreach from=$product_category item=cate} -->
+      <!-- {if $cate.cat_id eq $cat_id} -->
+      <option value="{$cate.cat_id}" selected="selected">{$cate.mark} {$cate.cat_name}</option>
+      <!-- {else} -->
+      <option value="{$cate.cat_id}">{$cate.mark} {$cate.cat_name}</option>
+      <!-- {/if} -->
+      <!-- {/foreach} -->
+     </select>
+     <input name="submit" class="btn" type="submit" value="{$lang.btn_execute}" />
+    </div>
+    </form>
+    </div>
+    <div class="clear"></div>
+    {include file="pager.htm"}
+    <!-- {/if} -->
+    <!-- {if $rec eq 'add' || $rec eq 'edit'} 商品添加或编辑 -->
+    <h3><a href="{$action_link.href}" class="actionBtn">{$action_link.text}</a>{$ur_here}</h3>
+    <form action="customer.php?rec={$form_action}" method="post" enctype="multipart/form-data">
+     <table width="100%" border="0" cellpadding="8" cellspacing="0" class="tableBasic">
+      <tr>
+       <td width="90" align="right">{$lang.customer_name}</td>
+       <td>
+        {$customer.name}
+       </td>
+      </tr>
+      <tr>
+       <td width="90" align="right">英文名</td>
+       <td>
+         {$customer.engname}
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.customer_sex}</td>
+         <!-- {if $customer.sex eq 0} -->
+         <td >男</td> 
+          <!-- {else} -->
+          <td>女</td> 
+           <!-- {/if} -->
+      </tr>
+      <tr>
+       <td align="right">{$lang.customer_date}</td>
+       <td>
+         {$customer.data}
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.customer_nation}</td>
+       <td>
+            {$customer.nation}
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.customer_contry}</td>
+       <td>
+       {$customer.contry}
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.customer_phone}</td>
+       <td>
+        {$customer.phone}
+       </td>
+      </tr>
+      <tr>
+       <td align="right" valign="top">{$lang.customer_gphone}</td>
+       <td>
+       {$customer.g_tel}
+       </td>
+      </tr>
+      <tr>
+       <td align="right" valign="top">{$lang.customer_idnumber}</td>
+       <td>
+       {$customer.id_number}
+       </td>
+      </tr>
+  
+      <tr>
+       <td align="right">{$lang.customer_pass}</td>
+       <td>
+        {$customer.pass_check}
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.customer_gid}</td>
+       <td>
+        {$customer.gid}
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.customer_address}</td>
+       <td>
+       {$customer.n_adress}
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.customer_gadress}</td>
+       <td>
+         {$customer.g_adress}
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.customer_school}</td>
+       <td>
+
+        <table class="education school_tab">
+                    <thead>
+                      <tr>
+                        <th>学校名称</th>
+                        <th>学校地址</th>
+                        <th>学校电话</th>
+                        <th>修读年期</th>
+                        <th>修读时间（年/月）</th>
+                        <th>所获学历</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{$customer.school_name[0]}</td>
+                        <td>{$customer.school_adress[0]}</td>
+                        <td>{$customer.school_tel[0]}</td>
+                        <td>{$customer.school_year[0]}</td>
+                        <td>{$customer.school_time[0]}</td>
+                        <td>{$customer.education[0]}</td>
+                      </tr>
+                      <tr>
+                         <td>{$customer.school_name[1]}</td>
+                        <td>{$customer.school_adress[1]}</td>
+                        <td>{$customer.school_tel[1]}</td>
+                        <td>{$customer.school_year[1]}</td>
+                        <td>{$customer.school_time[1]}</td>
+                        <td>{$customer.education[1]}</td>
+                      </tr>
+                      <tr>
+                        <td>{$customer.school_name[2]}</td>
+                        <td>{$customer.school_adress[2]}</td>
+                        <td>{$customer.school_tel[2]}</td>
+                        <td>{$customer.school_year[2]}</td>
+                        <td>{$customer.school_time[2]}</td>
+                        <td>{$customer.education[2]}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.customer_work}</td>
+       <td>
+       <table class="school_tab">
+                    <thead>
+                      <tr>
+                        <th width="16.66%">公司名称</th>
+                        <th width="16.66%">公司地址</th>
+                        <th width="16.66%">公司电话</th>
+                        <th width="16.66%">公司年期</th>
+                        <th width="16.66%">公司时间（年/月）</th>
+                        <th width="16.66%">职位</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{$customer.work_name[0]}</td>
+                        <td>{$customer.work_adress[0]}</td>
+                        <td>{$customer.work_tel[0]}</td>
+                        <td>{$customer.work_year[0]}</td>
+                        <td>{$customer.work_time[0]}</td>
+                        <td>{$customer.position[0]}</td>
+                      </tr>
+                      <tr>
+                       <td>{$customer.work_name[1]}</td>
+                        <td>{$customer.work_adress[1]}</td>
+                        <td>{$customer.work_tel[1]}</td>
+                        <td>{$customer.work_year[1]}</td>
+                        <td>{$customer.work_time[1]}</td>
+                        <td>{$customer.position[1]}</td>
+                      </tr>
+                      <tr>
+                        <td>{$customer.work_name[2]}</td>
+                        <td>{$customer.work_adress[2]}</td>
+                        <td>{$customer.work_tel[2]}</td>
+                        <td>{$customer.work_year[2]}</td>
+                        <td>{$customer.work_time[2]}</td>
+                        <td>{$customer.position[2]}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+       </td>
+      </tr>
+      <tr>
+       <td align="right">{$lang.customer_konwgd}</td>
+        <!-- {if $customer.konw_gd eq 0} -->
+         <td >是</td> 
+          <!-- {else} -->
+          <td>否</td> 
+           <!-- {/if} -->
+      </tr>
+      <tr >
+       <td align="right">{$lang.customer_special}</td>
+        <td> {$customer.special}</td>
+      </tr>
+      <tr >
+       <td align="right">{$lang.customer_health}</td>
+        <td> {$customer.health}</td>
+      </tr>
+       <tr >
+       <td align="right">身份证明文件</td>
+        <td> 
+        <span></span>
+            <!-- {foreach from=$customer.id_cent item=cent} -->
+             <!-- {if $cent} -->
+                <img src="../{$cent}" style="width:200px;height:150px;">
+            <!-- {/if} -->
+              
+             <!-- {/foreach} -->
+        </td>
+      </tr>
+      <tr >
+       <td align="right">证件照</td>
+        <td> 
+        <span></span>
+            <!-- {foreach from=$customer.id_phono item=cent} -->
+             <!-- {if $cent} -->
+              <img src="../{$cent}"  style="width:200px;height:150px;">
+            <!-- {/if} -->
+                
+             <!-- {/foreach} -->
+        </td>
+      </tr>
+      <tr >
+       <td align="right">成绩表、毕业证</td>
+        <td> 
+        <span></span>
+            <!-- {foreach from=$customer.mark item=cent} -->
+            <!-- {if $cent} -->
+              <img src="../{$cent}"  style="width:200px;height:150px;">
+            <!-- {/if} -->
+                
+             <!-- {/foreach} -->
+        </td>
+      </tr>
+      <tr >
+       <td align="right">推荐信</td>
+        <td> 
+        <span></span>
+            <!-- {foreach from=$customer.recom item=cent} -->
+            <!-- {if $cent} -->
+              <img src="../{$cent}"  style="width:200px;">
+            <!-- {/if} -->
+                
+             <!-- {/foreach} -->
+        </td>
+      </tr>
+      <tr >
+       <td align="right">工作证明信</td>
+        <td> 
+        <span></span>
+            <!-- {foreach from=$customer.work_cent item=cent} -->
+            <!-- {if $cent} -->
+              <img src="../{$cent}"  style="width:200px;">
+            <!-- {/if} -->
+                
+             <!-- {/foreach} -->
+        </td>
+      </tr>
+       <tr >
+       <td align="right">英语证明</td>
+        <td> 
+        <span></span>
+            <!-- {foreach from=$customer.engprove item=cent} -->
+            <!-- {if $cent} -->
+               <img src="../{$cent}"  style="width:200px;height:150px;">
+            <!-- {/if} -->
+               
+             <!-- {/foreach} -->
+        </td>
+      </tr>
+      <tr >
+       <td align="right">其他相关材料</td>
+        <td> 
+        <span></span>
+            <!-- {foreach from=$customer.other item=cent} -->
+            <!-- {if $cent} -->
+              <img src="../{$cent}"  style="width:200px;">
+            <!-- {/if} -->
+                
+             <!-- {/foreach} -->
+        </td>
+      </tr>
+      <tr >
+       <td align="right">{$lang.customer_tutorname}</td>
+        <td> {$customer.tutor_name}</td>
+      </tr>
+      <tr >
+       <td align="right">{$lang.customer_tutorsex}</td>
+       <!-- {if $customer.tutor_sex eq 0} -->
+         <td >男</td> 
+          <!-- {else} -->
+          <td >女</td> 
+           <!-- {/if} -->
+      </tr>
+      <tr >
+       <td align="right">{$lang.customer_tutorid}</td>
+        <td> {$customer.tutor_id}</td>
+      </tr>
+      <tr >
+       <td align="right">{$lang.customer_tutorpass}</td>
+        <td> {$customer.tutor_pass}</td>
+      </tr>
+      <tr >
+       <td align="right">{$lang.customer_tutorgid}</td>
+        <td> {$customer.tutor_gid}</td>
+      </tr>
+      <tr >
+       <td align="right">{$lang.customer_tutorwork}</td>
+        <td> {$customer.tutor_work}</td>
+      </tr>
+      <tr >
+       <td align="right">{$lang.customer_relation}</td>
+        <td> {$customer.relation}</td>
+      </tr>
+      <tr >
+       <td align="right">监护人身份证明材料</td>
+        <td> 
+        <span></span>
+            <!-- {foreach from=$customer.tutor_cent item=cent} -->
+            <!-- {if $cent} -->
+               <img src="../{$cent}"  style="width:200px;height:150px;">
+            <!-- {/if} -->
+               
+             <!-- {/foreach} -->
+        </td>
+      </tr>
+      <tr >
+       <td align="right">监护人证件照</td>
+        <td> 
+        <span></span>
+            <!-- {foreach from=$customer.tutor_idphono item=cent} -->
+            <!-- {if $cent} -->
+               <img src="../{$cent}"  style="width:200px;height:150px;">
+            <!-- {/if} -->
+               
+             <!-- {/foreach} -->
+        </td>
+      </tr>
+      <tr>
+      <td></td>
+      <td>
+        <a class="btn" href="customer.php">返回</a>
+      </td>
+          
+      </tr>
+     </table>
+    </form>
+    <!-- {/if} -->
+    <!-- {if $rec eq 're_thumb'} -->
+    <h3><a href="{$action_link.href}" class="actionBtn">{$action_link.text}</a>{$ur_here}</h3>
+    <script type="text/javascript">
+    {literal}
+     function mask(i) {
+        document.getElementById('mask').innerHTML += i;
+        document.getElementById('mask').scrollTop = 100000000;
+     }
+     function success() {
+        var d=document.getElementById('success');
+        d.style.display="block";
+     }
+    {/literal}
+    </script>
+    <dl id="maskBox">
+     <dt><em>{$mask.count}</em><!-- {if !$mask.confirm} --><form action="product.php?rec=re_thumb" method="post"><input name="confirm" class="btn" type="submit" value="{$lang.product_thumb_start}" /></form><!-- {/if} --></dt>
+     <dd class="maskBg">{$mask.bg}<i id="success">{$lang.product_thumb_succes}</i></dd>
+     <dd id="mask"></dd>
+    </dl>
+    <!-- {/if} -->
+   </div>
+ </div>
+ {include file="footer.htm"}
+ </div>
+<!-- {if $rec eq 'default'} 商品列表 -->
+<script type="text/javascript">
+{literal}
+onload = function()
+{
+ document.forms['action'].reset();
+}
+
+function douAction()
+{
+ var frm = document.forms['action'];
+ frm.elements['new_cat_id'].style.display = frm.elements['action'].value == 'category_move' ? '' : 'none';
+}
+{/literal}
+</script>
+<!-- {/if} -->
+<!-- {if $rec neq 're_thumb'} -->
+</body>
+</html>
+<!-- {/if} -->

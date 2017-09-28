@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hant">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">  
+	<meta content="yes" name="apple-mobile-web-app-capable">     
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>上传系统</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link href="common.css" rel="stylesheet" type="text/css" />
+	<link href="upload.css" rel="stylesheet" type="text/css" />
+	<script >
+	{literal}
+		function banben(){
+			if(navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE6.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE7.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE8.0" || navigator.appName == "Microsoft Internet Explorer" && navigator.appVersion .split(";")[1].replace(/[ ]/g,"")=="MSIE9.0")
+			{
+				alert("您的浏览器版本过低，为了方便您的操作，请下载IE9以上版本");
+			}
+		}
+		banben();
+{/literal}
+	</script>
+</head>
+<body>
+<!-- 头部 -->
+	<!-- top -->
+	{include file="inc/header.tpl"}
+	<!-- nav 大屏 end -->
+<!-- 头部 end -->
+
+	<div class="school_main">
+		<div class="local_img">
+			<img src="{$ce}" alt="">
+		</div>
+		<div class="uploading_system">
+			<div class="school_tit">
+				<div class="headline ">上传系统</div>
+			</div>
+			<div class="sys_datas">
+				<div class="steps">
+					<div class="steps_data">
+						<dl class="step_first">
+							<dt>填写资料</dt>
+							<dd ><img src="images/duihao.png" alt=""></dd>
+						</dl>
+					</div>
+					<div class="steps_data">
+						<dl class="step_first yes">
+							<dt>上传相关文件</dt>
+							<dd ><img src="images/duihao.png" alt=""></dd>
+						</dl>
+					</div>
+					<div class="steps_data">
+						<dl class="step_first">
+							<dt>完成</dt>
+							<dd ><img src="images/duihao.png" alt=""></dd>
+						</dl>
+					</div>
+				</div>
+
+				<div class="customer_uploading_dates">
+				<form action="uploading.php?rec=next" method="post" class="sresult-form" id="upload_file">
+					<table>
+						<thead>
+							<tr>
+								<th colspan="2">客户上传相关文件</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr>
+								<td>所有身份证明文件（内地身份证<span class="red">*</span>、户口本<span class="red">*</span>、港澳通行证/护照<span class="red">*</span>、香港身份证）</td>
+								<td>
+										<a  class="zwb_upload" id="zwb_upload0">
+											<input type="file" id="zwb" multiple class="add">上传
+							
+									</a>
+									<input type="text" name="filePath1" readonly  required class="callbackPath0 required" >
+								</td>
+							</tr>
+							<tr><td colspan="2" rowspan="" headers="">
+								
+							</td></tr>
+						</tbody>	
+						<tbody>	
+							<tr>
+								<td>证件照<span class="red">*</span></td>
+								<td>
+									<a  class="zwb_upload" id="zwb_upload1">
+											<input type="file" multiple class="add">上传
+							
+									</a>
+										<input type="text" name="filePath2" readonly  required class="callbackPath1 required">		
+								</td>
+								
+							</tr>
+							<tr><td colspan="2" rowspan="" headers=""></td></tr>
+						</tbody>
+						<tbody>
+							<tr>
+								<td>成绩表<span class="red">*</span>、毕业证<span class="red">*</span></td>
+								<td>
+									<a  class="zwb_upload" id="zwb_upload2">
+											<input type="file" multiple class="add">上传
+							
+									</a>
+									<input type="text" name="filePath3" readonly  class="callbackPath2 required" >
+								</td>
+							</tr>
+							<tr><td colspan="2" rowspan="" headers=""></td></tr>
+						</tbody>
+						<tbody>
+							<tr>
+								<td>工作证明信</td>
+								<td>
+									<a  class="zwb_upload" id="zwb_upload3">
+											<input type="file" multiple class="add">上传
+							
+									</a>
+									<input type="text" name="filePath4" readonly  class="callbackPath3" >
+								</td>
+							</tr>
+							<tr><td colspan="2" rowspan="" headers=""></td></tr>
+						</tbody>
+						<tbody>
+							<tr>
+								<td>推荐信</td>
+								<td>
+									<a  class="zwb_upload" id="zwb_upload4">
+										<input type="file" multiple class="add">上传
+									</a>
+									<input type="text" name="filePath5" readonly class="callbackPath4" >
+								</td>
+							</tr>
+							<tr><td colspan="2" rowspan="" headers=""></td></tr>
+						</tbody>
+						<tbody>
+							<tr>
+								<td>英语证明（如IELTS、托福、GCEAL）</td>
+								<td>
+									<a  class="zwb_upload" id="zwb_upload5">
+										<input type="file" multiple class="add">上传
+									</a>
+									<input type="text" name="filePath6" readonly class="callbackPath5" >
+								</td>
+							</tr>
+							<tr><td colspan="2" rowspan="" headers=""></td></tr>
+						</tbody>
+						<tbody>
+							<tr>
+								<td>其他相关证书</td>
+								<td>
+									<a  class="zwb_upload" id="zwb_upload6">
+										<input type="file" multiple class="add">上传
+									</a>
+									<input type="text" name="filePath7" readonly  class="callbackPath6" >
+								</td>
+							</tr>
+							<tr><td colspan="2" rowspan="" headers=""></td></tr>
+						</tbody>
+					</table>
+					<!--{if $age lt 18}-->
+					<table>
+						<thead>
+							<tr>
+								<th colspan="2">监护人上传相关文件</th></tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>所有身份证明文件（内地身份证<span class="red">*</span>、户口本<span class="red">*</span>、港澳通行证/护照<span class="red">*</span>、香港身份证）</td>
+								<td>
+										<a  class="zwb_upload" id="zwb_upload7">
+											<input type="file" id="zwb" multiple class="add">上传
+							
+									</a>
+									<input type="text" name="filePath8" readonly  required class="callbackPath7 required" >
+								</td>
+							</tr>
+							<tr><td colspan="2" rowspan="" headers="">
+								
+							</td></tr>
+						</tbody>	
+						<tbody>	
+							<tr>
+								<td>证件照<span class="red">*</span></td>
+								<td>
+									<a  class="zwb_upload" id="zwb_upload8">
+											<input type="file" multiple class="add">上传
+							
+									</a>
+										<input type="text" name="filePath9" readonly  required class="callbackPath8 required" >		
+								</td>
+								
+							</tr>
+							<tr><td colspan="2" rowspan="" headers=""></td></tr>
+						</tbody>
+					</table>
+					<!--{/if}-->
+					<div class="sub_btn">
+						<input type="hidden" name="id" value="{$id}">
+						<input type="hidden" name="age" value="{$age}">
+						<button type="submit" for="upload_file" class="btn_submit" onClick="return ckeckmes(this.form)">下一步</button>
+					</div>
+				</form>
+				</div>		
+			</div>
+		</div>		
+	</div>
+<!-- 底部 -->
+	{include file="inc/footer.tpl"}
+	 <script type="text/javascript" src="images/upload.js"></script>
+<!-- 引用jquery end -->
+	<script >
+{literal}
+		//服务器端成功返回 {state:1,path:文件保存路径}
+	    //服务器端失败返回 {state:0,errmsg:错误原因}
+	    //默认做了文件名不能含有中文,后端接收文件的变量名为file
+
+
+	    $('.zwb_upload').each(function(idx,ele){
+	    	$('#zwb_upload'+idx).bindUpload({
+		        url:"uploading.php?rec=load",//上传服务器地址
+		        callbackPath:".callbackPath"+idx,//绑定上传成功后 图片地址的保存容器的id或者class 必须为input或者textarea等可以使用$(..).val()设置之的表单元素
+		        // ps:值返回上传成功的 默认id为#callbackPath  保存容器为位置不限制,id需要加上#号,class需要加上.
+		        // 返回格式为:
+		        // 原来的文件名,服务端保存的路径|原来的文件名,服务端保存的路径|原来的文件名,服务端保存的路径|原来的文件名,服务端保存的路径....
+		        num:10,//上传数量的限制 默认为空 无限制
+		        type:"jpg|png|gif|svg/txt|doc|xlsx|docx",//上传文件类型 默认为空 无限制
+		        size:3,//上传文件大小的限制,默认为5单位默认为mb
+		    });
+	    })
+
+
+		$(function(){
+				laydate.render({
+					elem: '#date'
+			});
+		})
+
+		$(document).delegate('input:radio','click',function(){
+			$(this).css({'background':'yellow'})
+		})
+
+		// $("input[type='file']").on("change", function () {
+	 //        // var obj = document.getElementById("upfile");
+	 //        var self=$(this);
+	 //        self.siblings('div').html('已上传');
+	 //        // self.siblings("input").css('z-index','1');
+	 //        // self.parent().parent().css('width','auto');
+	      
+	     
+	 //    });
+	  	 $("input[type='file']").on("change", function () {
+	  	 	$(this).siblings('span').html('已上传');
+	  	 })
+
+	  	 function ckeckmes(form){
+	  	 	$('.requred').each(function(){
+	  	 		if($(this).val()==""){
+	  	 			alert('请把必填项填写完整')
+	  	 			return false;
+	  	 		}
+	  	 	})
+	  	 }
+
+{/literal}
+	</script>
+
+</body>
+</html>

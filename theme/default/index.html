@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hant">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">  
+	<meta content="yes" name="apple-mobile-web-app-capable">     
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>香港升學中心-首頁</title>
+	<!-- <link rel="stylesheet" href="common.css" type="text/css"> -->
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link href="common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!-- 头部 -->
+	<!-- top -->
+	{include file="inc/header.tpl"}
+	<!-- nav 大屏 end -->
+<!-- 头部 end -->
+<!-- 主体内容 -->
+	<div class="search-wrapper" style="background:url('{$ce}') no-repeat;background-size:cover;">
+		<div class="wide-container search-layout">
+			<div class="search-container">
+				<form action="search_result.php" method="post" class="search-form">
+					<p>我有</p>
+					<div class="form-row">
+						<input type="text" placeholder="分數" name="grade" class="grade">
+					</div>
+					<div class="form-row">
+						<input type="text" name="date" id="deadline" class="deadline lf" placeholder="截止日期">
+						<select name="gradetype" class="gradetype rt">
+							<option value="0">分數類型</option>
+							<!-- {foreach from=$score item=sco} -->
+								<option value="{$sco.id}">{$sco.name}</option>
+							<!-- {/foreach} -->
+						</select>
+					</div>
+					<div class="form-row">
+						<input type="text" placeholder="請輸入關鍵字" name="key" class="keyword">
+					</div>
+					<div>
+						<input type="submit" class="search" value="立即配對">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="home-ico"><div class="ico ico1"></div></div>
+	</div>
+	<div class="hotslider">
+		<div class="wide-container">
+			<div class="column-head">
+				<h2>熱門資訊</h2>
+				<p>POPULAR INFORMATION</p>
+			</div>			
+			<!-- 层叠轮播 大屏时显示 -->
+			<div class="container_image" id="image_scroll">
+				<a href="javascript:void(0)" tip="0" class="i_btn prev_L"></a>
+				<a href="javascript:void(0)" tip="1" class="i_btn next_R"></a>
+				<ul class="slide_img">
+					  <!-- {foreach from=$taste item=tas} -->
+						<li class="on">
+							<a href="news.php?id={$tas.id}&cid={$tas.cid}"><img src="{$tas.img}" /></a>
+							<div class="info">
+								<span style="width:100%;text-align: center;">{$tas.name}</span>
+								<p>{$tas.engname}</p>
+							</div>
+						</li>
+					  <!-- {/foreach} -->
+					
+				</ul>
+			</div>
+		</div>
+		<!-- 全屏轮播 小屏时显示 -->
+		<div class="flexslider">
+			<ul class="slides">
+				<!-- {foreach from=$taste item=tas} -->
+					<li>
+					<a href="news.php?id={$tas.id}&cid={$tas.cid}">
+						<img src="{$tas.img}" alt="">
+					</a>
+					<div class="info">
+						<span>{$tas.name}</span>
+						<p>{$tas.engname}</p>
+					</div>
+				</li>
+				<!-- {/foreach} -->
+				
+			</ul>
+		</div>
+		<div class="home-ico"><div class="ico ico2"></div></div>
+	</div>
+	<div class="subject-wrapper">
+		<div class="wide-container">
+			<div class="column-head">
+				<h2>最受歡迎學科</h2>
+				<p>THE MOST POPULAR SUBJECTS</p>
+			</div>
+			<div class="subject-container">
+				<div class="sub-row">
+					<div class="sub-left">
+						<img src="images/sub-1.jpg" alt=""><a href="#"><em>{$course[0].name}</em><span>{$course[0].shname}</span></a>
+					</div>
+					<div class="sub-right">
+						<img src="images/sub-1.jpg" alt=""><a href="#"><em>{$course[1].name}</em><span>{$course[1].shname}</span></a>
+					</div>
+				</div>
+				<div class="sub-row middle">
+					<div class="sub-left">
+						<img src="images/sub-1.jpg" alt=""><a href="#"><em>{$course[2].name}</em><span>{$course[2].shname}</span></a>
+					</div>
+					<div class="sub-right">
+						<img src="images/sub-1.jpg" alt=""><a href="#"><em>{$course[3].name}</em><span>{$course[3].shname}</span></a>
+					</div>
+				</div>
+				<div class="sub-row">
+					<div class="sub-left">
+						<img src="images/sub-1.jpg" alt=""><a href="#"><em>{$course[4].name}</em><span>{$course[4].shname}</span></a>
+					</div>
+					<div class="sub-right">
+						<img src="images/sub-1.jpg" alt=""><a href="#"><em>{$course[5].name}</em><span>{$course[5].shname}</span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="home-ico"><div class="ico ico3"></div></div>
+	</div>
+	<div class="news-wrapper">
+		<div class="wide-container">
+			<div class="column-head">
+				<h2>主題新聞</h2>
+				<p>SUBJECT NEWS</p>
+			</div>
+			<div class="news-container">
+				<ul class="news-cont">
+					<!-- {foreach from=$news item=news} -->
+						<li>
+							<div class="news-title">
+								<a href="index_news.php?id={$news.id}">{$news.name}</a>
+							</div>
+							
+							<img src="{$news.img}" alt="">
+						</li>
+					<!-- {/foreach} -->
+					
+				</ul>
+			</div>
+		</div>
+		<div class="home-ico"><div class="ico ico4"></div></div>
+	</div>
+{include file="inc/about.tpl"}
+<!-- 主体内容 end -->
+{include file="inc/footer.tpl"}
+<script type="text/javascript" src="images/home.js"></script> 
+
+</body>
+</html>

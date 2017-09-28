@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hant">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">  
+	<meta content="yes" name="apple-mobile-web-app-capable">     
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>上传系统</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link href="common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!-- 头部 -->
+	<!-- top -->
+	{include file="inc/header.tpl"}
+	<!-- nav 大屏 end -->
+<!-- 头部 end -->
+
+	<div class="school_main">
+		<div class="local_img">
+			<img src="{$ce}" alt="">
+		</div>
+		<div class="uploading_system">
+			<div class="school_tit">
+				<div class="headline ">上传系统</div>
+			</div>
+			<div class="sys_datas">
+				<div class="steps">
+					<div class="steps_data yes">
+						<dl class="step_first">
+							<dt>填写资料</dt>
+							<dd ><img src="images/duihao.png" alt=""></dd>
+						</dl>
+					</div>
+					<div class="steps_data">
+						<dl class="step_first">
+							<dt>上传相关文件</dt>
+							<dd ><img src="images/duihao.png" alt=""></dd>
+						</dl>
+					</div>
+					<div class="steps_data">
+						<dl class="step_first">
+							<dt>完成</dt>
+							<dd ><img src="images/duihao.png" alt=""></dd>
+						</dl>
+					</div>
+				</div>
+
+				<div class="customer_dates">
+					
+					<form action="uploading_system.php?rec=load" method="post" accept-charset="utf-8" id="custorm_dates">
+						<ul class="cusDatas">
+							<p class="customer_tit">客户资料</p>
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit require">中文姓名</span>
+									<input type="text" name="zh_name" value="" required>
+								</div>
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit require">英文姓名</span>
+									<input type="text" name="en_name" value="" required>
+								</div>
+			
+							</li>
+							<li class="cusDatas_list">
+								<div class="cusDatas_item sex">
+									<span class="cusDatas_tit require">性别</span>
+									<label><input type="radio" name="sex" value="0" checked>男</label>
+									<label><input type="radio" name="sex" value="1">女</label>
+								</div>
+							</li>
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit require">出生年月</span>
+									<input  name="date" id="date" value="">
+								</div>
+							</li>
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit require">国籍</span>
+									<input type="txt" name="nation" required>
+								</div>
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit require">户籍</span>
+									<input type="text" name="register" required>
+								</div>
+							</li>
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit require">内地身份证号码编号</span>
+									<input type="txt" name="shenfen" required>
+								</div>
+							</li>
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit require">港澳台通行证/护照号码</span>
+									<input type="txt" name="txz" required>
+								</div>
+							</li>	
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit">港澳身份证号码（如有）</span>
+									<input type="txt" name="gid">
+								</div>
+							</li>	
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit require">内地电话号码</span>
+									<input type="tel" name="neidi_tel" required maxlength="18">
+									<span class="supply">请输入11位手机号码</span>
+								</div>
+							</li>	
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit">香港电话号码（如有）</span>
+									<input type="tel" name="hokong_tel" maxlength="18">
+								</div>
+							</li>
+					
+							<li class="cusDatas_list addr">
+								<div class="cusDatas_item block">
+									<span class="cusDatas_tit">内地/香港地址</span>
+									<label class="custorm_address address_required" >
+										<input type="txt" name="address" value="" required class="required">
+										<span class="supply" >请填写详细地址，街道门牌号</span>
+									</label>
+									<label class="custorm_address" >
+										<input type="txt" name="gaddress" value="">
+										<span class="supply">请填写详细地址，街道门牌号</span>
+									</label>
+							
+								</div>
+							</li>	
+							<li class="cusDatas_list">
+								<div class="cusDatas_item" style="width:100%;">
+									<span class="cusDatas_tit require">学历（由最近的学历开始）</span>
+									<table class="education">
+										<thead>
+											<tr>
+												<th>学校名称</th>
+												<th>学校地址</th>
+												<th>学校电话</th>
+												<th>修读年期</th>
+												<th>修读时间（年/月）</th>
+												<th>所获学历</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><input type="text" name="school_name[]"></td>
+												<td><input type="text" name="school_address[]"></td>
+												<td><input type="text" name="school_tel[]"></td>
+												<td><input type="text" name="school_year[]"></td>
+												<td><input type="text" name="school_time[]"></td>
+												<td><input type="text" name="education[]"></td>
+											</tr>
+											<tr>
+												<td><input type="text" name="school_name[]"></td>
+												<td><input type="text" name="school_address[]"></td>
+												<td><input type="text" name="school_tel[]"></td>
+												<td><input type="text" name="school_year[]"></td>
+												<td><input type="text" name="school_time[]"></td>
+												<td><input type="text" name="education[]"></td>
+											</tr>
+											<tr>
+												<td><input type="text" name="school_name[]"></td>
+												<td><input type="text" name="school_address[]"></td>
+												<td><input type="text" name="school_tel[]"></td>
+												<td><input type="text" name="school_year[]"></td>
+												<td><input type="text" name="school_time[]"></td>
+												<td><input type="text" name="education[]"></td>
+											</tr>
+										</tbody>
+									</table>
+							
+								</div>
+							</li>	
+							<li class="cusDatas_list">
+								<div class="cusDatas_item" style="width:100%;">
+									<span class="cusDatas_tit">工作经验（如有）</span>
+									<table>
+										<thead>
+											<tr>
+												<th>公司名称</th>
+												<th>公司地址</th>
+												<th>公司电话</th>
+												<th>公司年期</th>
+												<th>公司时间（年/月）</th>
+												<th>职位</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td><input type="text" name="work_name[]"></td>
+												<td><input type="text" name="work_address[]"></td>
+												<td><input type="text" name="work_tel[]"></td>
+												<td><input type="text" name="work_year[]"></td>
+												<td><input type="text" name="work_time[]"></td>
+												<td><input type="text" name="position[]"></td>
+											</tr>
+											<tr>
+												<td><input type="text" name="work_name[]"></td>
+												<td><input type="text" name="work_address[]"></td>
+												<td><input type="text" name="work_tel[]"></td>
+												<td><input type="text" name="work_year[]"></td>
+												<td><input type="text" name="work_time[]"></td>
+												<td><input type="text" name="position[]"></td>
+											</tr>
+											<tr>
+												<td><input type="text" name="work_name[]"></td>
+												<td><input type="text" name="work_address[]"></td>
+												<td><input type="text" name="work_tel[]"></td>
+												<td><input type="text" name="work_year[]"></td>
+												<td><input type="text" name="work_time[]"></td>
+												<td><input type="text" name="position[]"></td>
+											</tr>
+										</tbody>
+									</table>
+							
+								</div>
+							</li>
+							<li class="cusDatas_list">
+								<div class="cusDatas_item sex">
+									<span class="cusDatas_tit">客户懂广东话吗</span>
+									<label><input type="radio" name="understand" value="0" checked>懂</label>
+									<label><input type="radio" name="understand" value="1">不懂</label>
+							
+								</div>
+							</li>	
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit">客户有特殊学习需要吗</span>
+									<input type="text" name="stduy_ness">
+								</div>
+							</li>	
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit">客户有任何健康问题吗</span>
+									<input type="text" name="health_ness">
+								</div>
+							</li>	
+						</ul>
+					
+						<ul class="tutorDatas">
+							<p class="customer_tit">监护人资料（如客户未满18岁必须填写）</p>
+
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit require" >监护人中文姓名</span>
+									<input type="text" name="tutor_zh_name" value="" required>
+								</div>
+								<div class="cusDatas_item ">
+									<span class="cusDatas_tit require">监护人英文姓名</span>
+									<input type="text" name="tutor_en_name" value="" required>
+								</div>
+			
+							</li>
+							<li class="cusDatas_list">
+								<div class="cusDatas_item sex">
+									<span class="cusDatas_tit require">性别</span>
+									<label><input type="radio" name="tutor_sex" value="0" checked>男</label>
+									<label><input type="radio" name="tutor_sex" value="1">女</label>
+								</div>
+							</li>
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit require">年龄</span>
+									<input type="number"  min="18" name="age" value="18" required>
+								</div>
+							</li>
+							
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit require">内地身份证号码编号</span>
+									<input type="txt" name="tutor_shenfen" required>
+								</div>
+							</li>
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit require">港澳台通行证/护照号码</span>
+									<input type="txt" name="tutor_txz" required>
+								</div>
+							</li>	
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit">港澳身份证账号（如有）</span>
+									<input type="txt" name="tutor_hongkong_shenfen">
+								</div>
+							</li>	
+								
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit require">职业</span>
+									<input type="txt" name="tutor_work" required>
+								</div>
+							</li>	
+							<li class="cusDatas_list">
+								<div class="cusDatas_item">
+									<span class="cusDatas_tit require">监护人与客户关系</span>
+									<input type="txt" name="tutor_relation" required>
+								</div>
+							</li>
+							
+						</ul>
+							<div class="sub_btn sub_button">
+								<button type="submit" for="custorm_dates" class="btn_submit" onClick="return formValidate(this.form)">下一步</button>
+								<!-- <a href="uploading.html" class="btn_submit">下一步</a> -->
+							</div>
+					</form>
+				</div>		
+			</div>
+		</div>		
+	</div>
+<!-- 底部 -->
+	
+{include file="inc/footer.tpl"}
+{literal}
+	<script >
+		$(function(){
+				laydate.render({
+					elem: '#date'
+			});
+		})
+		/**判断是否成年*/
+		$(document).delegate('#date','click',function(){
+			var self=$(this);
+			$('#layui-laydate1').on("click",function(){
+				
+				if(!$('#layui-laydate1').is(":visible")){
+					var bir=$('#date').val();
+					var birDat=bir.split('-');
+					var Year=parseInt(birDat[0]);
+					var Mon=parseInt(birDat[1]);
+					var Day=parseInt(birDat[2]);
+					var d = new Date()
+					var vYear = d.getFullYear()
+					var vMon = d.getMonth() + 1
+					var vDay = d.getDate();
+					
+					console.log(d)
+					if(vYear - Year >18){
+						$('.tutorDatas').remove();
+						alert(123)
+					}else if(vYear - Year == 18){	
+						if(vMon - Mon >0 ){
+							$('.tutorDatas').remove();	
+						}else if(vMon - Mon == 0 ){
+							if(vDay -Day >=0){$('.tutorDatas').remove();}
+						}
+					}
+				}
+						
+
+				
+			})
+		})
+		$(document).delegate('input:radio','click',function(){
+			$(this).css({'background':'yellow'})
+		})
+
+
+
+		// 验证中文名称
+		function isChinaName(name) {
+			 var pattern = /^[\u4E00-\u9FA5]{1,6}$/;
+			 return pattern.test(name);
+		}
+		 
+		// 验证手机号
+		function isPhoneNo(phone) { 
+			 var pattern = /^1[34578]\d{9}$/; 
+			 return pattern.test(phone); 
+		}
+		 
+		// 验证身份证 
+		function isCardNo(card) { 
+			 var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; 
+			 return pattern.test(card); 
+		} 
+		 
+
+		 function formValidate(form){
+			/*上传资料验证***/
+		 	if($.trim($('input[name="zh_name"]').val()).length == 0 || isChinaName($.trim($('input[name="zh_name"]').val())) == false ){
+					alert('请填写正确中文名');
+					return false;
+					$('input[name="zh_name"]').focus();
+				}else if($('input[name="en_name"]').val()==""){
+					alert('请填写英文名');
+					$('input[name="en_name"]').focus();
+				}else if($('input[name="nation"]').val()==""){
+					alert('请填写国籍');
+					$('input[name="nation"]').focus();
+				}else if($('input[name="register"]').val()==""){
+					alert('请填写户籍');
+					$('input[name="register"]').focus();
+				}else if($.trim($('input[name="shenfen"]').val()).length == 0 || isCardNo($.trim($('input[name="shenfen"]').val())) == false){
+					alert('请填写正确身份证');
+					$('input[name="shenfen"]').focus();
+				}else if($('input[name="tongxingzheng"]').val()==""){
+					alert('请填写通行证号码')
+				}else if($.trim($('input[name="neidi_tel"]').val()).length == 0  || isPhoneNo($.trim($('input[name="neidi_tel"]').val())) == false){
+					alert('请填写正确手机号码');
+					$('input[name="neidi_tel"]').focus();
+				}else if($('input[name="tongxingzheng"]').val()==""){
+					alert('请填写通行证号码')
+					$('input[name="tongxingzheng"]').focus();
+				}else if($('.education tbody tr input[type="text"]').val()==""){
+					alert("请完善学历信息");
+					$('.education tbody tr input[type="text"]').foucus();
+				}else if($('.tutorDatas').css('display')=="block"){
+					if($.trim($('input[name="tutor_zh_name"]').val()).length == 0 || isChinaName($.trim($('input[name="tutor_zh_name"]').val())) == false ){
+						alert('请填写监护人正确中文名')
+						$('input[name="tutor_zh_name"]').focus();
+					}else if($('input[name="tutor_en_name"]').val()==""){
+						alert('请填写监护人英文名');
+						$('input[name="tutor_en_name"]').focus();
+					}else if($.trim($('input[name="tutor_shenfen"]').val()).length == 0 || isCardNo($.trim($('input[name="tutor_shenfen"]').val())) == false){
+						alert('请填写正确监护人身份证');
+						$('input[name="tutor_shenfen"]').focus();
+					}else if($('input[name="tutor_tongxingzheng"]').val()==""){
+						alert('请填写监护人通行证号码')
+						$('input[name="tutor_tongxingzheng"]').focus();
+					}else  if($('input[name="tutor_work"]').val()==""){
+						alert('请填写监护人职业')
+						$('input[name="tutor_tongxingzheng"]').focus();
+					}else if($('input[name="tutor_relation"]').val()==""){
+						alert('请填写与监护人关系')
+						$('input[name="tutor_relation"]').focus();
+					}
+				}
+		 }
+
+		
+	</script>
+{/literal}
+</body>
+</html>

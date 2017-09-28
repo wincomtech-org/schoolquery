@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hant">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">  
+	<meta content="yes" name="apple-mobile-web-app-capable">     
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>香港升學中心-搜索結果</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link href="common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!-- 头部 -->
+	<!-- top -->
+	{include file="inc/header.tpl"}
+	<!-- nav 大屏 end -->
+<!-- 头部 end -->
+
+<!-- 主体内容 -->
+	<div class="color-bg">
+		<div class="pagetop-img">
+			<img src="{$ce}" alt="香港升學中心" title="香港升學中心">
+		</div>
+		<div class="wide-container">
+			<div class="school_tit">
+				<div class="headline ">本地及海外升學</div>
+				<div class="nav_brash">
+					<ul class="brash_list">
+						<li class="brash_item"><a href="index.php" class="active">首頁</a></li>
+						<li class="brash_item"><a>搜索結果</a></li>
+					</ul>
+				</div>				
+			</div>
+			<div class="sresult-wrapper">
+				<div class="sresult-container lf">
+					<div class="x-scroll">
+						<table class="sresult-table">
+							<thead>
+								<tr>
+									<th>課程</th>
+									<th>課程類型</th>
+									<th>截止日期</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- {foreach from=$course item=cou} -->
+								<tr>
+									<td class="subject-name">{$cou.engname}<br>{$cou.name}</td>
+									<td class="subject-type">{$cou.type}</td>
+									<td class="subject-deadline">{$cou.end}</td>
+								</tr>
+								<!--{/foreach}-->
+								
+							</tbody>
+						</table>
+					</div>
+					<div class="page-container sresult-page">
+						<ul class="page">
+						{$pagenav}
+						</ul>
+					</div>
+				</div>
+				<div class="sresult-search">
+					<form action="search_result.php" method="post" class="sresult-form">
+						<p>我有</p>
+						<div class="srform-row">
+							<input type="text" placeholder="分數" name="grade" class="grade" value="{$grade}">
+						</div>
+						<div class="srform-row">
+							<input type="text" value="{$date}" name="date" id="deadline" class="deadline" placeholder="截止日期">
+						</div>
+						<div class="srform-row">
+							<select name="gradetype" class="gradetype">
+								<!-- {foreach from=$score item=sco} -->
+								<!-- {if $sco.id eq $gradetype} -->
+								<option value="{$sco.id}" selected="selected">{$sco.name}</option>
+								<!-- {else} -->
+								<option value="{$sco.id}" >{$sco.name}</option>
+								<!-- {/if} -->
+								<!-- {/foreach} -->
+							</select>
+						</div>
+						<div class="srform-row">
+							<input type="text" placeholder="請輸入關鍵字" name="key" class="keyword" value="{$key}">
+						</div>
+						<div>
+							<input type="submit" class="search" value="立即配對">
+						</div>
+					</form>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+<!-- 主体内容 end -->
+
+{include file="inc/footer.tpl"}
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<div id="menu">
+ <ul class="top">
+  <li><a href="index.php"><i class="home"></i><em>{$lang.menu_home}<!-- {if $unum.system} --><span class="unum"><span>{$unum.system}</span></span><!-- {/if} --></em></a></li>
+ </ul>
+ <ul>
+ <!-- {foreach from=$moudle item=mou} -->
+  <!-- {if $mou.code eq system} -->
+  <li{if $cur eq 'system'} class="cur"{/if}><a href="system.php"><i class="system"></i><em>{$lang.system}</em></a></li>
+  <!--{/if} -->
+  <!-- {if $mou.code eq nav} -->
+  <li{if $cur eq 'nav'} class="cur"{/if}><a href="nav.php"><i class="nav"></i><em>{$lang.nav}</em></a></li>
+  <!--{/if} -->
+   <!-- {if $mou.code eq show} -->
+  <li{if $cur eq 'show'} class="cur"{/if}><a href="show.php"><i class="show"></i><em>{$lang.show}</em></a></li>
+  <!--{/if} -->
+   <!-- {if $mou.code eq page} -->
+    <li{if $cur eq 'page'} class="cur"{/if}><a href="page.php"><i class="page"></i><em>{$lang.menu_page}</em></a></li>
+    <!--{/if} -->
+  <!-- {/foreach} -->
+  </ul>
+
+  <ul>
+   <!-- {foreach from=$moudle item=mou} -->
+  <!-- {if $mou.code eq school_type} -->
+  <li{if $cur eq 'school_type'} class="cur"{/if}><a href="school_type.php"><i class=""></i><em>{$lang.school_type}</em></a></li>
+  <!--{/if} -->
+   <!-- {if $mou.code eq area} -->
+     <li{if $cur eq 'area'} class="cur"{/if}><a href="area.php"><i class=""></i><em>{$lang.area}</em></a></li>
+   <!--{/if} -->
+  
+    <!-- {if $mou.code eq school} -->
+    <li{if $cur eq 'school'} class="cur"{/if}><a href="school.php"><i class=""></i><em>{$lang.school}</em></a></li>
+   <!--{/if} -->
+    <!-- {if $mou.code eq course_type} -->
+    <li{if $cur eq 'course_type'} class="cur"{/if}><a href="course_type.php"><i class=""></i><em>{$lang.course_type}</em></a></li>
+   <!--{/if} -->
+   <!-- {if $mou.code eq course} -->
+    <li{if $cur eq 'course'} class="cur"{/if}><a href="course.php"><i class=""></i><em>{$lang.course}</em></a></li>
+   <!--{/if} -->
+    <!-- {if $mou.code eq score} -->
+     <li{if $cur eq 'score'} class="cur"{/if}><a href="score.php"><i class=""></i><em>{$lang.score_type}</em></a></li>
+   <!--{/if} -->
+    <!-- {if $mou.code eq score} -->
+     <li{if $cur eq 'score'} class="cur"{/if}><a href="score.php"><i class=""></i><em>{$lang.score_type}</em></a></li>
+   <!--{/if} -->
+    <!-- {if $mou.code eq taste_type} -->
+    <li{if $cur eq 'taste_type'} class="cur"{/if}><a href="taste_type.php"><i class=""></i><em>{$lang.taste_type}</em></a></li>
+   <!--{/if} -->
+    <!-- {if $mou.code eq taste} -->
+  <li{if $cur eq 'taste'} class="cur"{/if}><a href="taste.php"><i class=""></i><em>{$lang.taste}</em></a></li>
+   <!--{/if} -->
+    <!-- {if $mou.code eq customer} -->
+  <li{if $cur eq 'customer'} class="cur"{/if}><a href="customer.php"><i class=""></i><em>{$lang.customer}</em></a></li>
+   <!--{/if} -->
+  <!-- {/foreach} -->
+  </ul>
+  
+ <!-- {if !$workspace.menu_column && !$workspace.menu_single} 如果没有模块则调用单页面菜单 -->
+ <!-- {foreach from=$workspace.menu_simple item=menu} -->
+ <ul>
+  <li{if $cur eq $menu.unique_id} class="cur"{/if}><a href="page.php?rec=edit&id={$menu.id}"><i></i><em>{$menu.page_name}</em></a></li>
+  <!-- {foreach from=$menu.child item=child} -->
+  <li{if $cur eq $child.unique_id} class="cur"{/if}><a href="page.php?rec=edit&id={$child.id}"><i class="menuPage"></i><em>{$child.page_name}</em></a></li>
+  <!-- {/foreach} -->
+ </ul>
+ <!-- {/foreach} -->
+ <!-- {/if} -->
+
+
+ <ul class="bot">
+  <!-- {foreach from=$moudle item=mou} -->
+    <!-- {if $mou.code eq backup} -->
+    <li{if $cur eq 'backup'} class="cur"{/if}><a href="backup.php"><i class="backup"></i><em>{$lang.backup}</em></a></li>
+   <!--{/if} -->
+   <!-- {if $mou.code eq manager} -->
+     <li{if $cur eq 'manager'} class="cur"{/if}><a href="manager.php"><i class="manager"></i><em>{$lang.manager}</em></a></li>
+   <!--{/if} -->
+   <!-- {if $mou.code eq rbac} -->
+    <li {if $cur eq 'rbac'}class="cur"{/if}><a href="rbac.php"><i class="manager"></i><em>权限管理</em></a></li>
+   <!--{/if} -->
+    <!-- {if $mou.code eq manager_log} -->
+    <li{if $cur eq 'manager_log'} class="cur"{/if}><a href="manager.php?rec=manager_log"><i class="managerLog"></i><em>{$lang.manager_log}</em></a></li>
+   <!--{/if} -->
+  <!-- {/foreach} -->
+
+ </ul>
+</div>

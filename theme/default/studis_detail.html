@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hant">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">  
+	<meta content="yes" name="apple-mobile-web-app-capable">     
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>课程详情</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link href="common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!-- 头部 -->
+	<!-- top -->
+	{include file="inc/header.tpl"}
+	<!-- nav 大屏 end -->
+<!-- 头部 end -->
+
+	<div class="school_main">
+		<div class="local_img">
+			<img src="{$ce}" alt="">
+		</div>
+		<div class="local_main">
+			<div class="school_tit">
+				<div class="headline ">课程详情</div>
+				<div class="nav_brash">
+					<ul class="brash_list">
+						<li class="brash_item"><a href="local_school.html" class="active">本地升学</a></li>
+						<li class="brash_item"><a href="local_studies.html" class="active">课程列表</a></li>
+						<li class="brash_item"><a>课程详情</a></li>
+					</ul>
+				</div>
+				
+			</div>
+			<div class="studis_detail">
+					<div class="studis_detail_tit">
+						<ul class="studis_list">
+							<li>{$school.name}</li>
+							<li>{$course.depart}</li>
+						</ul>
+						<div class="studis_list_det">
+							<p>{$course.name} </p>
+							<p>{$course.eng_name}</p>
+							<p class="small">
+								<span class="date">{$course.open_data}入学</span>
+								<span class="bianma">课程代码：{$course.code}</span>
+							</p>
+						</div>
+					</div>
+					<div class="studis_detail_con">
+						<div class="school_tit">
+							<div class="headline color_gray" >入学要求</div>
+							<div class="nav_brash">
+								<p><img src="img/daoxiang.jpg" alt=""><a href="">导出PDF</a></p>
+							</div>
+						</div>
+						<div class="studis_detail_con_ul">
+						{$course.srequire}
+							
+						</div>
+					</div>
+			
+		</div>
+	</div>
+
+<!-- 底部 -->
+	{include file="inc/footer.tpl"}
+</body>
+</html>

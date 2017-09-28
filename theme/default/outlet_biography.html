@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hant">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">  
+	<meta content="yes" name="apple-mobile-web-app-capable">     
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>人物传记</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link href="common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!-- 头部 -->
+	<!-- top -->
+	{include file="inc/header.tpl"}
+	<!-- nav 大屏 end -->
+<!-- 头部 end -->
+
+	<div class="school_main">
+		<div class="local_img">
+			<img src="{$ce}" alt="">
+		</div>
+		<div class="local_main">
+			<div class="school_tit">
+				<div class="headline ">升学出路</div>
+				<div class="nav_brash">
+					<ul class="brash_list">
+						<li class="brash_item"><a href="process.php">大学排名</a></li>
+						<li class="brash_item"><a  class="active">学校</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="local_school">
+				<p class="video_tit">{$school.name}</p>
+				<div class="news_con">
+					<div class="news_video biography" style="width:100%;">
+						<div class="txt">
+							{$school.detail}
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+<!-- 底部 -->
+	{literal}
+	<script>
+		$(document).delegate('.local_shool_list','click',function(){
+			var self=$(this);
+			var t=$(this).index();
+			var con=$('.local_shool_content');
+			self.addClass('active').siblings().removeClass('active');
+			con.eq(t).show(600).siblings().hide(600);
+		})
+
+		$(function(){
+			/***新闻滚动条**/
+		    var DivLi=$('.new_video_items');
+		    for(var i=0;i<DivLi.length;i++){
+		        var DivLiH=DivLi[i].clientHeight;
+		    }
+		   $('#box').css('height',DivLiH*8+"px");
+		})
+
+	</script>
+{/literal}
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hant">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">  
+	<meta content="yes" name="apple-mobile-web-app-capable">     
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>上传系统</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link href="common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!-- 头部 -->
+	<!-- top -->
+	{include file="inc/header.tpl"}
+	<!-- nav 大屏 end -->
+<!-- 头部 end -->
+
+	<div class="school_main">
+		<div class="local_img">
+			<img src="{$ce}" alt="">
+		</div>
+		<div class="uploading_system">
+			<div class="school_tit">
+				<div class="headline ">上传系统</div>
+			</div>
+			<div class="sys_datas">
+				<div class="upload_complte">
+					<div class="img">
+						<span class="top"><img src="images/duigou.png"></span>
+						<span class="bottom">资料提交完成</span>
+					</div>
+					<div class="btn"><a href="index.php">跳转回首页</a></div>
+				</div>	
+			</div>
+		</div>		
+	</div>
+<!-- 底部 -->
+	{include file="inc/footer.tpl"}
+</body>
+</html>

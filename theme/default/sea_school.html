@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hant">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">  
+	<meta content="yes" name="apple-mobile-web-app-capable">     
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>本地升学课程</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link href="common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!-- 头部 -->
+	<!-- top -->
+	{include file="inc/header.tpl"}
+
+	<!-- nav 大屏 end -->
+<!-- 头部 end -->
+	<div class="school_main">
+		<div class="local_img">
+			<img src="{$ce}" alt="">
+		</div>
+		<div class="local_main">
+			<div class="school_tit">
+				<div class="headline ">大学概览</div>
+				<div class="nav_brash">
+					<div class="search">
+						<span>学校搜索</span>
+						<div class="class_ser">
+							<form name="action" method="post" action="sea_studies.php?rec=action">
+							<input type="text" name="sch" placeholder="请输入关键字">
+							<input type="submit" class="ser" value="搜索">
+							
+						</form>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="local_school">
+				<ul class="local_school_nav">
+				<!-- {foreach from=$area item=are} -->
+
+					<!-- {if $are.id eq $id} -->
+						<li class="local_shool_list active"><div class="nav_items">{$are.name}</div></li>
+					<!-- {else} -->
+				      <li class="local_shool_list "><div class="nav_items">{$are.name}</div></li>
+				    <!-- {/if} -->
+				<!--{/foreach}-->
+				</ul>
+				<div class="local_shool_con">
+				<!-- {foreach from=$school item=scho} -->
+					<div class="local_shool_content">
+						<ul>
+						<!-- {if $pass} -->
+							<!-- {foreach from=$scho item=sch} -->
+							<li class="xuewei_item"><img src="{$sch.school_logo}" alt=""><p><a href="sea_school_detail.php?id={$sch.id}">{$sch.name}<br/>{$sch.engname}</a></p></li>
+						<!--{/foreach}-->
+						<!-- {else} -->
+							<!-- {foreach from=$scho item=sch} -->
+							<li class="xuewei_item"><img src="{$sch.school_logo}" alt=""><p><a>{$sch.name}<br/>{$sch.engname}</a></p></li>
+							<!--{/foreach}-->
+						<!-- {/if} -->
+						
+						</ul>
+					</div>
+				<!--{/foreach}-->
+					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+<!-- 底部 -->
+	{include file="inc/footer.tpl"}
+	
+
+</body>
+</html>

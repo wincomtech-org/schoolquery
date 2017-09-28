@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hant">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">  
+	<meta content="yes" name="apple-mobile-web-app-capable">     
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<title>本地升学课程</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link href="common.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<!-- 头部 -->
+	<!-- top -->
+	{include file="inc/header.tpl"}
+	<!-- nav 大屏 end -->
+<!-- 头部 end -->
+	<div class="school_main">
+		<div class="local_img">
+			<img src="{$ce}" alt="">
+		</div>
+		<div class="local_main">
+			<div class="school_tit">
+				<div class="headline ">课程列表</div>
+				<div class="nav_brash">
+					<ul class="brash_list">
+						<li class="brash_item"><a href="local_school.php">海外升学</a></li>
+						<li class="brash_item"><a>学校列表</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="local_stuidies_con">
+				<div class="tit_img">
+					<div class="tit_image">
+						<img src="" alt="">
+					</div>
+					
+					<div class="search">
+						<span>学校搜索</span>
+						<div class="class_ser">
+						<form name="action" method="post" action="sea_studies.php?rec=action">
+							<input type="text" name="sch" placeholder="请输入关键字" value="{$sch}">
+							<input type="submit" class="ser" value="搜索">
+						</form>
+						</div>
+					</div>	
+				</div>
+				<div class="local_stuidies_a">
+				<a href="#" class="active">ALL</a>
+					<a href="?sch={$sch}&name=a">A</a>
+					<a href="?sch={$sch}&name=b">B</a>
+					<a href="?sch={$sch}&name=c">C</a>
+					<a href="?sch={$sch}&name=d">D</a>
+					<a href="?sch={$sch}&name=e">E</a>
+					<a href="?sch={$sch}&name=f">F</a>
+					<a href="?sch={$sch}&name=g">G</a>
+					<a href="?sch={$sch}&name=h">H</a>
+					<a href="?sch={$sch}&name=i">I</a>
+					<a href="?sch={$sch}&name=j">J</a>
+					<a href="?sch={$sch}&name=k">K</a>
+					<a href="?sch={$sch}&name=l">L</a>
+					<a href="?sch={$sch}&name=m">M</a>
+					<a href="?sch={$sch}&name=n">N</a>
+					<a href="?sch={$sch}&name=o">O</a>
+					<a href="?sch={$sch}&name=p">P</a>
+					<a href="?sch={$sch}&name=q">Q</a>
+					<a href="?sch={$sch}&name=r">R</a>
+					<a href="?sch={$sch}&name=s">S</a>
+					<a href="?sch={$sch}&name=t">T</a>
+					<a href="?sch={$sch}&name=u">U</a>
+					<a href="?sch={$sch}&name=v">V</a>
+					<a href="?sch={$sch}&name=w">W</a>
+					<a href="?sch={$sch}&name=x">X</a>
+					<a href="?sch={$sch}&name=y">Y</a>
+					<a href="?sch={$sch}&name=z">Z</a>
+					
+				</div>
+				<div class='local_stuidies'>
+					<table>
+						<thead>
+							<tr>
+								<th>學校名稱</th>
+								<th>學校網站</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="2">海外升學</td>
+							</tr>
+							<!-- {if $pass} -->
+							<!-- {foreach from=$school item=sch} -->
+							<tr>
+								<td>
+									<p><a href="studis_detail.php?id={$cou.id}">{$sch.engname}</a> </p>
+									<p><a href="studis_detail.php?id={$cou.id}">{$sch.name}</a></p>
+								</td>
+								<td><a href="{$sch.website}" target="_blank"></a></td>
+							</tr>
+							<!--{/foreach}-->
+							 <!-- {else} -->
+						     <!-- {foreach from=$school item=sch} -->
+							<tr>
+								<td>
+									<p><a>{$sch.engname}</a> </p>
+									<p><a>{$sch.name}</a></p>
+								</td>
+								<td><a href="{$sch.website}" target="_blank">{$sch.website}</a></td>
+							</tr>
+							<!--{/foreach}-->
+						      <!-- {/if} -->
+						</tbody>
+					</table>
+					<div class="school_page">
+						<ul class="page">
+						{$pagenav}
+							<!-- <a href="" class="prev"><img src="images/prev.png" alt=""></a>
+							<a href="" class="active page_num" >1</a>
+							<a href="" class="page_num">2</a>
+							<a href="" class="next"><img src="images/next.png" alt=""></a> -->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- 底部 -->
+	{include file="inc/footer.tpl"}
+</body>
+</html>
