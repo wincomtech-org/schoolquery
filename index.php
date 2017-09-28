@@ -84,6 +84,7 @@ $sql = "SELECT * FROM " . $dou->table('taste').'where news_show=1 order by sort 
 $query = $dou->query($sql);
 while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
 		$row['content']=mb_substr($row['content'],0,40,'UTF-8');
+         $row['content']=strip_tags($row['content']);
 	   $news[]=$row;
 }
 $smarty->assign('news', $news);//获取新闻
