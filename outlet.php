@@ -36,7 +36,6 @@ $sql = "SELECT * FROM " . $dou->table('nav').'where module="process"';
  $query = $dou->query($sql);
 $about = $dou->fetch_array($query);
 $ce=$about['show_img'];
-echo $ce;
 $smarty->assign('ce', $ce);//获取图片
 
 // $sql = "SELECT * FROM " . $dou->table('school').'order by sort desc limit 3';

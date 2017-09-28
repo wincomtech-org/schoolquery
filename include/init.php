@@ -69,10 +69,10 @@ if (!defined('EXIT_INIT')) {
     header('Content-type: text/html; charset=' . DOU_CHARSET);
     
     // 判断是否跳转到手机版（条件：是移动端、没有强制显示PC版、手机版没有关闭）
-    if ($dou->is_mobile() && $_COOKIE['client'] != 'pc' && !$_CFG['mobile_closed']) {
-        $content_url = str_replace(ROOT_URL, '', 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-        $dou->dou_header(ROOT_URL . M_PATH . '/' . $content_url);
-    }
+    // if ($dou->is_mobile() && $_COOKIE['client'] != 'pc' && !$_CFG['mobile_closed']) {
+    //     $content_url = str_replace(ROOT_URL, '', 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+    //     $dou->dou_header(ROOT_URL . M_PATH . '/' . $content_url);
+    // }
     
     // 豆壳防火墙
     $firewall->dou_firewall();
