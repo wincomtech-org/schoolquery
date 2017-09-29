@@ -633,6 +633,7 @@ label.custorm_address {height:30px;line-height:30px;display:inline-block;width:9
 .customer_uploading_dates{width:100%;background-color:#fff;}
 .customer_uploading_dates table{width:96%;margin:0 2%;border-collapse:collapse;margin-bottom:20px;}
 .customer_uploading_dates table th{font-size:18px;color:#fff;padding:20px;text-align:left;}
+.customer_uploading_dates table th span.tip{font-size:14px;color:#fff;margin-left:8px;}
 .customer_uploading_dates table  thead tr{background-color:#1452c8;}
 .customer_uploading_dates table td{font-size:14px;color:#333;padding:15px;line-height:25px;}
 .customer_uploading_dates table td span.red{color:red;}
