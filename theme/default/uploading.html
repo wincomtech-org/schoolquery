@@ -63,13 +63,13 @@
 					<table>
 						<thead>
 							<tr>
-								<th colspan="2">客户上传相关文件</th>
+								<th colspan="2">客户上传相关文件<span class="tip">请按要求上传相应数量的文件</span></th>
 							</tr>
 						</thead>
 						<tbody>
 
 							<tr>
-								<td>所有身份证明文件（内地身份证<span class="red">*</span>、户口本<span class="red">*</span>、港澳通行证/护照<span class="red">*</span>、香港身份证）</td>
+								<td>所有身份证明文件（内地身份证<span class="red" style="font-size:12px;letter-spacing:1px">(需身份证正反面)</span><span class="red">*</span>、户口本<span class="red">*</span>、港澳通行证/护照<span class="red">*</span>、香港身份证）</td>
 								<td>
 										<a  class="zwb_upload" id="zwb_upload0">
 											<input type="file" id="zwb" multiple class="add">上传
@@ -163,11 +163,11 @@
 					<table class="jianhuren">
 						<thead>
 							<tr>
-								<th colspan="2">监护人上传相关文件</th></tr>
+								<th colspan="2">监护人上传相关文件<span class="tip">请按要求上传相应数量的文件</span></th></tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>所有身份证明文件（内地身份证<span class="red">*</span>、户口本<span class="red">*</span>、港澳通行证/护照<span class="red">*</span>、香港身份证）</td>
+								<td>所有身份证明文件（内地身份证<span class="red" style="font-size:12px;letter-spacing:1px">(需身份证正反面)</span><span class="red">*</span>、户口本<span class="red">*</span>、港澳通行证/护照<span class="red">*</span>、香港身份证）</td>
 								<td>
 										<a  class="zwb_upload" id="zwb_upload7">
 											<input type="file" id="zwb" multiple class="add">上传
@@ -248,20 +248,22 @@
 	  	 })
 
 	  	 function ckeckmes(form){
+	  	 	var a=$.trim($('input[name="filePath1"]').val()).split(',').length;
+	  	 	console.log(a);
 	  
-	  	 	if($.trim($('input[name="filePath1"]').val()) == "" ){
-	  	 		alert("请上传身份证明文件");
+	  	 	if($.trim($('input[name="filePath1"]').val()).split(',').length <= 4 || $.trim($('input[name="filePath1"]').val()) == "" ){
+	  	 		alert("请至少上传4张相关身份证明文件");
 	  	 		return false;
 	  	 	}else if($.trim($('input[name="filePath2"]').val()) == "" ){
 	  	 		alert("请上传证件照");
 	  	 		return false;
-	  	 	}else if($.trim($('input[name="filePath3"]').val()) == "" ){
-	  	 		alert("请上传成绩表*、毕业证*");
+	  	 	}else if($.trim($('input[name="filePath3"]').val()).split(',').length <= 1 || $.trim($('input[name="filePath3"]').val()) == "" ){
+	  	 		alert("请上传成绩表、毕业证");
 	  	 		return false;
 	  	 	}else if($('.jianhuren').is(":visible")){
 
-		  	 	if($.trim($('input[name="filePath8"]').val()) == "" ){
-		  	 		alert("请上传监护人身份证明文件");
+		  	 	if($.trim($('input[name="filePath8"]').val()).split(',').length <= 4 ||$.trim($('input[name="filePath8"]').val()) == "" ){
+		  	 		alert("请至少上传4张监护人身份证明文件");
 		  	 		return false;
 		  	 	}else if($.trim($('input[name="filePath9"]').val()) == "" ){
 		  	 		alert("请上传监护人证件照");
