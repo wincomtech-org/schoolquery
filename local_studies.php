@@ -85,7 +85,7 @@ if($id){
     pageft($allnum,$pageSize,1,1,0,5,"local_studies.php?sch=$sch");
 }
 
-
+$smarty->assign('index', 'local_school');//选中加样式
 $smarty->assign('pagenav',$pagenav);
 $smarty->assign('id',$id);
 $smarty->assign('course',$course);

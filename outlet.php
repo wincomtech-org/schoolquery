@@ -44,6 +44,7 @@ $smarty->assign('ce', $ce);//获取图片
 //     $row['content']=mb_substr($row['content'],0,180,'UTF-8');
 //     $school[]=$row;
 // }
+$smarty->assign('index', 'process');
 // $smarty->assign('school', $school);//获取图片
 $smarty->display('outlet.html');
 
