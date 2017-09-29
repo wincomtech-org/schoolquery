@@ -276,7 +276,7 @@ $.fn.bindUpload = function () {
                     itemList.eq(i).find(".state").html(data.errmsg);
                     itemList.eq(i).find(".err").width("100%").html(data.errmsg);
                 }
-                itemList.eq(i).find(".progressBox").hide();
+                itemList.find(".progressBox").hide();
             }, error: function () {
                 itemList.eq(i).find(".progressBox").hide();
                 itemList.eq(i).find(".state").html("请求失败");
