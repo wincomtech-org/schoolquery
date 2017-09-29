@@ -42,11 +42,11 @@ $school=$dou->fetch_array($query);
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('Nicola Asuni');
-$pdf->SetTitle('TCPDF Example 038');
-$pdf->SetSubject('TCPDF Tutorial');
-$pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+// $pdf->SetCreator(PDF_CREATOR);
+// $pdf->SetAuthor('Nicola Asuni');
+// $pdf->SetTitle('TCPDF Example 038');
+// $pdf->SetSubject('TCPDF Tutorial');
+// $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
 // set default header data
 // $pdf->SetHeaderData('PDF_HEADER_LOGO', PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 038', PDF_HEADER_STRING);
