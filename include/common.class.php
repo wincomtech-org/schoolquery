@@ -227,7 +227,66 @@ class Common extends DbMysql {
 
         return $child_id;
     }
-    
+     
+   /**
+ * 改变图片的宽高
+ *
+
+ * @param string $img_src 原图片的存放地址或url
+ * @param string $new_img_path 新图片的存放地址
+ * @param int $new_width 新图片的宽度
+ * @param int $new_height 新图片的高度
+ * @return bool 成功true, 失败false
+ */
+function resize_image($img_src, $new_img_path, $new_width, $new_height)
+{
+    $img_info = @getimagesize($img_src);
+    if (!$img_info || $new_width < 1 || $new_height < 1 || empty($new_img_path)) {
+        return false;
+    }
+    if (strpos($img_info['mime'], 'jpeg') !== false) {
+        $pic_obj = imagecreatefromjpeg($img_src);
+    } else if (strpos($img_info['mime'], 'gif') !== false) {
+        $pic_obj = imagecreatefromgif($img_src);
+    } else if (strpos($img_info['mime'], 'png') !== false) {
+        $pic_obj = imagecreatefrompng($img_src);
+    } else {
+        return false;
+    }
+
+    $pic_width = imagesx($pic_obj);
+    $pic_height = imagesy($pic_obj);
+
+    if (function_exists("imagecopyresampled")) {
+        $new_img = imagecreatetruecolor($new_width,$new_height);
+        imagecopyresampled($new_img, $pic_obj, 0, 0, 0, 0, $new_width, $new_height, $pic_width, $pic_height);
+    } else {
+        $new_img = imagecreate($new_width, $new_height);
+        imagecopyresized($new_img, $pic_obj, 0, 0, 0, 0, $new_width, $new_height, $pic_width, $pic_height);
+    }
+    if (preg_match('~.([^.]+)$~', $new_img_path, $match)) {
+        $new_type = strtolower($match[1]);
+        switch ($new_type) {
+            case 'jpg':
+                imagejpeg($new_img, $new_img_path);
+                break;
+            case 'gif':
+                imagegif($new_img, $new_img_path);
+                break;
+            case 'png':
+                imagepng($new_img, $new_img_path);
+                break;
+            default:
+                imagejpeg($new_img, $new_img_path);
+        }
+    } else {
+        imagejpeg($new_img, $new_img_path);
+    }
+    imagedestroy($pic_obj);
+    imagedestroy($new_img);
+    return true;
+}
+
     /**
      * +----------------------------------------------------------
      * 向客户端发送原始的 HTTP 报头
