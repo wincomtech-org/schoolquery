@@ -221,7 +221,7 @@ elseif ($rec == 'insert') {
         $files = $images_dir . $upfiles;
         $img->make_thumb($upfiles, $_CFG['thumb_width'], $_CFG['thumb_height']);
     }
-    $ret = resize_image(ROOT_PATH.$files, ROOT_PATH.$files, '300', '240');
+    $ret = resize_image(ROOT_PATH.$files, ROOT_PATH.$files, '300', '210');
     //$add_time = time();
     
     // 格式化自定义参数
@@ -313,7 +313,7 @@ elseif ($rec == 'update') {
         $img->make_thumb($upfiles, $_CFG['thumb_width'], $_CFG['thumb_height']);
         $up_files = ", school_logo='$files'";
     }
-    $ret = resize_image(ROOT_PATH.$files, ROOT_PATH.$files, '300', '240');
+    $ret = resize_image(ROOT_PATH.$files, ROOT_PATH.$files, '300', '210');
     // 格式化自定义参数
     //$_POST['defined'] = str_replace("\r\n", ',', $_POST['defined']);
     
