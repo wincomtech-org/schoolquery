@@ -122,7 +122,6 @@ if($rec=='load'){
 	$_POST['work_year']=implode('|',$_POST['work_year']);
 	$_POST['work_time']=implode('|',$_POST['work_time']);
 	$_POST['position']=implode('|',$_POST['position']);
-	echo $_POST['school_name'];
 	 $sql = "INSERT INTO " . $dou->table('customer') . " (id,name,engname,sex,data,nation, contry, id_number,pass_check,phone,g_tel, n_adress ,g_adress, gid, school_name,school_adress,school_tel,school_year,school_time,education,work_name,work_adress,work_tel,work_year,work_time,position,tutor_name,tutor_engname,tutor_sex,tutor_id,tutor_pass,tutor_gid,tutor_work,relation,tutor_year,know_gd,special,health)" . " VALUES (NULL,'$_POST[zh_name]','$_POST[en_name]','$_POST[sex]','$_POST[date]','$_POST[nation]','$_POST[register]','$_POST[shenfen]','$_POST[txz]','$_POST[neidi_tel]','$_POST[hokong_tel]','$_POST[address]','$_POST[gaddress]','$_POST[gid]','$_POST[school_name]','$_POST[school_address]','$_POST[school_tel]','$_POST[school_year]','$_POST[school_time]','$_POST[education]','$_POST[work_name]','$_POST[work_address]','$_POST[work_tel]','$_POST[work_year]','$_POST[work_time]','$_POST[position]','$_POST[tutor_zh_name]','$_POST[tutor_en_name]','$_POST[tutor_sex]','$_POST[tutor_shenfen]','$_POST[tutor_txz]','$_POST[tutor_hongkong_shenfen]','$_POST[tutor_work]','$_POST[tutor_relation]','$_POST[age]','$_POST[understand]','$_POST[stduy_ness]','$_POST[health_ness]')";
     if($dou->query($sql)){
     	$sqls="SELECT id FROM".$dou->table('customer')."where name='$_POST[zh_name]'";
