@@ -110,7 +110,6 @@ if($rec=='load'){
 			exit; 
 		}
 	}
-	print_r($_POST['school_name']);
 	$_POST['school_name']=implode('|',$_POST['school_name']);
 	$_POST['school_address']=implode('|',$_POST['school_address']);
 	$_POST['school_tel']=implode('|',$_POST['school_tel']);
