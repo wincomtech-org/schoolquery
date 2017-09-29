@@ -14,6 +14,54 @@
 define('IN_DOUCO', true);
 
 require (dirname(__FILE__) . '/include/init.php');
+function resize_image($img_src, $new_img_path, $new_width, $new_height)
+{
+    $img_info = @getimagesize($img_src);
+    if (!$img_info || $new_width < 1 || $new_height < 1 || empty($new_img_path)) {
+        return false;
+    }
+    if (strpos($img_info['mime'], 'jpeg') !== false) {
+        $pic_obj = imagecreatefromjpeg($img_src);
+    } else if (strpos($img_info['mime'], 'gif') !== false) {
+        $pic_obj = imagecreatefromgif($img_src);
+    } else if (strpos($img_info['mime'], 'png') !== false) {
+        $pic_obj = imagecreatefrompng($img_src);
+    } else {
+        return false;
+    }
+
+    $pic_width = imagesx($pic_obj);
+    $pic_height = imagesy($pic_obj);
+
+    if (function_exists("imagecopyresampled")) {
+        $new_img = imagecreatetruecolor($new_width,$new_height);
+        imagecopyresampled($new_img, $pic_obj, 0, 0, 0, 0, $new_width, $new_height, $pic_width, $pic_height);
+    } else {
+        $new_img = imagecreate($new_width, $new_height);
+        imagecopyresized($new_img, $pic_obj, 0, 0, 0, 0, $new_width, $new_height, $pic_width, $pic_height);
+    }
+    if (preg_match('~.([^.]+)$~', $new_img_path, $match)) {
+        $new_type = strtolower($match[1]);
+        switch ($new_type) {
+            case 'jpg':
+                imagejpeg($new_img, $new_img_path);
+                break;
+            case 'gif':
+                imagegif($new_img, $new_img_path);
+                break;
+            case 'png':
+                imagepng($new_img, $new_img_path);
+                break;
+            default:
+                imagejpeg($new_img, $new_img_path);
+        }
+    } else {
+        imagejpeg($new_img, $new_img_path);
+    }
+    imagedestroy($pic_obj);
+    imagedestroy($new_img);
+    return true;
+}
 
 // rec操作项的初始化
 $rec = $check->is_rec($_REQUEST['rec']) ? $_REQUEST['rec'] : 'default';
@@ -173,6 +221,7 @@ elseif ($rec == 'insert') {
         $files = $images_dir . $upfiles;
         $img->make_thumb($upfiles, $_CFG['thumb_width'], $_CFG['thumb_height']);
     }
+    $ret = resize_image(ROOT_PATH.$files, ROOT_PATH.$files, '300', '240');
     //$add_time = time();
     
     // 格式化自定义参数
@@ -264,6 +313,7 @@ elseif ($rec == 'update') {
         $img->make_thumb($upfiles, $_CFG['thumb_width'], $_CFG['thumb_height']);
         $up_files = ", school_logo='$files'";
     }
+    $ret = resize_image(ROOT_PATH.$files, ROOT_PATH.$files, '300', '240');
     // 格式化自定义参数
     //$_POST['defined'] = str_replace("\r\n", ',', $_POST['defined']);
     
