@@ -100,7 +100,7 @@ if($rec=='load'){
 			echo "<script>alert('监护人身份证号不能为空');history.go(-1);</script>"; 
 			exit; 
 		}
-		if(empty($_POST['tutor_tongxingzheng'])){
+		if(empty($_POST['tutor_txz'])){
 			echo "<script>alert('监护人通行证或护照号不能为空');history.go(-1);</script>"; 
 			exit; 
 		}
