@@ -47,8 +47,21 @@ if($_SESSION['pass']){
     }
      $couid=substr($couid,0,-1);
     $pageNum = empty($_GET["page"])?1:$_GET["page"];
-    $pageSize=4;
-     $sql="SELECT * FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%') and cut_off_data >='$date' order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
+    $pageSize=10;
+    if(!empty($couid)){
+        if(!empty($_REQUEST['date'])){
+             $sql="SELECT * FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%') and cut_off_data >='$date' order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
+        }else{
+             $sql="SELECT * FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%') order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
+        }
+    }else{
+        if(!empty($_REQUEST['date'])){
+           $sql="SELECT * FROM " . $dou->table('course')." where (name like '%$key%' or eng_name like '%$key%') and cut_off_data >='$date' order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
+        }else{
+             $sql="SELECT * FROM " . $dou->table('course')." where (name like '%$key%' or eng_name like '%$key%') order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
+        }
+    }
+     // $sql="SELECT * FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%') and cut_off_data >='$date' order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
      $query = $dou->query($sql);
      while ($rows = $GLOBALS['dou']->fetch_assoc($query)) {
         $end=date('Y/m/d', $rows['cut_off_data']);

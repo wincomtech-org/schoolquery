@@ -41,6 +41,7 @@ $course['open_data']=date('Y年m月',$course['open_data']);
 $sql="SELECT name FROM".$dou->table('school')." where id='$course[shid]'";
 $query=$dou->query($sql);
 $school=$dou->fetch_array($query);
+
 $smarty->assign('school',$school);
 $smarty->assign('course',$course);
 $smarty->display('studis_detail.html');
