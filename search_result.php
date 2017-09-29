@@ -88,6 +88,11 @@ if($_SESSION['pass']){
     $num=$dou->fetch_array($query);
     $allnum=$num['count(*)'];
 }
+if($key==''){
+    echo 111;
+    $course='';
+    $allnum='';
+}
 
 pageft($allnum,$pageSize,1,1,0,5,"search_result.php?grade=$grade&gradetype=$gradetype&date=$dates&key=$key");
 $smarty->assign('course',$course);

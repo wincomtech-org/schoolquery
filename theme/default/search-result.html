@@ -43,6 +43,7 @@
 								</tr>
 							</thead>
 							<tbody>
+								<!--{if $course}-->
 								<!-- {foreach from=$course item=cou} -->
 								<tr>
 									<td class="subject-name">{$cou.engname}<br>{$cou.name}</td>
@@ -50,7 +51,11 @@
 									<td class="subject-deadline">{$cou.end}</td>
 								</tr>
 								<!--{/foreach}-->
-								
+								<!--{else}-->
+									<tr>
+										<td>没有任何符合搜索条件的课程</td>
+									</tr>
+								<!--{/if}-->
 							</tbody>
 						</table>
 					</div>
