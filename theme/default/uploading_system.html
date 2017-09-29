@@ -386,46 +386,67 @@
 					return false;
 					$('input[name="zh_name"]').focus();
 				}else if($('input[name="en_name"]').val()==""){
+					
 					alert('请填写英文名');
+					return false;
 					$('input[name="en_name"]').focus();
+					
+				}else if($('input[name="date"]').val()==""){
+					alert('请填写出生日期');
+					return false;
+					
+					$('input[name="nation"]').focus();
 				}else if($('input[name="nation"]').val()==""){
 					alert('请填写国籍');
+					return false;
 					$('input[name="nation"]').focus();
 				}else if($('input[name="register"]').val()==""){
 					alert('请填写户籍');
+					return false;
 					$('input[name="register"]').focus();
 				}else if($.trim($('input[name="shenfen"]').val()).length == 0 || isCardNo($.trim($('input[name="shenfen"]').val())) == false){
 					alert('请填写正确身份证');
+					return false;
 					$('input[name="shenfen"]').focus();
 				}else if($('input[name="tongxingzheng"]').val()==""){
-					alert('请填写通行证号码')
+					alert('请填写通行证号码');
+					return false;
 				}else if($.trim($('input[name="neidi_tel"]').val()).length == 0  || isPhoneNo($.trim($('input[name="neidi_tel"]').val())) == false){
 					alert('请填写正确手机号码');
+					return false;
 					$('input[name="neidi_tel"]').focus();
-				}else if($('input[name="tongxingzheng"]').val()==""){
-					alert('请填写通行证号码')
+				}else if($('.address_required input[name="address"]').val()==""){
+					alert('请填写详细地址');
+					return false;
 					$('input[name="tongxingzheng"]').focus();
 				}else if($('.education tbody tr input[type="text"]').val()==""){
 					alert("请完善学历信息");
+					return false;
 					$('.education tbody tr input[type="text"]').foucus();
 				}else if($('.tutorDatas').css('display')=="block"){
 					if($.trim($('input[name="tutor_zh_name"]').val()).length == 0 || isChinaName($.trim($('input[name="tutor_zh_name"]').val())) == false ){
-						alert('请填写监护人正确中文名')
+						alert('请填写监护人正确中文名');
+						return false;
 						$('input[name="tutor_zh_name"]').focus();
 					}else if($('input[name="tutor_en_name"]').val()==""){
 						alert('请填写监护人英文名');
+						return false;
 						$('input[name="tutor_en_name"]').focus();
 					}else if($.trim($('input[name="tutor_shenfen"]').val()).length == 0 || isCardNo($.trim($('input[name="tutor_shenfen"]').val())) == false){
 						alert('请填写正确监护人身份证');
+						return false;
 						$('input[name="tutor_shenfen"]').focus();
-					}else if($('input[name="tutor_tongxingzheng"]').val()==""){
-						alert('请填写监护人通行证号码')
-						$('input[name="tutor_tongxingzheng"]').focus();
+					}else if($('input[name="tutor_txz"]').val()==""){
+						alert('请填写监护人通行证号码');
+						return false;
+						$('input[name="tutor_txz"]').focus();
 					}else  if($('input[name="tutor_work"]').val()==""){
 						alert('请填写监护人职业')
+						return false;
 						$('input[name="tutor_tongxingzheng"]').focus();
 					}else if($('input[name="tutor_relation"]').val()==""){
 						alert('请填写与监护人关系')
+						return false;
 						$('input[name="tutor_relation"]').focus();
 					}
 				}

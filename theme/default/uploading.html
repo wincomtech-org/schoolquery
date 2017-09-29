@@ -160,7 +160,7 @@
 						</tbody>
 					</table>
 					<!--{if $age lt 18}-->
-					<table>
+					<table class="jianhuren">
 						<thead>
 							<tr>
 								<th colspan="2">监护人上传相关文件</th></tr>
@@ -210,8 +210,9 @@
 	{include file="inc/footer.tpl"}
 	 <script type="text/javascript" src="images/upload.js"></script>
 <!-- 引用jquery end -->
-	<script >
+
 {literal}
+	<script >
 		//服务器端成功返回 {state:1,path:文件保存路径}
 	    //服务器端失败返回 {state:0,errmsg:错误原因}
 	    //默认做了文件名不能含有中文,后端接收文件的变量名为file
@@ -241,30 +242,36 @@
 			$(this).css({'background':'yellow'})
 		})
 
-		// $("input[type='file']").on("change", function () {
-	 //        // var obj = document.getElementById("upfile");
-	 //        var self=$(this);
-	 //        self.siblings('div').html('已上传');
-	 //        // self.siblings("input").css('z-index','1');
-	 //        // self.parent().parent().css('width','auto');
-	      
-	     
-	 //    });
+	
 	  	 $("input[type='file']").on("change", function () {
 	  	 	$(this).siblings('span').html('已上传');
 	  	 })
 
 	  	 function ckeckmes(form){
-	  	 	$('.requred').each(function(){
-	  	 		if($(this).val()==""){
-	  	 			alert('请把必填项填写完整')
-	  	 			return false;
-	  	 		}
-	  	 	})
-	  	 }
+	  
+	  	 	if($.trim($('input[name="filePath1"]').val()) == "" ){
+	  	 		alert("请上传身份证明文件");
+	  	 		return false;
+	  	 	}else if($.trim($('input[name="filePath2"]').val()) == "" ){
+	  	 		alert("请上传证件照");
+	  	 		return false;
+	  	 	}else if($.trim($('input[name="filePath3"]').val()) == "" ){
+	  	 		alert("请上传成绩表*、毕业证*");
+	  	 		return false;
+	  	 	}else if($('.jianhuren').is(":visible")){
 
+		  	 	if($.trim($('input[name="filePath8"]').val()) == "" ){
+		  	 		alert("请上传监护人身份证明文件");
+		  	 		return false;
+		  	 	}else if($.trim($('input[name="filePath9"]').val()) == "" ){
+		  	 		alert("请上传监护人证件照");
+		  	 		return false;
+		  	 	}
+	  	 	}
+	  	 }
+</script>
 {/literal}
-	</script>
+	
 
 </body>
 </html>
