@@ -13,12 +13,6 @@
  */
 define('IN_DOUCO', true);
 
-// 强制在移动端中显示PC版
-if (isset($_REQUEST['mobile'])) {
-    setcookie('client', 'pc');
-    if ($_COOKIE['client'] != 'pc') $_COOKIE['client'] = 'pc';
-}
-
 require (dirname(__FILE__) . '/include/init.php');
 
 

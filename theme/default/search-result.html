@@ -44,13 +44,23 @@
 								</tr>
 							</thead>
 							<tbody>
+							<!--{if $pass}-->
+								<!-- {foreach from=$course item=cou} -->
+								<tr>
+									<td class="subject-name"><a href="studies_detail.php$?id={$cou.id}">{$cou.engname}<br>{$cou.name}</a></td>
+									<td class="subject-type">{$cou.type}</td>
+									<td class="subject-deadline">{$cou.end}</td>
+								</tr>
+								<!--{/foreach}-->	
+							<!--{else}-->
 								<!-- {foreach from=$course item=cou} -->
 								<tr>
 									<td class="subject-name">{$cou.engname}<br>{$cou.name}</td>
 									<td class="subject-type">{$cou.type}</td>
 									<td class="subject-deadline">{$cou.end}</td>
 								</tr>
-								<!--{/foreach}-->	
+								<!--{/foreach}-->
+							<!--{/if}-->
 							</tbody>
 						</table>
 						<!--{else}-->

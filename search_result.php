@@ -101,6 +101,7 @@ $query = $dou->query($sql);
 while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
     $score[]=$row;
 }
+
 $smarty->assign('score', $score);
 $smarty->assign('grade',$grade);
 $smarty->assign('gradetype',$gradetype);
