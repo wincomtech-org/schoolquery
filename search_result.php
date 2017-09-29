@@ -89,7 +89,6 @@ if($_SESSION['pass']){
     $allnum=$num['count(*)'];
 }
 if($key==''){
-    echo 111;
     $course='';
     $allnum='';
 }
