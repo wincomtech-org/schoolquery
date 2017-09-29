@@ -16,7 +16,6 @@ define('IN_DOUCO', true);
 // 强制在移动端中显示PC版
 
 require (dirname(__FILE__) . '/include/init.php');
-$_SESSION['cusid']=999;
 if($_SESSION['cusid']){
 	$cusid=$_SESSION['cusid'];
 }else{
