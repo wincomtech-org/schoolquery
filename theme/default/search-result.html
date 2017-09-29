@@ -34,6 +34,7 @@
 			<div class="sresult-wrapper">
 				<div class="sresult-container lf">
 					<div class="x-scroll">
+					<!--{if $course}-->
 						<table class="sresult-table">
 							<thead>
 								<tr>
@@ -43,21 +44,18 @@
 								</tr>
 							</thead>
 							<tbody>
-								<!--{if $course}-->
 								<!-- {foreach from=$course item=cou} -->
 								<tr>
 									<td class="subject-name">{$cou.engname}<br>{$cou.name}</td>
 									<td class="subject-type">{$cou.type}</td>
 									<td class="subject-deadline">{$cou.end}</td>
 								</tr>
-								<!--{/foreach}-->
-								<!--{else}-->
-									<tr>
-										<td>没有任何符合搜索条件的课程</td>
-									</tr>
-								<!--{/if}-->
+								<!--{/foreach}-->	
 							</tbody>
 						</table>
+						<!--{else}-->
+							<div>没有任何符合搜索条件的课程</div>
+						<!--{/if}-->
 					</div>
 					<div class="page-container sresult-page">
 						<ul class="page">
