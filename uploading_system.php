@@ -131,13 +131,11 @@ if($rec=='load'){
     	$cus=$GLOBALS['dou']->fetch_assoc($query);
     	$id=$cus[id];
     	$_SESSION['cusid']=$id;
-    	// 赋值给模板-导航栏
-if($rec=='default'){
-	$smarty->assign('nav_middle_list', $dou->get_nav('middle'));
-	$sql = "SELECT * FROM " . $dou->table('nav').'where module="process"';
-	 $query = $dou->query($sql);
-	$about = $dou->fetch_array($query);
-	$ce=$about['show_img'];
+    	$smarty->assign('nav_middle_list', $dou->get_nav('middle'));
+		$sql = "SELECT * FROM " . $dou->table('nav').'where module="process"';
+		 $query = $dou->query($sql);
+		$about = $dou->fetch_array($query);
+		$ce=$about['show_img'];
 
 	$smarty->assign('ce', $ce);//获取首页图片
     	$smarty->assign('id',$id);
