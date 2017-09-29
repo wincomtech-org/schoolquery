@@ -114,8 +114,8 @@ box-shadow: inset 0 0 70px 130px rgba(49, 49, 49, .6);}
 .pagetop-img>img{width:100%;}
 .headline{float:left;font-size:30px;color:#1452c8;}
 .nav_brash{float:right;}
-.brash_list  .brash_item{float:left;font-size:14px;margin-right:10px;}
-.brash_list  .brash_item:not(:last-child):after{content:">";display:inline-block;margin:0 10px;}
+.brash_list  .brash_item{float:left;font-size:14px;}
+.brash_list  .brash_item:not(:last-child):after{content:">";display:inline-block;margin:0 7px;}
 .brash_list  .brash_item:first-child{margin-right:0;}
 .brash_list  .brash_item a.active{font-size:14px;color:#538eff;}
 .school_tit{height:50px;line-height:50px;border-bottom:1px solid #ddd;}
@@ -260,10 +260,10 @@ td.subject-deadline{width:auto;}
 .local_stuidies_tit{width:100%;}
 .headline{float:left;font-size:30px;color:#1452c8;}
 .nav_brash{float:right;}
-.brash_list  .brash_item{float:left;font-size:14px;margin-right:10px;}
-.brash_list  .brash_item:not(:last-child):after{content:">";display:inline-block;margin:0 10px;}
+/*.brash_list  .brash_item{float:left;font-size:14px;margin-right:10px;}*/
+/*.brash_list  .brash_item:not(:last-child):after{content:">";display:inline-block;margin:0 10px;}
 .brash_list  .brash_item:first-child{margin-right:0;}
-.brash_list  .brash_item a.active{font-size:14px;color:#538eff;}
+.brash_list  .brash_item a.active{font-size:14px;color:#538eff;}*/
 .school_tit{height:50px;line-height:50px;border-bottom:1px solid #ddd;margin-top:24px;}
 
 
