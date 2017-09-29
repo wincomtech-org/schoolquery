@@ -72,7 +72,7 @@
 							<li class="cusDatas_list">
 								<div class="cusDatas_item">
 									<span class="cusDatas_tit require">出生年月</span>
-									<input  name="date" id="date" value="">
+									<input  name="date" id="date" value="" readonly>
 								</div>
 							</li>
 							<li class="cusDatas_list">
@@ -340,7 +340,7 @@
 					console.log(d)
 					if(vYear - Year >18){
 						$('.tutorDatas').remove();
-						alert(123)
+						
 					}else if(vYear - Year == 18){	
 						if(vMon - Mon >0 ){
 							$('.tutorDatas').remove();	
