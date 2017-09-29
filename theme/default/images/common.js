@@ -42,6 +42,14 @@ $(function(){
    $('#box').css('height',DivLiH*8+"px");
 })
 
+
+$('#deadline').on('foucus',function(){
+	document.activeElement.blur();
+})
+$('#date').on('foucus',function(){
+	document.activeElement.blur();
+})
+
 //切换国家和地区
 $(document).delegate('.local_shool_list','click',function(){
 	var self=$(this);
