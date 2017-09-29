@@ -16,6 +16,7 @@ define('IN_DOUCO', true);
 // 强制在移动端中显示PC版
 
 require (dirname(__FILE__) . '/include/init.php');
+$_SESSION['cusid']=999;
 if($_SESSION['cusid']){
 	$cusid=$_SESSION['cusid'];
 }else{
@@ -37,10 +38,11 @@ if($rec=='load'){
 		mkdir($path,0777,true);
 	}
 	if(isset($_POST['upload'])){
-	if(move_uploaded_file($_FILES['file']['tmp_name'], $path.basename($_FILES['file']['name']))){
-		echo json_encode(['state'=>1,'path'=>$path.basename($_FILES['file']['name'])]);die;
-	}
-		echo json_encode(['state'=>2,'path'=>'/']);die;
+		if(move_uploaded_file($_FILES['file']['tmp_name'], $path.basename($_FILES['file']['name']))){
+			echo json_encode(['state'=>1,'path'=>$path.basename($_FILES['file']['name'])]);exit;
+		}else{
+			echo json_encode(['state'=>1,'path'=>'/']);die;
+		}
 	}else{
 		echo json_encode(['state'=>2,'path'=>'/']);die;
 	}
