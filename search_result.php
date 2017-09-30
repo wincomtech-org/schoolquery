@@ -31,7 +31,40 @@ $gradetype=$_REQUEST['gradetype'];
 $dates=$_REQUEST['date'];
 $key=$_REQUEST['key'];
 $date=strtotime($dates);
-
+//$where="where 1=1";
+$wh='';
+if(!empty($key)){
+    //根据关键字查询学校id
+    $sql= "SELECT id FROM " . $dou->table('school')."where name like '%$key%' or engname like '%$key%'";
+    $query = $dou->query($sql);
+    while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
+        $scid[]=$row;
+    }
+    foreach($scid as $val){
+        foreach($val as $v){
+            $sid.= $v.',';
+        }
+    }
+    $sid=substr($sid,0,-1);
+    if(!empty($sid)){
+        $wh.=" or shid in ($sid)";
+    }
+    //关键字查询课程类别的id
+    $sql= "SELECT id FROM " . $dou->table('course_type')."where name like '%$key%'";
+    $query = $dou->query($sql);
+    while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
+        $thid[]=$row;
+    }
+    foreach($thid as $val){
+        foreach($val as $v){
+            $tid.= $v.',';
+        }
+    }
+    $tid=substr($tid,0,-1);
+    if(!empty($tid)){
+        $wh.=" or tid in ($tid)";
+    }
+}
 if($_SESSION['pass']){
     $sql = "SELECT cou_id FROM " . $dou->table('sco_cou')."where sco_id='$gradetype' and min_score<='$grade'";
     $query = $dou->query($sql);
@@ -50,20 +83,24 @@ if($_SESSION['pass']){
     $pageSize=10;
     if(!empty($couid)){
         if(!empty($_REQUEST['date'])){
-             $sql="SELECT * FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%') and cut_off_data >='$date' order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
+            $sql="SELECT * FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%' ".$wh.") and cut_off_data >='$date' order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
+            $sqls="SELECT count(*) FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%' ".$wh.") and cut_off_data >='$date'";
+
         }else{
-             $sql="SELECT * FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%') order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
+            $sql="SELECT * FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%' ".$where.") order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
+            $sqls="SELECT count(*) FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%' ".$where.")";
         }
     }else{
         if(!empty($_REQUEST['date'])){
-           $sql="SELECT * FROM " . $dou->table('course')." where (name like '%$key%' or eng_name like '%$key%') and cut_off_data >='$date' order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
+            $sql="SELECT * FROM " . $dou->table('course')." where (name like '%$key%' or eng_name like '%$key%' ".$wh.") and cut_off_data >='$date' order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
+            $sqls="SELECT count(*) FROM " . $dou->table('course')."  where (name like '%$key%' or eng_name like '%$key%' ".$wh.") and cut_off_data >='$date'";
         }else{
-             $sql="SELECT * FROM " . $dou->table('course')." where (name like '%$key%' or eng_name like '%$key%') order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
+            $sql="SELECT * FROM " . $dou->table('course')." where (name like '%$key%' or eng_name like '%$key%' ".$wh.") order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
+            $sqls="SELECT count(*) FROM " . $dou->table('course')."  where (name like '%$key%' or eng_name like '%$key%' ".$wh.")";
         }
     }
-     // $sql="SELECT * FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%') and cut_off_data >='$date' order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
-     $query = $dou->query($sql);
-     while ($rows = $GLOBALS['dou']->fetch_assoc($query)) {
+    $query = $dou->query($sql);
+    while ($rows = $GLOBALS['dou']->fetch_assoc($query)) {
         $end=date('Y/m/d', $rows['cut_off_data']);
          $styname = $dou->get_one("SELECT name FROM " . $dou->table('course_type') . " WHERE id = '$rows[tid]'");
         $course[] = array (
@@ -75,35 +112,40 @@ if($_SESSION['pass']){
               
         );
     }
-    $sql="SELECT count(*) FROM".$dou->table('course')."where id in ($couid) and (name like '%$key%' or eng_name like '%$key%') and cut_off_data >='$date'";
-    $query = $dou->query($sql);
+    
+    $query = $dou->query($sqls);
     $num=$dou->fetch_array($query);
     $allnum=$num['count(*)'];
-}else{
-    $pageNum = empty($_GET["page"])?1:$_GET["page"];
-    $pageSize=10;
-     $sql="SELECT * FROM " . $dou->table('course')." where name like '%$key%' or eng_name like '%$key%' order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
-     $query = $dou->query($sql);
-     while ($rows = $GLOBALS['dou']->fetch_assoc($query)) {
-        $end=date('Y/m/d', $rows['cut_off_data']);
-         $styname = $dou->get_one("SELECT name FROM " . $dou->table('course_type') . " WHERE id = '$rows[tid]'");
-        $course[] = array (
+    if(empty($_REQUEST['date']) && empty($couid) &&empty($_REQUEST['key'])){
+        $course='';
+        $allnum='';
+    }
+}else{  
+    if(empty($key)){
+        $course='';
+        $allnum='';
+    }else{
+        $pageNum = empty($_GET["page"])?1:$_GET["page"];
+        $pageSize=10;
+        $sql="SELECT * FROM " . $dou->table('course')." where  (name like '%$key%' or eng_name like '%$key%' ".$wh.") order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
+        $query = $dou->query($sql);
+        while ($rows = $GLOBALS['dou']->fetch_assoc($query)) {
+            $end=date('Y/m/d', $rows['cut_off_data']);
+            $styname = $dou->get_one("SELECT name FROM " . $dou->table('course_type') . " WHERE id = '$rows[tid]'");
+            $course[] = array (
                 "id" => $rows['id'],
                 "name" => $rows['name'],
                 "engname" => $rows['eng_name'],
                 "type" =>  $styname,
                 "end" => $end
-              
-        );
-    }
-    $sql="SELECT count(*) FROM".$dou->table('course')."where name like '%$key%' or eng_name like '%$key%'";
+            );
+        }
+    $sql="SELECT count(*) FROM".$dou->table('course')."where (name like '%$key%' or eng_name like '%$key%' ".$wh.")";
     $query = $dou->query($sql);
     $num=$dou->fetch_array($query);
     $allnum=$num['count(*)'];
-}
-if($key==''){
-    $course='';
-    $allnum='';
+    }
+   
 }
 
 pageft($allnum,$pageSize,1,1,0,5,"search_result.php?grade=$grade&gradetype=$gradetype&date=$dates&key=$key");

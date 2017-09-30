@@ -15,10 +15,12 @@ define('IN_DOUCO', true);
 
     require (dirname(__FILE__) . '/include/init.php');
      require ('PHPExcel/Classes/PHPExcel.php');
-     echo ROOT_PATH;
      //exit;
     // 验证并获取合法的ID
     $id = $check->is_number($_REQUEST['id']) ? $_REQUEST['id'] : '';
+    if(empty($id)){
+        exit;
+    }
     $query = $dou->select($dou->table('customer'), '*', '`id` = \'' . $id . '\'');
     $customer = $dou->fetch_array($query);
     //print_r($school);
@@ -120,10 +122,62 @@ define('IN_DOUCO', true);
 
     //3.填充表格 
   
-
+// $obj->setActiveSheetIndex()->getDefaultStyle()->getAlignment()>setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+$obj->getActiveSheet()->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
     $objActSheet = $obj->setActiveSheetIndex(0); //填充表头  
-    //$obj->setActiveSheetIndex()->getDefaultStyle()->getAlignment()>setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
 $obj->setActiveSheetIndex()->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+    //设置单元格宽度
+    $obj->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+    $obj->getActiveSheet()->getColumnDimension('B')->setWidth(15);
+    $obj->getActiveSheet()->getColumnDimension('C')->setWidth(15);
+    $obj->getActiveSheet()->getColumnDimension('D')->setWidth(10);
+    $obj->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+    $obj->getActiveSheet()->getColumnDimension('F')->setWidth(15);
+    $obj->getActiveSheet()->getColumnDimension('G')->setWidth(40);
+    $obj->getActiveSheet()->getColumnDimension('H')->setWidth(15);
+    $obj->getActiveSheet()->getColumnDimension('I')->setWidth(15);
+    $obj->getActiveSheet()->getColumnDimension('J')->setWidth(30);
+    $obj->getActiveSheet()->getColumnDimension('K')->setWidth(25);
+    $obj->getActiveSheet()->getColumnDimension('L')->setWidth(30);
+    $obj->getActiveSheet()->getColumnDimension('M')->setWidth(50);
+    $obj->getActiveSheet()->getColumnDimension('N')->setWidth(50);
+    $obj->getActiveSheet()->getColumnDimension('O')->setWidth(30);
+    $obj->getActiveSheet()->getColumnDimension('P')->setWidth(40);
+    $obj->getActiveSheet()->getColumnDimension('Q')->setWidth(15);
+    $obj->getActiveSheet()->getColumnDimension('R')->setWidth(10);
+    $obj->getActiveSheet()->getColumnDimension('S')->setWidth(10);
+    $obj->getActiveSheet()->getColumnDimension('T')->setWidth(10);
+    $obj->getActiveSheet()->getColumnDimension('U')->setWidth(30);
+    $obj->getActiveSheet()->getColumnDimension('V')->setWidth(40);
+    $obj->getActiveSheet()->getColumnDimension('W')->setWidth(15);
+    $obj->getActiveSheet()->getColumnDimension('X')->setWidth(10);
+    $obj->getActiveSheet()->getColumnDimension('Y')->setWidth(10);
+    $obj->getActiveSheet()->getColumnDimension('Z')->setWidth(10);
+    $obj->getActiveSheet()->getColumnDimension('AA')->setWidth(10);
+    $obj->getActiveSheet()->getColumnDimension('AB')->setWidth(40);
+    $obj->getActiveSheet()->getColumnDimension('AC')->setWidth(40);
+    $obj->getActiveSheet()->getColumnDimension('AD')->setWidth(100);
+    $obj->getActiveSheet()->getColumnDimension('AE')->setWidth(100);
+    $obj->getActiveSheet()->getColumnDimension('AF')->setWidth(100);
+    $obj->getActiveSheet()->getColumnDimension('AG')->setWidth(100);
+    $obj->getActiveSheet()->getColumnDimension('AH')->setWidth(100);
+    $obj->getActiveSheet()->getColumnDimension('AI')->setWidth(100);
+    $obj->getActiveSheet()->getColumnDimension('AJ')->setWidth(100);
+    $obj->getActiveSheet()->getColumnDimension('AK')->setWidth(20);
+    $obj->getActiveSheet()->getColumnDimension('AL')->setWidth(20);
+    $obj->getActiveSheet()->getColumnDimension('AM')->setWidth(10);
+    $obj->getActiveSheet()->getColumnDimension('AN')->setWidth(10);
+    $obj->getActiveSheet()->getColumnDimension('AO')->setWidth(40);
+    $obj->getActiveSheet()->getColumnDimension('AP')->setWidth(40);
+    $obj->getActiveSheet()->getColumnDimension('AQ')->setWidth(40);
+    $obj->getActiveSheet()->getColumnDimension('AR')->setWidth(20);
+    $obj->getActiveSheet()->getColumnDimension('AS')->setWidth(10);
+    $obj->getActiveSheet()->getColumnDimension('AT')->setWidth(100);
+    $obj->getActiveSheet()->getColumnDimension('AU')->setWidth(100);
+   
+ $obj->getActiveSheet()->getStyle("A1")->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
 
     $objActSheet->setCellValue('A1','ID');  
     $objActSheet->setCellValue('B1','姓名');  
