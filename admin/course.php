@@ -229,18 +229,23 @@ elseif ($rec == 'edit') {
     }
      $sql = "SELECT * FROM " . $GLOBALS['dou']->table('score');
       $query = $GLOBALS['dou']->query($sql);
-    while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
-        $score[]=$row;
+        while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
+         $scores= $dou->get_one("SELECT min_score FROM " . $dou->table('sco_cou') . " WHERE sco_id = '$row[id]' and cou_id='$id'");
+        $score[] = array (
+                "id" => $row['id'],
+                "name" => $row['name'],
+                "scores" => $scores
+        );
     }
     //查询对应的分数要求
-    $sql="SELECT * FROM".$GLOBALS['dou']->table('sco_cou')."where cou_id=$id";
-    $query= $dou->query($sql);
-    while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
-        $scores[]=$row;
-    }
+    // $sql="SELECT * FROM".$GLOBALS['dou']->table('sco_cou')."where cou_id=$id";
+    // $query= $dou->query($sql);
+    // while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
+    //     $scores[]=$row;
+    // }
     // 赋值给模板
     $smarty->assign('score',$score);
-    $smarty->assign('scores',$scores);
+    //$smarty->assign('scores',$scores);
     $smarty->assign('form_action', 'update');
     $smarty->assign('sty', $sty);
     $smarty->assign('typ', $typ);
