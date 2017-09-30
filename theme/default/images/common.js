@@ -39,7 +39,15 @@ $(function(){
     for(var i=0;i<DivLi.length;i++){
         var DivLiH=DivLi[i].clientHeight;
     }
-   $('#box').css('height',DivLiH*8+"px");
+    if(DivLi.length > 8){
+    	$('#box').css('height',DivLiH*8+"px");
+    }else{
+    	
+    		$('#box').css('height',DivLiH*DivLi.length+"px");
+    	
+    }
+
+   
 })
 
 

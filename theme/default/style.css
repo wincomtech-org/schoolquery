@@ -427,7 +427,7 @@ td.subject-deadline{width:auto;}
 .new_video_list{float:right;padding:0 30px;border-left:1px solid #ddd;width:360px;box-sizing:border-box;}
 .new_video_list>p{font-size:18px;color:#333;border-bottom:3px solid #ddd;padding:10px 0;margin-bottom:15px;}
 .new_video_list>p img{vertical-align:bottom;margin-right:10px;}
-.scroll_con{width:100%;position:relative;}
+.scroll_con{width:100%;position:relative;overflow:hidden;}
 #parent{width: 10px; height:100%; background: #e5e5e5;position:absolute;right:0;top:0;}
 #div1{width: 10px; height: 106px; background: #1452c8;position: absolute;}
 #box{width: 100%;height: 100%;position: relative;overflow: hidden;}
