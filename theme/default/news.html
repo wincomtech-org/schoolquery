@@ -43,9 +43,9 @@
 						<div class="scroll_con">
 							<div id="box">
 								<ol id="container">
-								<!-- {foreach from=$list item=lis} -->
+								<!-- {foreach from=$list key=key item=lis} -->
 								<li class="new_video_items blography_items">
-									<span class="icon">1</span>
+									<span class="icon">{$key+1}</span>
 									<a href="news.php?id={$lis.id}&cid={$lis.cid}" class="tit">{$lis.name} </a>
 								</li>
 								<!--{/foreach}-->		
