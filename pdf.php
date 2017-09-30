@@ -78,15 +78,17 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 // ---------------------------------------------------------
 
 // set font
-$pdf->SetFont('stsongstdlight', '', 15);
+$pdf->SetFont('stsongstdlight', '', 16);
 // add a page
 $pdf->AddPage();
 
+$txt = $school['name'];
+$pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
 
 
 // set font
 //$pdf->SetFont('stsongstdlight', '', 10);
-;
+$pdf->SetFont('stsongstdlight', '', 15);
 
 $txt = "<div><p>$course[name]</p> <p>{$course[eng_name]}</p><div>$course[open_data]入学</div><div>课程代码：$course[code]</div><div>";
 $pdf->WriteHTML($txt);
