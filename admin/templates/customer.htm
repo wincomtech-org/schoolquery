@@ -46,7 +46,7 @@
        <th width="100" align="center">{$lang.customer_nation}</th>
         <th  align="center">{$lang.customer_date}</th>
         <th  align="center">{$lang.customer_phone}</th>
-        <th width="80" align="center">{$lang.handler}</th>
+        <th width="120" align="center">{$lang.handler}</th>
       </tr>
       <!-- {foreach from=$customer item=customer} -->
       <tr>
@@ -63,7 +63,7 @@
         <td align="center">{$customer.data}</td>
         <td align="center">{$customer.phone}</td>
         <td align="center">
-         <a href="customer.php?rec=edit&id={$customer.id}">查看</a> | <a href="customer.php?rec=del&id={$customer.id}">{$lang.del}</a>
+         <a href="customer.php?rec=edit&id={$customer.id}">查看</a> | <a href="PHPExcel.php?id={$customer.id}">导出</a> |<a href="customer.php?rec=del&id={$customer.id}">{$lang.del}</a>
         </td>
       </tr>
       <!-- {/foreach} -->
