@@ -83,7 +83,7 @@ if($rec=='next'){
 		$tutor_cent='';
 		$tutor_idphono='';
 	}
-	$sql = "update " . $dou->table('customer') . " SET id_cent = '$id_cent',id_phono= '$id_phono',mark = '$mark',work_cent = '$work_cent', recom = '$recom',engprove = '$engprove' ,other = '$other', tutor_cent = '$tutor_cent', tutor_idphono = 'tutor_idphono' WHERE id = '$id'";
+	$sql = "update " . $dou->table('customer') . " SET id_cent = '$id_cent',id_phono= '$id_phono',mark = '$mark',work_cent = '$work_cent', recom = '$recom',engprove = '$engprove' ,other = '$other', tutor_cent = '$tutor_cent', tutor_idphono = '$tutor_idphono' WHERE id = '$id'";
 	
     if($dou->query($sql)){
     	$smarty->display('uploading_completed.html');
