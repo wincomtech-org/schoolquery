@@ -72,6 +72,7 @@ if ($rec == 'default') {
         //  echo $row['content'];
         //$add_time = date("Y-m-d", $row['add_time']);
        $row['content']=mb_substr($row['content'],0,30,'UTF-8');
+       $row['content']=strip_tags($row['content']);
         $taste[] = array (
                 "id" => $row['id'],
                 "name" => $row['name'],
@@ -81,7 +82,6 @@ if ($rec == 'default') {
                 "sort" => $row['sort'] 
         );
     }
-    
     // // 首页显示商品数量限制框
     // for($i = 1; $i <= $_CFG['home_display_product']; $i++) {
     //     $sort_bg .= "<li><em></em></li>";
@@ -321,7 +321,7 @@ elseif ($rec == 'update') {
 
 /**
  * +----------------------------------------------------------
- * 学校删除
+ * 攻略删除
  * +----------------------------------------------------------
  */
 elseif ($rec == 'del') {
