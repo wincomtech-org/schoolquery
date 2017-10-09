@@ -17,14 +17,30 @@ define('IN_DOUCO', true);
      require ('PHPExcel/Classes/PHPExcel.php');
      //exit;
     // 验证并获取合法的ID
+    
     $id = $check->is_number($_REQUEST['id']) ? $_REQUEST['id'] : '';
+    $id=6;
     if(empty($id)){
         exit;
     }
+
     $query = $dou->select($dou->table('customer'), '*', '`id` = \'' . $id . '\'');
     $customer = $dou->fetch_array($query);
-    //print_r($school);
     
+     /*
+        *判断上传的文件是否为图片格式
+     */
+    function img($name){
+        $arr=array('jpg','png','svg');
+        foreach($name as $v){
+            $d=substr($v, strrpos($v, '.')+1);
+            if(in_array($d,$arr)){
+                $imgname[]=$v;
+            }
+        }
+        return $imgname;
+    }
+
     // CSRF防御令牌生成
     $smarty->assign('token', $firewall->get_token());
     $customer['school_name']= explode("|", $customer['school_name']); 
@@ -45,57 +61,73 @@ define('IN_DOUCO', true);
         $str=explode(",",$val);
         $id_cent[] =$str[(count($str)-1)];
     }
-    print_r( $customer['id_cent']);
-    //exit;
+    $id_cent=img($id_cent);
     $customer['id_cent']=$id_cent;
+
     $customer['id_phono']= explode("|", $customer['id_phono']);
     foreach($customer['id_phono'] as $val){
         $str=explode(",",$val);
         $id_phono[] =$str[(count($str)-1)];
     }
+    $id_phono=img($id_phono);
     $customer['id_phono']=$id_phono;
+
     $customer['mark']= explode("|", $customer['mark']);
     foreach($customer['mark'] as $val){
         $str=explode(",",$val);
         $mark[] =$str[(count($str)-1)];
     }
+    $mark=img($mark);
     $customer['mark']=$mark;
+
     $customer['recom']= explode("|", $customer['recom']);
     foreach($customer['recom'] as $val){
         $str=explode(",",$val);
         $recom[] =$str[(count($str)-1)];
     }
+    $recom=img($recom);
     $customer['recom']=$recom;
+
     $customer['engprove']= explode("|", $customer['engprove']);
     foreach($customer['engprove'] as $val){
         $str=explode(",",$val);
         $engprove[] =$str[(count($str)-1)];
     }
+    $engprove=img($engprove);
     $customer['engprove']=$engprove;
+
     $customer['work_cent']= explode("|", $customer['work_cent']);
     foreach($customer['work_cent'] as $val){
         $str=explode(",",$val);
         $work_cent[] =$str[(count($str)-1)];
     }
+    $work_cent=img($work_cent);
     $customer['work_cent']=$work_cent;
+
     $customer['other']= explode("|", $customer['other']);
     foreach($customer['other'] as $val){
         $str=explode(",",$val);
         $other[] =$str[(count($str)-1)];
     }
+    $other=img($other);
     $customer['other']=$other;
+
     $customer['tutor_cent']= explode("|", $customer['tutor_cent']);
     foreach($customer['tutor_cent'] as $val){
         $str=explode(",",$val);
         $tutor_cent[] =$str[(count($str)-1)];
     }
+    $tutor_cent=img($tutor_cent);
     $customer['tutor_cent']=$tutor_cent;
+
     $customer['tutor_idphono']= explode("|", $customer['tutor_idphono']);
     foreach($customer['tutor_idphono'] as $val){
         $str=explode(",",$val);
         $tutor_idphono[] =$str[(count($str)-1)];
     }
+    $tutor_idphono=img($tutor_idphono);
     $customer['tutor_idphono']=$tutor_idphono;
+
     if($customer['sex']==0){
        $customer['sex']='男'; 
     }else{
@@ -111,7 +143,7 @@ define('IN_DOUCO', true);
     }else{
         $customer['tutor_sex']='女';
     }
-  print_r($customer);
+  //print_r($customer);
   $obj=new PHPExcel();
   $obj->getProperties()  
         ->setCreator("WOLF")  
@@ -504,7 +536,7 @@ $obj->setActiveSheetIndex()->getDefaultStyle()->getAlignment()->setVertical(PHPE
      $obj->getActiveSheet()->setTitle('客户信息表');  
     $obj->setActiveSheetIndex(0);  
     $day      = date("m-d");  
-    $filename = $day.'客户信息表.xls';  
+    $filename = $customer['name'].'信息表.xls';  
     ob_end_clean();//清除缓冲区,避免乱码  
     header("Content-Type: application/vnd.ms-excel; charset=utf-8");  
     header('Content-Disposition: attachment;filename='.$filename);  
