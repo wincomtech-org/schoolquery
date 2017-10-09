@@ -188,7 +188,19 @@ elseif ($rec == 'edit') {
             'text' => $_LANG['customer'],
             'href' => 'customer.php' 
     ));
-    
+     /*
+        *判断上传的文件是否为图片格式
+     */
+    function img($name){
+        $arr=array('jpg','png','svg');
+        foreach($name as $v){
+            $d=substr($v, strrpos($v, '.')+1);
+            if(in_array($d,$arr)){
+                $imgname[]=$v;
+            }
+        }
+        return $imgname;
+    }
     // 验证并获取合法的ID
     $id = $check->is_number($_REQUEST['id']) ? $_REQUEST['id'] : '';
     
@@ -210,59 +222,76 @@ elseif ($rec == 'edit') {
     $customer['work_year']= explode("|", $customer['work_year']);
     $customer['work_time']= explode("|", $customer['work_time']);
     $customer['position']= explode("|", $customer['position']);
+
     $customer['id_cent']= explode("|", $customer['id_cent']);
     foreach($customer['id_cent'] as $val){
         $str=explode(",",$val);
         $id_cent[] =$str[(count($str)-1)];
     }
+    $id_cent=img($id_cent);
     $customer['id_cent']=$id_cent;
     $customer['id_phono']= explode("|", $customer['id_phono']);
     foreach($customer['id_phono'] as $val){
         $str=explode(",",$val);
         $id_phono[] =$str[(count($str)-1)];
     }
+    $id_phono=img($id_phono);
     $customer['id_phono']=$id_phono;
+
     $customer['mark']= explode("|", $customer['mark']);
     foreach($customer['mark'] as $val){
         $str=explode(",",$val);
         $mark[] =$str[(count($str)-1)];
     }
+    $mark=img($mark);
     $customer['mark']=$mark;
+
     $customer['recom']= explode("|", $customer['recom']);
     foreach($customer['recom'] as $val){
         $str=explode(",",$val);
         $recom[] =$str[(count($str)-1)];
     }
+    $recom=img($recom);
     $customer['recom']=$recom;
+
     $customer['engprove']= explode("|", $customer['engprove']);
     foreach($customer['engprove'] as $val){
         $str=explode(",",$val);
         $engprove[] =$str[(count($str)-1)];
     }
+    $engprove=img($engprove);
     $customer['engprove']=$engprove;
+
     $customer['work_cent']= explode("|", $customer['work_cent']);
     foreach($customer['work_cent'] as $val){
         $str=explode(",",$val);
         $work_cent[] =$str[(count($str)-1)];
     }
+    $work_cent=img($work_cent);
     $customer['work_cent']=$work_cent;
+
     $customer['other']= explode("|", $customer['other']);
     foreach($customer['other'] as $val){
         $str=explode(",",$val);
         $other[] =$str[(count($str)-1)];
     }
+    $other=img($other);
     $customer['other']=$other;
+
     $customer['tutor_cent']= explode("|", $customer['tutor_cent']);
     foreach($customer['tutor_cent'] as $val){
         $str=explode(",",$val);
         $tutor_cent[] =$str[(count($str)-1)];
     }
+    $tutor_cent=img($tutor_cent);
     $customer['tutor_cent']=$tutor_cent;
+
     $customer['tutor_idphono']= explode("|", $customer['tutor_idphono']);
     foreach($customer['tutor_idphono'] as $val){
         $str=explode(",",$val);
         $tutor_idphono[] =$str[(count($str)-1)];
     }
+    $tutor_idphono=img($tutor_idphono);
     $customer['tutor_idphono']=$tutor_idphono;
 
     // 赋值给模板
