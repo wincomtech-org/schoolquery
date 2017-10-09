@@ -19,7 +19,6 @@ define('IN_DOUCO', true);
     // 验证并获取合法的ID
     
     $id = $check->is_number($_REQUEST['id']) ? $_REQUEST['id'] : '';
-    $id=6;
     if(empty($id)){
         exit;
     }
