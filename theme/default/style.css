@@ -555,12 +555,13 @@ td.subject-deadline{width:auto;}
 
 
 .customer_tit{font-size:18px;color:#333;font-weight:bold;padding-left:124px;padding-bottom:10px;}
+.customer_tit span{font-size:16px;color:#333;font-weight:bold;}
 .customer_dates{width:100%;padding:30px;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;}
-.cusDatas_list{}
+.cusDatas_list b.tip{color:red;font-weight:normal;}
 .cusDatas_list .cusDatas_tit{width:180px;display:inline-block;text-align:right;font-size:14px;color:#333;margin-right:20px;}
 
 .cusDatas_item{display:inline-block;margin:20px 0;}
-.cusDatas_item input{border:1px solid #ddd;height:28px;line-height:28px;padding-left:5px;padding-left:15px;}
+.cusDatas_item input{border:1px solid #ddd;height:28px;line-height:28px;padding-left:15px;}
 .cusDatas_item .supply{margin-top:10px;}
 .cusDatas_tit.require:before{content:"*";display:inline-block;color:red;}
 label.custorm_address {height:30px;line-height:30px;display:inline-block;width:910px;}
@@ -574,6 +575,8 @@ label.custorm_address {height:30px;line-height:30px;display:inline-block;width:9
 .cusDatas_item table tr td:not(:first-child),.cusDatas_item table tr th:not(:first-child){border-left:1px solid #ddd;}
 .cusDatas_item table tr td,.cusDatas_item table tr th{padding:10px;}
 .cusDatas_item.block{display:block;}
+
+
 
 /***/
 .addr .cusDatas_item label input{width:41%;}
@@ -590,7 +593,7 @@ label.custorm_address {height:30px;line-height:30px;display:inline-block;width:9
 	.school_tit{width:100%;padding:0 10px;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;-o-box-sizing:border-box;}
 	.uploading_system{width:100%;}
 	.cusDatas_item{margin:13px 0;}
-	label.custorm_address{width:calc(100% - 203px);width:-webkit-calc(100% - 203px);width:-moz-calc(100% - 203px);width:-ms-calc(100% - 203px);width:-o-calc(100% - 203px);}
+	label.custorm_address{width:500px;}
 }
 
 @media screen and  (max-width:1024px){
@@ -602,17 +605,19 @@ label.custorm_address {height:30px;line-height:30px;display:inline-block;width:9
 	.customer_dates{padding:20px;}
 	.cusDatas_item{display:block;}
 	.cusDatas_list .cusDatas_tit{width:auto;display:block;text-align:left;}
-	.cusDatas_item input{display:block;width:100%;max-width:400px;margin-top:10px;}
+	.cusDatas_item input{display:block;width:100%;max-width:400px;margin-top:10px;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;-o-box-sizing:border-box;}
 	.cusDatas_item.sex .cusDatas_tit{display:inline-block;}
-	.cusDatas_item.sex input[type="radio"]{display:inline-block;width:auto;vertical-align:bottom;}
+	.cusDatas_item.sex input[type="radio"]{display:inline-block;margin-top:0;width:auto;}
 	.cusDatas_item .supply{display:block;}
-	.cusDatas_item label.custorm_address{line-height:auto;}
+	.cusDatas_item label.custorm_address{line-height:auto;width:100%;}
 	.cusDatas_item label.custorm_address input{margin-bottom:0;width:100%;}
 	.addr .cusDatas_item .custorm_address:last-child{margin-left:0;margin-top:0;}
 	.cusDatas_item  label.custorm_address .supply{margin-top:0;}
 
 	.customer_tit{padding-left:0;text-align:center;line-height:25px;}
 	.cusDatas_item table{width:100%;margin:0;margin-top:10px;}
+
+	.cusDatas_list b.tip{margin-top:10px;display:block;margin-left:8px;}
 }
 @media screen and  (max-width:320px){
 	.customer_dates{padding:15px;}

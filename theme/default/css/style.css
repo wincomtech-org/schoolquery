@@ -563,6 +563,10 @@ td.subject-deadline{width:auto;}
 .cusDatas_item table tr td,.cusDatas_item table tr th{padding:10px;}
 .cusDatas_item.block{display:block;}
 
+/*错误提示*/
+.cusDatas_list .tip{color:red;}
+
+
 /***/
 .addr .cusDatas_item label input{width:41%;}
 .addr .cusDatas_item .custorm_address input.required{background:url(../img/red_star.png) no-repeat -3px center;background-size:25px;}
