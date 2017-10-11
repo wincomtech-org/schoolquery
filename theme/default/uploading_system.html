@@ -54,11 +54,13 @@
 							<li class="cusDatas_list">
 								<div class="cusDatas_item">
 									<span class="cusDatas_tit require">中文姓名</span>
-									<input type="text" name="zh_name" value="" required>
+									<input type="text" name="zh_name" value=""  maxlength="25" required>
+									<b class="tip" style="display:none;">*请填写正确中文名</b>
 								</div>
 								<div class="cusDatas_item">
 									<span class="cusDatas_tit require">英文姓名</span>
-									<input type="text" name="en_name" value="" required>
+									<input type="text" name="en_name" value="" maxlength="30" required>
+									<b class="tip" style="display:none;">* 请填写正确英文名</b>
 								</div>
 			
 							</li>
@@ -73,34 +75,40 @@
 								<div class="cusDatas_item">
 									<span class="cusDatas_tit require">出生年月</span>
 									<input  name="date" id="date" value="" readonly>
+									<b class="tip" style="display:none;">* 请填写出生日期</b>
 								</div>
 							</li>
 							<li class="cusDatas_list">
 								<div class="cusDatas_item">
 									<span class="cusDatas_tit require">国籍</span>
 									<input type="txt" name="nation" required>
+									<b class="tip" style="display:none;">* 请填写国籍</b>
 								</div>
 								<div class="cusDatas_item">
 									<span class="cusDatas_tit require">户籍</span>
 									<input type="text" name="register" required>
+									<b class="tip" style="display:none;">* 请填写户籍</b>
 								</div>
 							</li>
 							<li class="cusDatas_list">
 								<div class="cusDatas_item">
 									<span class="cusDatas_tit require">内地身份证号码编号</span>
 									<input type="txt" name="shenfen" required>
+									<b class="tip" style="display:none;">* 请填写正确身份证编号</b>
 								</div>
 							</li>
 							<li class="cusDatas_list">
 								<div class="cusDatas_item">
 									<span class="cusDatas_tit require">港澳台通行证/护照号码</span>
 									<input type="txt" name="txz" required>
+									<b class="tip" style="display:none;">* 请填写正确港澳台通行证/护照号码</b>
 								</div>
 							</li>	
 							<li class="cusDatas_list">
 								<div class="cusDatas_item">
 									<span class="cusDatas_tit">港澳身份证号码（如有）</span>
 									<input type="txt" name="gid">
+
 								</div>
 							</li>	
 							<li class="cusDatas_list">
@@ -108,6 +116,7 @@
 									<span class="cusDatas_tit require">内地电话号码</span>
 									<input type="tel" name="neidi_tel" required maxlength="18">
 									<span class="supply">请输入11位手机号码</span>
+									<b class="tip" style="display:none;">* 请填写正确内地电话号码</b>
 								</div>
 							</li>	
 							<li class="cusDatas_list">
@@ -123,6 +132,7 @@
 									<label class="custorm_address address_required" >
 										<input type="txt" name="address" value="" required class="required">
 										<span class="supply" >请填写详细地址，街道门牌号</span>
+										<b class="tip" style="display:none;">* 请填写地址</b>
 									</label>
 									<label class="custorm_address" >
 										<input type="txt" name="gaddress" value="">
@@ -147,12 +157,12 @@
 										</thead>
 										<tbody>
 											<tr>
-												<td><input type="text" name="school_name[]"></td>
-												<td><input type="text" name="school_address[]"></td>
-												<td><input type="text" name="school_tel[]"></td>
-												<td><input type="text" name="school_year[]"></td>
-												<td><input type="text" name="school_time[]"></td>
-												<td><input type="text" name="education[]"></td>
+												<td><input type="text" name="school_name[]" class="required"><b class="tip" style="display:none;">* 请正确填写</b></td>
+												<td><input type="text" name="school_address[]" class="required"><b class="tip" style="display:none;">* 请正确填写</b></td>
+												<td><input type="text" name="school_tel[]" class="required"><b class="tip" style="display:none;">* 请正确填写</b></td>
+												<td><input type="text" name="school_year[]" class="required"><b class="tip" style="display:none;">* 请正确填写</b></td>
+												<td><input type="text" name="school_time[]" class="required"><b class="tip" style="display:none;">* 请正确填写</b></td>
+												<td><input type="text" name="education[]" class="required"><b class="tip" style="display:none;">* 请正确填写</b></td>
 											</tr>
 											<tr>
 												<td><input type="text" name="school_name[]"></td>
@@ -242,16 +252,18 @@
 						</ul>
 					
 						<ul class="tutorDatas">
-							<p class="customer_tit">监护人资料（如客户未满18岁必须填写）</p>
+							<p class="customer_tit">监护人资料<span>（如客户未满18岁必须填写）</span></p>
 
 							<li class="cusDatas_list">
 								<div class="cusDatas_item">
 									<span class="cusDatas_tit require" >监护人中文姓名</span>
-									<input type="text" name="tutor_zh_name" value="" required>
+									<input type="text" name="tutor_zh_name" value="" minlength="2" maxlength="25" required>
+									<b class="tip" style="display:none;">* 请填写正确中文名</b>
 								</div>
 								<div class="cusDatas_item ">
 									<span class="cusDatas_tit require">监护人英文姓名</span>
-									<input type="text" name="tutor_en_name" value="" required>
+									<input type="text" name="tutor_en_name" value=""  maxlength="30" required>
+									<b class="tip" style="display:none;">* 请填写正确英文名</b>
 								</div>
 			
 							</li>
@@ -273,12 +285,14 @@
 								<div class="cusDatas_item">
 									<span class="cusDatas_tit require">内地身份证号码编号</span>
 									<input type="text" name="tutor_shenfen" required>
+									<b class="tip" style="display:none;">* 请填写正确内地身份证号码编号</b>
 								</div>
 							</li>
 							<li class="cusDatas_list">
 								<div class="cusDatas_item">
 									<span class="cusDatas_tit require">港澳台通行证/护照号码</span>
 									<input type="text" name="tutor_txz" required>
+									<b class="tip" style="display:none;">* 请填写正确港澳台通行证/护照号码</b>
 								</div>
 							</li>	
 							<li class="cusDatas_list">
@@ -292,12 +306,14 @@
 								<div class="cusDatas_item">
 									<span class="cusDatas_tit require">职业</span>
 									<input type="text" name="tutor_work" required>
+									<b class="tip" style="display:none;">* 请填写职业</b>
 								</div>
 							</li>	
 							<li class="cusDatas_list">
 								<div class="cusDatas_item">
 									<span class="cusDatas_tit require">监护人与客户关系</span>
 									<input type="text" name="tutor_relation" required>
+									<b class="tip" style="display:none;">* 请填写监护人与客户关系</b>
 								</div>
 							</li>
 							
@@ -318,7 +334,8 @@
 	<script >
 		$(function(){
 				laydate.render({
-					elem: '#date'
+					elem: '#date',
+					value: '2000-01-01'
 			});
 		})
 		/**判断是否成年*/
@@ -360,6 +377,8 @@
 
 
 
+
+
 		// 验证中文名称
 		function isChinaName(name) {
 			 var pattern = /^[\u4E00-\u9FA5]{1,6}$/;
@@ -377,77 +396,223 @@
 			 var pattern = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; 
 			 return pattern.test(card); 
 		} 
-		 
 
+
+		function ishuzhao(huzhao){
+			var pattern =/^[HMhm]{1}([0-9]{10}|[0-9]{8})$|^[0-9]{8}$|^[0-9]{10}$|^[a-zA-Z]{5,17}$|^[a-zA-Z0-9]{5,17}$|[CW]{1}[0-9]{8}$/;
+			return pattern.test(huzhao); 
+		}
+		 
+		/**表单失去焦点验证*/
+		$(function(){
+		
+			$('.cusDatas_list .require+input').blur(function(){
+			
+				if($.trim($(this).val()).length == 0){
+
+					$(this).siblings('b').show();
+	
+				}else if($(this).attr('name')=="zh_name" ){
+					if(isChinaName($.trim($(this).val())) == false ){
+						$(this).siblings('b').show();
+					}else{
+						$(this).siblings('b').hide();
+					}
+				}else if($(this).attr('name')=="txz" ){
+					if(ishuzhao($.trim($(this).val())) == false ){
+						$(this).siblings('b').show();
+					}else{
+						$(this).siblings('b').hide();
+					}
+
+				}else if($(this).attr('name')=="tutor_txz" ){
+					if(ishuzhao($.trim($(this).val())) == false ){
+						$(this).siblings('b').show();
+					}else{
+						$(this).siblings('b').hide();
+					}
+
+				}else if($(this).attr('name')=="shenfen" ){
+					if(isCardNo($.trim($(this).val())) == false){
+						$(this).siblings('b').show();
+					}else{
+						$(this).siblings('b').hide();
+					}
+				}else if($(this).attr('name')=="neidi_tel"){
+					if(isPhoneNo($.trim($(this).val())) == false){
+						$(this).siblings('b').show()
+					}else{
+						$(this).siblings('b').hide();
+					}
+				}else if($(this).attr('name')=="tutor_zh_name"){
+					if(isChinaName($.trim($(this).val())) == false ){
+						$(this).siblings('b').show()
+					}else{
+						$(this).siblings('b').hide();
+					}
+				}else if($(this).attr('name')=="tutor_shenfen"){
+					if(isCardNo($.trim($(this).val())) == false){
+						$(this).siblings('b').show()
+					}else{
+						$(this).siblings('b').hide();
+					}
+				}
+				else{
+
+					$(this).siblings('b').hide();
+				}
+			})
+			
+
+			$('input.required').blur(function(){
+				if($.trim($(this).val()).length == 0 ){
+					$(this).siblings('b').show();
+				}else{
+					$(this).siblings('b').hide();
+				}
+			})
+		})
+
+
+		// 学历验证
+		function education(){
+			
+				if($.trim($('.education tbody tr:first-child input[name="school_name[]"]').val()).length == 0){
+					$('.education tbody tr:first-child input[name="school_name[]"]').siblings('b').show();
+					return false;
+					
+				}else if($.trim($('.education tbody tr:first-child input[name="school_address[]"]').val()).length == 0){
+					$('.education tbody tr:first-child input[name="school_address[]"]').siblings('b').show();
+					return false;
+					
+				}else if($.trim($('.education tbody tr:first-child input[name="school_tel[]"]').val()).length == 0){
+					$('.education tbody tr:first-child input[name="school_tel[]"]').siblings('b').show();
+					return false;
+					
+				}else if($.trim($('.education tbody tr:first-child input[name="school_year[]"]').val()).length == 0){
+					$('.education tbody tr:first-child input[name="school_year[]"]').siblings('b').show();
+					return false;
+					
+				}else if($.trim($('.education tbody tr:first-child input[name="school_time[]"]').val()).length == 0){
+					$('.education tbody tr:first-child input[name="school_time[]"]').siblings('b').show();
+					return false;
+					
+				}else if($.trim($('.education tbody tr:first-child input[name="education[]"]').val()).length == 0){
+					$('.education tbody tr:first-child input[name="education[]"]').siblings('b').show();
+					return false;
+					
+				}
+			
+		}
+ 
+
+
+		
 		 function formValidate(form){
+
 			/*上传资料验证***/
 		 	if($.trim($('input[name="zh_name"]').val()).length == 0 || isChinaName($.trim($('input[name="zh_name"]').val())) == false ){
-					alert('请填写正确中文名');
-					return false;
+					alert('请填写中文名');
 					$('input[name="zh_name"]').focus();
-				}else if($('input[name="en_name"]').val()==""){
-					
-					alert('请填写英文名');
+					$('input[name="zh_name"]+b').show(600); 
 					return false;
+					   
+				}else if($('input[name="en_name"]').val()==""){
+					alert('请填写英文名');
 					$('input[name="en_name"]').focus();
+					$('input[name="en_name"]+b').show(600);
+					return false;
+					
 					
 				}else if($('input[name="date"]').val()==""){
 					alert('请填写出生日期');
+					$('input[name="date"]').focus();
+					$('input[name="date"]+b').show(600);
 					return false;
 					
-					$('input[name="nation"]').focus();
+					
 				}else if($('input[name="nation"]').val()==""){
 					alert('请填写国籍');
-					return false;
 					$('input[name="nation"]').focus();
+					$('input[name="nation"]+b').show(600);
+					return false;
+					
 				}else if($('input[name="register"]').val()==""){
 					alert('请填写户籍');
-					return false;
 					$('input[name="register"]').focus();
+					$('input[name="register"]+b').show(600);
+					return false;
+					
 				}else if($.trim($('input[name="shenfen"]').val()).length == 0 || isCardNo($.trim($('input[name="shenfen"]').val())) == false){
 					alert('请填写正确身份证');
-					return false;
 					$('input[name="shenfen"]').focus();
-				}else if($('input[name="tongxingzheng"]').val()==""){
-					alert('请填写通行证号码');
+					$('input[name="shenfen"]+b').show(600);
 					return false;
+					
+				}else if($.trim($('input[name="txz"]').val()).length == 0  || ishuzhao($.trim($('input[name="txz"]').val())) == false){
+					alert('请填写通行证号码');
+					$('input[name="txz"]').focus();
+					$('input[name="txz"]+b').show(600);
+					return false;
+
+					
 				}else if($.trim($('input[name="neidi_tel"]').val()).length == 0  || isPhoneNo($.trim($('input[name="neidi_tel"]').val())) == false){
 					alert('请填写正确手机号码');
-					return false;
 					$('input[name="neidi_tel"]').focus();
+					$('input[name="neidi_tel"+b]').show(600);
+					return false;
+					
 				}else if($('.address_required input[name="address"]').val()==""){
 					alert('请填写详细地址');
+					$('.address_required input[name="address"]').focus();
+					$('.address_required input[name="address"]').siblings('b').show(600);
 					return false;
-					$('input[name="tongxingzheng"]').focus();
-				}else if($('.education tbody tr input[type="text"]').val()==""){
-					alert("请完善学历信息");
+					
+				}else 
+				if($.trim($('.education tbody tr:first-child input.required').val()).length == 0 || education() == false){
+					alert("请完善学历信息")
+					$('.education tbody tr:first-child input.required').focus();
+					$('.education tbody tr:first-child input.required').show(600);
 					return false;
-					$('.education tbody tr input[type="text"]').foucus();
 				}else if($('.tutorDatas').css('display')=="block"){
 					if($.trim($('input[name="tutor_zh_name"]').val()).length == 0 || isChinaName($.trim($('input[name="tutor_zh_name"]').val())) == false ){
+
 						alert('请填写监护人正确中文名');
-						return false;
+						$('input[name="tutor_zh_name"]+b').show();
 						$('input[name="tutor_zh_name"]').focus();
+						return false;
+						
+						
 					}else if($('input[name="tutor_en_name"]').val()==""){
 						alert('请填写监护人英文名');
-						return false;
 						$('input[name="tutor_en_name"]').focus();
+						$('input[name="tutor_en_name"]+b').show(600);
+						return false;
+						
 					}else if($.trim($('input[name="tutor_shenfen"]').val()).length == 0 || isCardNo($.trim($('input[name="tutor_shenfen"]').val())) == false){
 						alert('请填写正确监护人身份证');
-						return false;
 						$('input[name="tutor_shenfen"]').focus();
-					}else if($('input[name="tutor_txz"]').val()==""){
+						$('input[name="tutor_shenfen"]+b').show(600);
+						return false;
+						
+					}else if($.trim($('input[name="tutor_txz"]').val()).length == 0  || ishuzhao($.trim($('input[name="tutor_txz"]').val())) == false){
 						alert('请填写监护人通行证号码');
-						return false;
 						$('input[name="tutor_txz"]').focus();
+						$('input[name="tutor_txz"]+b').show(600);
+						return false;
+						
 					}else  if($('input[name="tutor_work"]').val()==""){
-						alert('请填写监护人职业')
-						return false;
+						alert('请填写监护人职业');
 						$('input[name="tutor_tongxingzheng"]').focus();
-					}else if($('input[name="tutor_relation"]').val()==""){
-						alert('请填写与监护人关系')
+						$('input[name="tutor_tongxingzheng"]+b').show(600);
 						return false;
+						
+					}else if($('input[name="tutor_relation"]').val()==""){
+						alert('请填写与监护人关系');
 						$('input[name="tutor_relation"]').focus();
+						$('input[name="tutor_relation"]+b').show(600);
+						return false;
+						
 					}
 				}
 		 }
