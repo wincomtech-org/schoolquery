@@ -143,19 +143,17 @@ elseif ($rec == 'update') {
 elseif ($rec == 'del') {
     $id = $check->is_number($_REQUEST['id']) ? $_REQUEST['id'] : $dou->dou_msg($_LANG['illegal'], 'area.php');
     $name = $dou->get_one("SELECT name FROM " . $dou->table('area') . " WHERE id = '$id'");
-    // $is_parent = $dou->get_one("SELECT id FROM " . $dou->table('product') . " WHERE cat_id = '$cat_id'") .
-    //          $dou->get_one("SELECT cat_id FROM " . $dou->table('product_category') . " WHERE parent_id = '$cat_id'");
-    // if ($is_parent) {
-    //     $_LANG['product_category_del_is_parent'] = preg_replace('/d%/Ums', $cat_name, $_LANG['product_category_del_is_parent']);
-    //     $dou->dou_msg($_LANG['product_category_del_is_parent'], 'product_category.php', '', '3');
-    // } else {
-        if (isset($_POST['confirm']) ? $_POST['confirm'] : '') {
+    if($id==1){
+        $dou->dou_msg('该地区不能删除');
+    }else{
+         if (isset($_POST['confirm']) ? $_POST['confirm'] : '') {
             $dou->create_admin_log($_LANG['area_del'] . ': ' . $name);
             $dou->delete($dou->table('area'), "id = $id", 'area.php');
         } else {
             $_LANG['del_check'] = preg_replace('/d%/Ums', $name, $_LANG['del_check']);
             $dou->dou_msg($_LANG['del_check'], 'area.php', '', '30', "area.php?rec=del&id=$id");
         }
-    // }
+    }
+       
 }
 ?>

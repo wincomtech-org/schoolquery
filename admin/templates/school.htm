@@ -15,7 +15,7 @@
  <div id="dcMain">
    {include file="ur_here.htm"}
    <div class="mainBox" style="{$workspace.height}">
-    <!-- {if $rec eq 'default'} 商品列表 -->
+    <!-- {if $rec eq 'default'} 学校列表 -->
     <h3><a href="{$action_link.href}" class="actionBtn add">{$action_link.text}</a>{$ur_here}</h3>
     <div class="filter">
     <form action="school.php" method="post">
@@ -23,9 +23,9 @@
       <option value="0">{$lang.uncategorized}</option>
       <!-- {foreach from=$sty item=type} -->
       <!-- {if $type.id eq $id} -->
-      <option value="{$type.id}" selected="selected">{$type.stype_name}</option>
+      <option value="{$type.id}" selected="selected">{$type.name}</option>
       <!-- {else} -->
-      <option value="{$type.id}">{$type.stype_name}</option>
+      <option value="{$type.id}">{$type.name}</option>
       <!-- {/if} -->
       <!-- {/foreach} -->
      </select>
@@ -43,8 +43,8 @@
         <th width="22" align="center"><input name='chkall' type='checkbox' id='chkall' onclick='selectcheckbox(this.form)' value='check'></th>
         <th width="40" align="center">{$lang.school_id}</th>
         <th align="left" width="150">{$lang.school_name}</th>
-        <th width="150" align="center">{$lang.school_img}</th>
-       <th width="80" align="center">{$lang.school_insty}</th>
+        <th width="150" align="center">{$lang.school_logo}</th>
+       <!-- <th width="80" align="center">{$lang.school_insty}</th> -->
        <th width="100" align="center">{$lang.school_con}</th>
         <th  align="center">{$lang.school_content}</th>
         <th width="80" align="center">{$lang.sort}</th>
@@ -56,7 +56,7 @@
         <td align="center">{$school.id}</td>
         <td>{$school.name}</td>
         <td align="center"><img width="100px" src="../{$school.img}"></td>
-        <td align="center">{$school.styname}</td>
+        <!-- <td align="center">{$school.styname}</td> -->
         <td align="center">{$school.conname}</td>
         <td>{$school.content}</td>
         <td align="center">{$school.sort}</td>
@@ -104,21 +104,7 @@
         <input type="text" name="engname" value="{$school.engname}" size="80" class="inpMain" />
        </td>
       </tr>
-      <tr>
-       <td align="right">{$lang.school_type}*</td>
-       <td>
-      <select name="sid" style="width:150px;">
-        <option value="0">{$lang.uncategorized}</option>
-        <!-- {foreach from=$sty item=type} -->
-        <!-- {if $type.id eq $school.sid} -->
-        <option value="{$type.id}" selected="selected">{$type.stype_name}</option>
-        <!-- {else} -->
-        <option value="{$type.id}">{$type.stype_name}</option>
-        <!-- {/if} -->
-        <!-- {/foreach} -->
-     </select>
-       </td>
-      </tr>
+     
       <tr>
        <td align="right">{$lang.school_con}*</td>
        <td>
@@ -134,18 +120,18 @@
      </select>
        </td>
       </tr>
+       <tr>
+       <td align="right">{$lang.school_logo}*</td>
+       <td>
+       <input type="file" name="img" size="38" class="inpFlie" />
+        {if $school.school_logo}<a href="../{$school.school_logo}" target="_blank"><img src="images/icon_yes.png"></a>{else}<img src="images/icon_no.png">{/if}
+       </td>
+      </tr>
       <tr>
        <td align="right">{$lang.school_img}*</td>
        <td>
        <input type="file" name="image" size="38" class="inpFlie" />
         {if $school.school_img}<a href="../{$school.school_img}" target="_blank"><img src="images/icon_yes.png"></a>{else}<img src="images/icon_no.png">{/if}
-       </td>
-      </tr>
-      <tr>
-       <td align="right">{$lang.school_logo}*</td>
-       <td>
-       <input type="file" name="img" size="38" class="inpFlie" />
-        {if $school.school_logo}<a href="../{$school.school_logo}" target="_blank"><img src="images/icon_yes.png"></a>{else}<img src="images/icon_no.png">{/if}
        </td>
       </tr>
       <tr>

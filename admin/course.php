@@ -178,7 +178,8 @@ elseif ($rec == 'insert') {
     $i=0;
    
 
-    $sql = "INSERT INTO " . $dou->table('course') . " (id,,code,shid,tid, name,eng_name, sort, depart ,open_data, cut_off_data, srequire)" . " VALUES (NULL,'$_POST[code]','$_POST[shid]','$_POST[tid]', '$_POST[name]', '$_POST[engname]', '$_POST[sort]', '$_POST[depart]', '$ndata', '$ldata', '$_POST[content]')";
+    $sql = "INSERT INTO " . $dou->table('course') . " (id,code,shid,tid, name,eng_name, sort, depart ,open_data, cut_off_data, srequire)" . " VALUES (NULL,'$_POST[code]','$_POST[shid]','$_POST[tid]', '$_POST[name]', '$_POST[engname]', '$_POST[sort]', '$_POST[depart]', '$ndata', '$ldata', '$_POST[content]')";
+
     $dou->query($sql);
     $sql="SELECT id FROM " . $dou->table('course')."order by id desc";
      $query= $dou->query($sql);

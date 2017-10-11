@@ -14,54 +14,6 @@
 define('IN_DOUCO', true);
 
 require (dirname(__FILE__) . '/include/init.php');
-function resize_image($img_src, $new_img_path, $new_width, $new_height)
-{
-    $img_info = @getimagesize($img_src);
-    if (!$img_info || $new_width < 1 || $new_height < 1 || empty($new_img_path)) {
-        return false;
-    }
-    if (strpos($img_info['mime'], 'jpeg') !== false) {
-        $pic_obj = imagecreatefromjpeg($img_src);
-    } else if (strpos($img_info['mime'], 'gif') !== false) {
-        $pic_obj = imagecreatefromgif($img_src);
-    } else if (strpos($img_info['mime'], 'png') !== false) {
-        $pic_obj = imagecreatefrompng($img_src);
-    } else {
-        return false;
-    }
-
-    $pic_width = imagesx($pic_obj);
-    $pic_height = imagesy($pic_obj);
-
-    if (function_exists("imagecopyresampled")) {
-        $new_img = imagecreatetruecolor($new_width,$new_height);
-        imagecopyresampled($new_img, $pic_obj, 0, 0, 0, 0, $new_width, $new_height, $pic_width, $pic_height);
-    } else {
-        $new_img = imagecreate($new_width, $new_height);
-        imagecopyresized($new_img, $pic_obj, 0, 0, 0, 0, $new_width, $new_height, $pic_width, $pic_height);
-    }
-    if (preg_match('~.([^.]+)$~', $new_img_path, $match)) {
-        $new_type = strtolower($match[1]);
-        switch ($new_type) {
-            case 'jpg':
-                imagejpeg($new_img, $new_img_path);
-                break;
-            case 'gif':
-                imagegif($new_img, $new_img_path);
-                break;
-            case 'png':
-                imagepng($new_img, $new_img_path);
-                break;
-            default:
-                imagejpeg($new_img, $new_img_path);
-        }
-    } else {
-        imagejpeg($new_img, $new_img_path);
-    }
-    imagedestroy($pic_obj);
-    imagedestroy($new_img);
-    return true;
-}
 
 // rec操作项的初始化
 $rec = $check->is_rec($_REQUEST['rec']) ? $_REQUEST['rec'] : 'default';
@@ -77,18 +29,18 @@ if (!file_exists(ROOT_PATH . $images_dir)) {
 
 // 赋值给模板
 $smarty->assign('rec', $rec);
-$smarty->assign('cur', 'school');
+$smarty->assign('cur', 'customer');
 
 /**
  * +----------------------------------------------------------
- * 学校列表
+ * 客户列表
  * +----------------------------------------------------------
  */
 if ($rec == 'default') {
-    $smarty->assign('ur_here', $_LANG['school']);
+    $smarty->assign('ur_here', $_LANG['customer']);
     $smarty->assign('action_link', array (
-            'text' => $_LANG['school_add'],
-            'href' => 'school.php?rec=add' 
+            'text' => $_LANG['customer_add'],
+            'href' => 'customer.php?rec=add' 
     ));
     
     // 获取参数
@@ -96,7 +48,7 @@ if ($rec == 'default') {
     $keyword = isset($_REQUEST['keyword']) ? trim($_REQUEST['keyword']) : '';
     // 筛选条件
     if($id!=0){
-        $where = "WHERE cid='$id'";
+        $where = "WHERE sid='$id'";
     }else{
         $where = ' WHERE 1=1';
     }
@@ -111,42 +63,43 @@ if ($rec == 'default') {
     $page_url = 'school.php' . ($id ? '?id=' . $id : '');
     $limit = $dou->pager('school', 15, $page, $page_url, $where, $get);
     
-    $sql = "SELECT id, name, sid,cid ,school_logo ,sort ,content FROM " . $dou->table('school') . $where . " ORDER BY id DESC" . $limit;
+    $sql = "SELECT id, name, engname,sex ,data ,nation ,phone FROM " . $dou->table('customer') . $where . " ORDER BY id DESC" . $limit;
     $query = $dou->query($sql);
     while ($row = $dou->fetch_array($query)) {
-       
-        $conname = $dou->get_one("SELECT name FROM " . $dou->table('area') . " WHERE id = '$row[cid]'");
-      
+    
         //  echo $row['content'];
         //$add_time = date("Y-m-d", $row['add_time']);
        $row['content']=mb_substr($row['content'],0,30,'UTF-8');
-        $school[] = array (
+        $customer[] = array (
                 "id" => $row['id'],
                 "name" => $row['name'],
-                "img" => $row['school_logo'],
-                "conname" => $conname,
-                "content" => $row['content'],
-                "sort" => $row['sort'] 
+                "engname" => $row['engname'],
+                "sex" => $row['sex'],
+                "data" => $row['data'],
+                "nation" => $row['nation'],
+                "phone" => $row['phone']
         );
     }
     
-    $sql = "SELECT * FROM " . $GLOBALS['dou']->table('area');
-    $query = $GLOBALS['dou']->query($sql);
-    while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
-        $sty[]=$row;
-    }
-    //print
-    $smarty->assign('id', $id);
-    $smarty->assign('keyword', $keyword);
-    $smarty->assign('sty', $sty);
-    $smarty->assign('school', $school);
+    // // 首页显示商品数量限制框
+    // for($i = 1; $i <= $_CFG['home_display_product']; $i++) {
+    //     $sort_bg .= "<li><em></em></li>";
+    // }
     
-    $smarty->display('school.htm');
+    // 赋值给模板
+    //echo
+    //$smarty->assign('if_sort', $_SESSION['if_sort']);
+    //$smarty->assign('sort', get_sort_product());
+    //$smarty->assign('sort_bg', $sort_bg);
+    $smarty->assign('keyword', $keyword);
+    $smarty->assign('customer', $customer);
+    
+    $smarty->display('customer.htm');
 } 
 
 /**
  * +----------------------------------------------------------
- * 学校添加
+ * 产品添加
  * +----------------------------------------------------------
  */
 elseif ($rec == 'add') {
@@ -185,14 +138,14 @@ elseif ($rec == 'add') {
     $smarty->assign('con', $con);
     $smarty->assign('product', $product);
     //print_r($product);
-    $smarty->display('school.htm');
+    $smarty->display('customer.htm');
 } 
 
 elseif ($rec == 'insert') {
     if (empty($_POST['name']))
         $dou->dou_msg($_LANG['school_name'] . $_LANG['is_empty']);
-    if($_POST['cid']==0)
-        $dou->dou_msg($_LANG['school_area'] . $_LANG['is_empty']);
+    if($_POST['sid']==0)
+        $dou->dou_msg($_LANG['school_type'] . $_LANG['is_empty']);
     if(empty($_POST['content']))
         $dou->dou_msg($_LANG['school_content'] . $_LANG['is_empty']);
     // 判断是否有上传图片/上传图片生成
@@ -210,7 +163,6 @@ elseif ($rec == 'insert') {
         $files = $images_dir . $upfiles;
         $img->make_thumb($upfiles, $_CFG['thumb_width'], $_CFG['thumb_height']);
     }
-    $ret = resize_image(ROOT_PATH.$files, ROOT_PATH.$files, '300', '210');
     //$add_time = time();
     
     // 格式化自定义参数
@@ -227,45 +179,120 @@ elseif ($rec == 'insert') {
 
 /**
  * +----------------------------------------------------------
- * 学校编辑
+ * 产品编辑
  * +----------------------------------------------------------
  */
 elseif ($rec == 'edit') {
-    $smarty->assign('ur_here', $_LANG['school_edit']);
+    $smarty->assign('ur_here', $_LANG['customer_edit']);
     $smarty->assign('action_link', array (
-            'text' => $_LANG['school'],
-            'href' => 'school.php' 
+            'text' => $_LANG['customer'],
+            'href' => 'customer.php' 
     ));
-    
+     /*
+        *判断上传的文件是否为图片格式
+     */
+    function img($name){
+        $arr=array('jpg','png','svg');
+        foreach($name as $v){
+            $d=substr($v, strrpos($v, '.')+1);
+            if(in_array($d,$arr)){
+                $imgname[]=$v;
+            }
+        }
+        return $imgname;
+    }
     // 验证并获取合法的ID
     $id = $check->is_number($_REQUEST['id']) ? $_REQUEST['id'] : '';
     
-    $query = $dou->select($dou->table('school'), '*', '`id` = \'' . $id . '\'');
-    $school = $dou->fetch_array($query);
+    $query = $dou->select($dou->table('customer'), '*', '`id` = \'' . $id . '\'');
+    $customer = $dou->fetch_array($query);
     //print_r($school);
-    
-   
     
     // CSRF防御令牌生成
     $smarty->assign('token', $firewall->get_token());
-     $sql = "SELECT * FROM " . $GLOBALS['dou']->table('school_type');
-    $query = $GLOBALS['dou']->query($sql);
-    while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
-        $sty[]=$row;
+    $customer['school_name']= explode("|", $customer['school_name']); 
+     $customer['school_adress']= explode("|", $customer['school_adress']); 
+    $customer['school_tel']= explode("|", $customer['school_tel']); 
+    $customer['school_year']= explode("|", $customer['school_year']); 
+    $customer['school_time']= explode("|", $customer['school_time']); 
+    $customer['education']= explode("|", $customer['education']);
+    $customer['work_name']= explode("|", $customer['work_name']);
+    $customer['work_adress']= explode("|", $customer['work_adress']);
+    $customer['work_tel']= explode("|", $customer['work_tel']);
+    $customer['work_year']= explode("|", $customer['work_year']);
+    $customer['work_time']= explode("|", $customer['work_time']);
+    $customer['position']= explode("|", $customer['position']);
+
+    $customer['id_cent']= explode("|", $customer['id_cent']);
+    foreach($customer['id_cent'] as $val){
+        $str=explode(",",$val);
+        $id_cent[] =$str[(count($str)-1)];
     }
-     $sql = "SELECT * FROM " . $GLOBALS['dou']->table('area');
-    $query = $GLOBALS['dou']->query($sql);
-    while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
-        $row['addtime']=date("Y-m-d H:i:s",$row['addtime']);
-        $con[]=$row;
+    $id_cent=img($id_cent);
+    $customer['id_cent']=$id_cent;
+    $customer['id_phono']= explode("|", $customer['id_phono']);
+    foreach($customer['id_phono'] as $val){
+        $str=explode(",",$val);
+        $id_phono[] =$str[(count($str)-1)];
     }
+    $id_phono=img($id_phono);
+    $customer['id_phono']=$id_phono;
+
+    $customer['mark']= explode("|", $customer['mark']);
+    foreach($customer['mark'] as $val){
+        $str=explode(",",$val);
+        $mark[] =$str[(count($str)-1)];
+    }
+    $mark=img($mark);
+    $customer['mark']=$mark;
+
+    $customer['recom']= explode("|", $customer['recom']);
+    foreach($customer['recom'] as $val){
+        $str=explode(",",$val);
+        $recom[] =$str[(count($str)-1)];
+    }
+    $recom=img($recom);
+    $customer['recom']=$recom;
+
+    $customer['engprove']= explode("|", $customer['engprove']);
+    foreach($customer['engprove'] as $val){
+        $str=explode(",",$val);
+        $engprove[] =$str[(count($str)-1)];
+    }
+    $engprove=img($engprove);
+    $customer['engprove']=$engprove;
+
+    $customer['work_cent']= explode("|", $customer['work_cent']);
+    foreach($customer['work_cent'] as $val){
+        $str=explode(",",$val);
+        $work_cent[] =$str[(count($str)-1)];
+    }
+    $work_cent=img($work_cent);
+    $customer['work_cent']=$work_cent;
+
+    $customer['other']= explode("|", $customer['other']);
+    foreach($customer['other'] as $val){
+        $str=explode(",",$val);
+        $other[] =$str[(count($str)-1)];
+    }
+    $customer['other']=$other;
+    $customer['tutor_cent']= explode("|", $customer['tutor_cent']);
+    foreach($customer['tutor_cent'] as $val){
+        $str=explode(",",$val);
+        $tutor_cent[] =$str[(count($str)-1)];
+    }
+    $customer['tutor_cent']=$tutor_cent;
+    $customer['tutor_idphono']= explode("|", $customer['tutor_idphono']);
+    foreach($customer['tutor_idphono'] as $val){
+        $str=explode(",",$val);
+        $tutor_idphono[] =$str[(count($str)-1)];
+    }
+    $customer['tutor_idphono']=$tutor_idphono;
+
     // 赋值给模板
     $smarty->assign('form_action', 'update');
-    $smarty->assign('sty', $sty);
-    $smarty->assign('con', $con);
-    $smarty->assign('school', $school);
-    
-    $smarty->display('school.htm');
+    $smarty->assign('customer', $customer);
+    $smarty->display('customer.htm');
 } 
 
 elseif ($rec == 'update') {
@@ -273,8 +300,8 @@ elseif ($rec == 'update') {
     // exit;
     if (empty($_POST['name']))
         $dou->dou_msg($_LANG['school_name'] . $_LANG['is_empty']);
-    if($_POST['cid']==0)
-        $dou->dou_msg($_LANG['school_area'] . $_LANG['is_empty']);
+    if($_POST['sid']==0)
+        $dou->dou_msg($_LANG['school_type'] . $_LANG['is_empty']);
     if(empty($_POST['content']))
         $dou->dou_msg($_LANG['school_content'] . $_LANG['is_empty']);
         
@@ -293,7 +320,6 @@ elseif ($rec == 'update') {
         $img->make_thumb($upfiles, $_CFG['thumb_width'], $_CFG['thumb_height']);
         $up_files = ", school_logo='$files'";
     }
-    $ret = resize_image(ROOT_PATH.$files, ROOT_PATH.$files, '300', '210');
     // 格式化自定义参数
     //$_POST['defined'] = str_replace("\r\n", ',', $_POST['defined']);
     
@@ -306,6 +332,43 @@ elseif ($rec == 'update') {
     $dou->dou_msg($_LANG['school_edit_succes'], 'school.php');
 } 
 
+// /**
+//  * +----------------------------------------------------------
+//  * 重新生成产品图片
+//  * +----------------------------------------------------------
+//  */
+// elseif ($rec == 're_thumb') {
+//     $smarty->assign('ur_here', $_LANG['product_thumb']);
+//     $smarty->assign('action_link', array (
+//             'text' => $_LANG['product'],
+//             'href' => 'product.php' 
+//     ));
+    
+//     $sql = "SELECT id, image FROM " . $dou->table('product') . "ORDER BY id ASC";
+//     $count = mysql_num_rows($query = $dou->query($sql));
+//     $mask['count'] = preg_replace('/d%/Ums', $count, $_LANG['product_thumb_count']);
+//     $mask_tag = '<i></i>';
+//     $mask['confirm'] = $_POST['confirm'];
+    
+//     for($i = 1; $i <= $count; $i++)
+//         $mask['bg'] .= $mask_tag;
+    
+//     $smarty->assign('mask', $mask);
+//     $smarty->display('product.htm');
+    
+//     if (isset($_POST['confirm'])) {
+//         echo ' ';
+//         while ($row = $dou->fetch_array($query)) {
+//             $img->make_thumb(basename($row['image']), $_CFG['thumb_width'], $_CFG['thumb_height']);
+//             echo "<script type=\"text/javascript\">mask('" . $mask_tag . "');</script>";
+//             flush();
+//             ob_flush();
+//         }
+//         echo "<script type=\"text/javascript\">success();</script>\n</body>\n</html>";
+//     }
+// }
+
+
 /**
  * +----------------------------------------------------------
  * 学校删除
@@ -313,20 +376,17 @@ elseif ($rec == 'update') {
  */
 elseif ($rec == 'del') {
     // 验证并获取合法的ID
-    $id = $check->is_number($_REQUEST['id']) ? $_REQUEST['id'] : $dou->dou_msg($_LANG['illegal'], 'school.php');
+    $id = $check->is_number($_REQUEST['id']) ? $_REQUEST['id'] : $dou->dou_msg($_LANG['illegal'], 'customer.php');
     
-    $name = $dou->get_one("SELECT name FROM " . $dou->table('school') . " WHERE id = '$id'");
+    $name = $dou->get_one("SELECT name FROM " . $dou->table('customer') . " WHERE id = '$id'");
     
     if (isset($_POST['confirm']) ? $_POST['confirm'] : '') {
-        // 删除相应商品图片
-        $image = $dou->get_one("SELECT school_img FROM " . $dou->table('school') . " WHERE id = '$id'");
-        $dou->del_image($image);
         
-        $dou->create_admin_log($_LANG['school_del'] . ': ' . $name);
-        $dou->delete($dou->table('school'), "id = $id", 'school.php');
+        $dou->create_admin_log($_LANG['customer_del'] . ': ' . $name);
+        $dou->delete($dou->table('customer'), "id = $id", 'customer.php');
     } else {
         $_LANG['del_check'] = preg_replace('/d%/Ums', $name, $_LANG['del_check']);
-        $dou->dou_msg($_LANG['del_check'], 'school.php', '', '30', "school.php?rec=del&id=$id");
+        $dou->dou_msg($_LANG['del_check'], 'customer.php', '', '30', "customer.php?rec=del&id=$id");
     }
 } 
 
@@ -339,12 +399,32 @@ elseif ($rec == 'action') {
     if (is_array($_POST['checkbox'])) {
         if ($_POST['action'] == 'del_all') {
             // 批量学校删除
-            $dou->del_all('school', $_POST['checkbox'], 'id', 'image');
+            $dou->del_all('customer', $_POST['checkbox'], 'id', 'image');
         }
     } else {
-        $dou->dou_msg($_LANG['school_select_empty']);
+        $dou->dou_msg($_LANG['customer_select_empty']);
     }
 }
 
-
+/**
+ * +----------------------------------------------------------
+ * 获取首页显示商品
+ * +----------------------------------------------------------
+ */
+// function get_sort_product() {
+//     $limit = $GLOBALS['_DISPLAY']['home_product'] ? ' LIMIT ' . $GLOBALS['_DISPLAY']['home_product'] : '';
+//     $sql = "SELECT id, name, image FROM " . $GLOBALS['dou']->table('product') . " WHERE sort > 0 ORDER BY sort DESC" . $limit;
+//     $query = $GLOBALS['dou']->query($sql);
+//     while ($row = $GLOBALS['dou']->fetch_array($query)) {
+//         $image = ROOT_URL . $row['image'];
+        
+//         $sort[] = array (
+//                 "id" => $row['id'],
+//                 "name" => $row['name'],
+//                 "image" => $image 
+//         );
+//     }
+    
+//     return $sort;
+// }
 ?>
