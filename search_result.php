@@ -153,7 +153,6 @@ if($_SESSION['pass']){
 }
 
 pageft($allnum,$pageSize,1,1,0,5,"search_result.php?grade=$grade&gradetype=$gradetype&date=$dates&key=$key");
-print_r($course);
 $smarty->assign('course',$course);
 //获取分数类型
 $sql = "SELECT * FROM " . $dou->table('score').'order by sort desc';
