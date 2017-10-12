@@ -102,12 +102,14 @@ if($_SESSION['pass']){
     $query = $dou->query($sql);
     while ($rows = $GLOBALS['dou']->fetch_assoc($query)) {
         $end=date('Y/m/d', $rows['cut_off_data']);
-         $styname = $dou->get_one("SELECT name FROM " . $dou->table('course_type') . " WHERE id = '$rows[tid]'");
+        $styname = $dou->get_one("SELECT name FROM " . $dou->table('course_type') . " WHERE id = '$rows[tid]'");
+        $schname = $dou->get_one("SELECT name FROM " . $dou->table('school') . " WHERE id = '$rows[shid]'");
         $course[] = array (
                 "id" => $rows['id'],
                 "name" => $rows['name'],
                 "engname" => $rows['eng_name'],
                 "type" =>  $styname,
+                "school" =>  $schname,
                 "end" => $end
               
         );
@@ -132,11 +134,13 @@ if($_SESSION['pass']){
         while ($rows = $GLOBALS['dou']->fetch_assoc($query)) {
             $end=date('Y/m/d', $rows['cut_off_data']);
             $styname = $dou->get_one("SELECT name FROM " . $dou->table('course_type') . " WHERE id = '$rows[tid]'");
+            $schname = $dou->get_one("SELECT name FROM " . $dou->table('school') . " WHERE id = '$rows[shid]'");
             $course[] = array (
                 "id" => $rows['id'],
                 "name" => $rows['name'],
                 "engname" => $rows['eng_name'],
                 "type" =>  $styname,
+                "school" =>  $schname,
                 "end" => $end
             );
         }
@@ -149,6 +153,7 @@ if($_SESSION['pass']){
 }
 
 pageft($allnum,$pageSize,1,1,0,5,"search_result.php?grade=$grade&gradetype=$gradetype&date=$dates&key=$key");
+print_r($course);
 $smarty->assign('course',$course);
 //获取分数类型
 $sql = "SELECT * FROM " . $dou->table('score').'order by sort desc';
