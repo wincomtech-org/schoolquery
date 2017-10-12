@@ -130,9 +130,10 @@ box-shadow: inset 0 0 70px 130px rgba(49, 49, 49, .6);}
 .sresult-table th{white-space:nowrap;font-size:18px;color:#fff;line-height: 40px;font-weight: normal;}
 .sresult-table td{line-height: 22px;color:#333;}
 .sresult-table th:first-child{text-align:left;}
-td.subject-name{width:50%;text-align:left;}
-td.subject-type{width:25%;}
-td.subject-deadline{width:25%;}
+td.subject-name{width:45%;text-align:left;}
+td.subject-type{width:20%;}
+td.subject-school{width:20%;}
+td.subject-deadline{width:15%;}
 .sresult-page{margin:90px 0;}
 
 .sresult-search{float:right;width:280px;margin-bottom:30px;background: rgb(83,142,255);-webkit-box-shadow:0 0 30px 5px rgba(160,160,160,.8);-moz-box-shadow:0 0 30px 5px rgba(160,160,160,.8);box-shadow:0 0 30px 5px rgba(160,160,160,.8);}
