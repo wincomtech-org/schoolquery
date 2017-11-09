@@ -1,16 +1,4 @@
 <?php
-/**
- * DouPHP
- * --------------------------------------------------------------------------------------------------
- * 版权所有 2013-2015 漳州豆壳网络科技有限公司，并保留所有权利。
- * 网站地址: http://www.douco.com
- * --------------------------------------------------------------------------------------------------
- * 这不是一个自由软件！您只能在遵守授权协议前提下对程序代码进行修改和使用；不允许对程序代码以任何形式任何目的的再发布。
- * 授权协议：http://www.douco.com/license.html
- * --------------------------------------------------------------------------------------------------
- * Author: DouCo
- * Release Date: 2015-10-16
- */
 define('IN_DOUCO', true);
 
 // 强制在移动端中显示PC版
@@ -25,7 +13,7 @@ require (dirname(__FILE__) . '/include/init.php');
 // 赋值给模板-导航栏
 $smarty->assign('nav_middle_list', $dou->get_nav('middle'));
 $sql = "SELECT * FROM " . $dou->table('nav').'where module="local_school"';
- $query = $dou->query($sql);
+$query = $dou->query($sql);
 $about = $dou->fetch_array($query);
 $ce=$about['show_img'];
 
@@ -40,28 +28,28 @@ $sql = "SELECT * FROM " . $dou->table('course_type').'order by sort desc';
 $query = $dou->query($sql);
 $i=0;
 while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
-   	$sq = "SELECT shid FROM " . $dou->table('course')."where tid='$row[id]'";
+	$sq = "SELECT shid FROM " . $dou->table('course')."where tid='$row[id]'";
 	$querys = $dou->query($sq);
 	while ($rows = $GLOBALS['dou']->fetch_assoc($querys)) {
 		$sqls = "SELECT * FROM " . $dou->table('school')."where id='$rows[shid]' and cid=1";
 		$quer = $dou->query($sqls);
 		while ($ro = $GLOBALS['dou']->fetch_assoc($quer)) {
 			$sch[]=$ro;
-			
+
 		}
 		$school[$i]=$sch;
-		
-		
+
+
 	}
 
-		foreach ($school[$i] as $v){
-			$v = join(",",$v); //降维,也可以用implode,将一维数组转换为用逗号连接的字符串
-			$temp[$i][] = $v;
-		}
-		$temp[$i] = array_unique($temp[$i]); //去掉重复的字符串,也就是重复的一维数组
-		foreach ($temp[$i] as $k => $v){
-			$temp[$i][$k] = explode(",",$v); //再将拆开的数组重新组装
-		} 
+	foreach ($school[$i] as $v){
+		$v = join(",",$v); //降维,也可以用implode,将一维数组转换为用逗号连接的字符串
+		$temp[$i][] = $v;
+	}
+	$temp[$i] = array_unique($temp[$i]); //去掉重复的字符串,也就是重复的一维数组
+	foreach ($temp[$i] as $k => $v){
+		$temp[$i][$k] = explode(",",$v); //再将拆开的数组重新组装
+	}
 	$i++;
 	$course[]=$row;
 }
@@ -74,8 +62,8 @@ $smarty->assign('course', $course);
 $sql = "SELECT * FROM " . $dou->table('taste').'where news_show=1 order by sort desc limit 2';
 $query = $dou->query($sql);
 while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
-		$row['content']=mb_substr($row['content'],0,60,'UTF-8');
-	   $news[]=$row;
+	$row['content']=mb_substr($row['content'],0,60,'UTF-8');
+	$news[]=$row;
 }
 $smarty->assign('news', $news);//获取新闻
 // 赋值给模板-数据
