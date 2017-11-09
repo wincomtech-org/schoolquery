@@ -24,24 +24,24 @@ $query = $dou->query($sql);
 $row = $GLOBALS['dou']->fetch_assoc($query);
 $smarty->assign('id',$row['id']);
 //获取分类
+// 课程分类
 $sql = "SELECT * FROM " . $dou->table('course_type').'order by sort desc';
 $query = $dou->query($sql);
-$i=0;
+$i=0;$school=array();
 while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
+	// 课程列表
 	$sq = "SELECT shid FROM " . $dou->table('course')."where tid='$row[id]'";
 	$querys = $dou->query($sq);
 	while ($rows = $GLOBALS['dou']->fetch_assoc($querys)) {
-		$sqls = "SELECT * FROM " . $dou->table('school')."where id='$rows[shid]' and cid=1";
+		// 学校列表
+		$sqls = "SELECT id,name,school_logo FROM " . $dou->table('school')."where id='$rows[shid]' and cid=1";
 		$quer = $dou->query($sqls);
 		while ($ro = $GLOBALS['dou']->fetch_assoc($quer)) {
 			$sch[]=$ro;
-
 		}
 		$school[$i]=$sch;
-
-
 	}
-
+	// 去重
 	foreach ($school[$i] as $v){
 		$v = join(",",$v); //降维,也可以用implode,将一维数组转换为用逗号连接的字符串
 		$temp[$i][] = $v;
@@ -53,8 +53,8 @@ while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
 	$i++;
 	$course[]=$row;
 }
-$smarty->assign('school', $temp);
 
+$smarty->assign('school', $temp);
 $smarty->assign('course', $course);
 //$smarty->assign('school', $school);
 
