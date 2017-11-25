@@ -12,8 +12,8 @@ select{-webkit-appearance:none;-moz-appearance:none;border:none;-ms-appearance:n
 .form-row{overflow: hidden;margin:10px 0 36px;}
 .search-form .grade,.keyword{background:rgb(62,106,191);color:#fff;width:100%;height:44px;line-height: 44px;font-size:14px;padding:0 0 0 10px;}
 .search-form .deadline{line-height: 44px;}
-.search-form .deadline,.search-form .gradetype{background:rgb(62,106,191) url(../img/arrow.png) right center no-repeat;background-position:right 8px center;padding:0px 10px;width:200px;height:44px;font-size:14px;color:#fff;}
-.gradetype{line-height:16px;padding:14px 0px 14px 10px;}
+.search-form .deadline,.search-form .gradetype,.search-form .grade,.province{background:rgb(62,106,191) url(../img/arrow.png) right center no-repeat;background-position:right 8px center;padding:0px 10px;width:200px;height:44px;font-size:14px;color:#fff;}
+.gradetype,.province{line-height:16px;padding:14px 0px 14px 10px;}
 .search-form input[type="submit"]{display:block;height:36px;line-height:36px;padding:0 40px 0 65px;margin:-16px auto 20px;font-size:14px;color:#000;background:#fff url(../img/search.png) no-repeat 40px center;-webkit-border-radius:20px;-moz-border-radius:20px;border-radius:20px;}
 /*定位图标*/
 .home-ico{width: 80px;margin: 0 auto;}

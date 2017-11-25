@@ -97,6 +97,20 @@
 								<!-- {/foreach} -->
 							</select>
 						</div>
+
+						<!--新添加的-->
+						<div class="srform-row" style="display:none;">
+							<select  name="province" class="province" >
+								<option value="0">选择省份</option>
+								<!-- {foreach from=$score item=sco} -->
+								<!-- {if $sco.id eq $gradetype} -->
+								<option value="{$sco.id}" selected="selected">{$sco.name}</option>
+								<!-- {else} -->
+								<option value="{$sco.id}" >{$sco.name}</option>
+								<!-- {/if} -->
+								<!-- {/foreach} -->
+							</select>
+						</div>
 						<div class="srform-row">
 							<input type="text" placeholder="請輸入關鍵字" name="key" class="keyword" value="{$key}">
 						</div>
@@ -113,5 +127,19 @@
 
 {include file="inc/footer.tpl"}
 <script type="text/javascript" src="images/home.js"></script> 
+
+{literal}
+<script>
+	$('.gradetype  option').on('click',function(){
+		var sel_pro = $(this).val();
+		if(sel_pro == 1){
+		
+			$('.province').parent().show();
+		}else{
+			$('.province').parent().hide();
+		}
+	})
+</script>
+{/literal}
 </body>
 </html>
