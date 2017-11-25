@@ -79,9 +79,7 @@
 				<div class="sresult-search">
 					<form action="search_result.php" method="post" class="sresult-form">
 						<p>我有</p>
-						<div class="srform-row">
-							<input type="text" placeholder="分數" name="grade" class="grade" value="{$grade}">
-						</div>
+						
 						<div class="srform-row">
 							<input type="text" readonly value="{$date}" name="date" id="deadline" class="deadline" placeholder="截止日期">
 						</div>
@@ -111,6 +109,10 @@
 								<!-- {/foreach} -->
 							</select>
 						</div>
+
+						<div class="srform-row">
+							<input type="text" placeholder="分數" name="grade" class="grade" value="{$grade}">
+						</div>
 						<div class="srform-row">
 							<input type="text" placeholder="請輸入關鍵字" name="key" class="keyword" value="{$key}">
 						</div>
@@ -126,10 +128,20 @@
 <!-- 主体内容 end -->
 
 {include file="inc/footer.tpl"}
-<script type="text/javascript" src="images/home.js"></script> 
 
 {literal}
 <script>
+	$(function(){
+		var sel_pro = $('.gradetype  option:selected').val();
+		console.log(sel_pro)
+		if(sel_pro == 1){
+		
+			$('.province').parent().show();
+		}else{
+			$('.province').parent().hide();
+		}
+	})
+
 	$('.gradetype  option').on('click',function(){
 		var sel_pro = $(this).val();
 		if(sel_pro == 1){
@@ -141,5 +153,8 @@
 	})
 </script>
 {/literal}
+<script type="text/javascript" src="images/home.js"></script> 
+
+
 </body>
 </html>
