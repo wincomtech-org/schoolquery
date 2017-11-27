@@ -164,14 +164,15 @@
 
 {literal}
 <script>
-	$('.gradetype  option').on('click',function(){
-		var sel_pro = $(this).val();
-		if(sel_pro == '-1'){
-			$('.province').show();
-		}else{
-			$('.province').hide();
-		}
-	})
+ 
+$('.gradetype').on('click',function(){
+	var sel_pro = $(this).val(); 
+	if(sel_pro == '-1'){ 
+		$('.province').show();
+	}else{
+		$('.province').hide();
+	}
+}) 
 </script>
 {/literal}
 </body>
