@@ -27,7 +27,14 @@ $ce=$about['show_img'];
 $smarty->assign('ce', $ce);//获取首页图片
 
 $grade=$_REQUEST['grade'];
+//获取分数类别
 $gradetype=$_REQUEST['gradetype'];
+if($gradetype=='-1'){
+    $gradetype=$_REQUEST['province'];
+}
+/* if(empty($gradetype)){
+    $dou->dou_msg('分数信息选择不完整');
+} */
 $dates=$_REQUEST['date'];
 $key=$_REQUEST['key'];
 $date=strtotime($dates);
@@ -35,7 +42,7 @@ $date=strtotime($dates);
 $wh='';
 if(!empty($key)){
     //根据关键字查询学校id
-    $sql= "SELECT id FROM " . $dou->table('school')."where name like '%$key%' or engname like '%$key%'";
+    $sql= "SELECT id FROM " . $dou->table('school')." where name like '%$key%' or engname like '%$key%'";
     $query = $dou->query($sql);
     while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
         $scid[]=$row;
@@ -66,7 +73,7 @@ if(!empty($key)){
     }
 }
 if($_SESSION['pass']){
-    $sql = "SELECT cou_id FROM " . $dou->table('sco_cou')."where sco_id='$gradetype' and min_score<='$grade'";
+    $sql = "SELECT cou_id FROM " . $dou->table('sco_cou')." where sco_id='$gradetype' and min_score<='$grade'";
     $query = $dou->query($sql);
     while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
         $cou_id[]=$row;
@@ -78,14 +85,15 @@ if($_SESSION['pass']){
         }
        
     }
-     $couid=substr($couid,0,-1);
+    $couid=substr($couid,0,-1);
+    
     $pageNum = empty($_GET["page"])?1:$_GET["page"];
     $pageSize=10;
     if(!empty($couid)){
         if(!empty($_REQUEST['date'])){
             $sql="SELECT * FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%' ".$wh.") and cut_off_data >='$date' order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
             $sqls="SELECT count(*) FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%' ".$wh.") and cut_off_data >='$date'";
-
+           
         }else{
             $sql="SELECT * FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%' ".$where.") order by sort desc limit ". (($pageNum - 1) * $pageSize) . "," . $pageSize;
             $sqls="SELECT count(*) FROM " . $dou->table('course')." where id in ($couid) and (name like '%$key%' or eng_name like '%$key%' ".$where.")";
@@ -151,17 +159,22 @@ if($_SESSION['pass']){
     }
    
 }
-
+ 
 pageft($allnum,$pageSize,1,1,0,5,"search_result.php?grade=$grade&gradetype=$gradetype&date=$dates&key=$key");
 $smarty->assign('course',$course);
 //获取分数类型
-$sql = "SELECT * FROM " . $dou->table('score').'order by sort desc';
+$sql = "SELECT * FROM " . $dou->table('score').' where sort<5 order by sort asc';
 $query = $dou->query($sql);
 while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
-    $score[]=$row;
+    $score0[]=$row;
 }
-
-$smarty->assign('score', $score);
+$sql = "SELECT * FROM " . $dou->table('score').' where sort>5 order by sort asc';
+$query = $dou->query($sql);
+while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
+    $score1[]=$row;
+}
+$smarty->assign('score0', $score0);
+$smarty->assign('score1', $score1);
 $smarty->assign('grade',$grade);
 $smarty->assign('gradetype',$gradetype);
 $smarty->assign('date',$dates);

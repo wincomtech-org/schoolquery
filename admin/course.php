@@ -132,13 +132,19 @@ elseif ($rec == 'add') {
     while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
         $typ[]=$row;
     }
-     $sql = "SELECT * FROM " . $GLOBALS['dou']->table('score');
+     $sql = "SELECT * FROM " . $GLOBALS['dou']->table('score') ." where sort<5 order by id asc";
       $query = $GLOBALS['dou']->query($sql);
     while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
-        $score[]=$row;
+        $score0[]=$row;
+    }
+    $sql = "SELECT * FROM " . $GLOBALS['dou']->table('score')." where sort>5  order by id asc";
+    $query = $GLOBALS['dou']->query($sql);
+    while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
+        $score1[]=$row;
     }
     // 赋值给模板
-    $smarty->assign('score',$score);
+    $smarty->assign('score0',$score0);
+    $smarty->assign('score1',$score1);
     $smarty->assign('form_action', 'insert');
     $smarty->assign('sty', $sty);
     $smarty->assign('typ', $typ);
@@ -166,7 +172,7 @@ elseif ($rec == 'insert') {
     $ldata=strtotime($_POST['ldata']);
     // 格式化自定义参数
     //$_POST['defined'] = str_replace("\r\n", ',', $_POST['defined']);
-     $sql = "SELECT * FROM " . $GLOBALS['dou']->table('score');
+    $sql = "SELECT * FROM " . $GLOBALS['dou']->table('score')." order by id asc";
       $query = $GLOBALS['dou']->query($sql);
     while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
         $scores[]=$row;
@@ -181,16 +187,20 @@ elseif ($rec == 'insert') {
     $sql = "INSERT INTO " . $dou->table('course') . " (id,code,shid,tid, name,eng_name, sort, depart ,open_data, cut_off_data, srequire)" . " VALUES (NULL,'$_POST[code]','$_POST[shid]','$_POST[tid]', '$_POST[name]', '$_POST[engname]', '$_POST[sort]', '$_POST[depart]', '$ndata', '$ldata', '$_POST[content]')";
 
     $dou->query($sql);
-    $sql="SELECT id FROM " . $dou->table('course')."order by id desc";
+     $sql="SELECT id FROM " . $dou->table('course')." order by id desc";
      $query= $dou->query($sql);
-    $row = $GLOBALS['dou']->fetch_assoc($query);
+    $row = $GLOBALS['dou']->fetch_assoc($query); 
+    
     $rows= $row['id'];
      foreach($score as $v){
         $sid=$scores[$i]['id'];
         $sql = "INSERT INTO " . $dou->table('sco_cou') . " (id,sco_id,cou_id,min_score)" . " VALUES (NULL,'$sid', '$rows','$v')";
+          
         $dou->query($sql);
         $i++;
+        
      }
+   
     $dou->create_admin_log($_LANG['course_add'] . ': ' . $_POST['name']);
     $dou->dou_msg($_LANG['course_add_succes'], 'course.php');
 } 
@@ -228,14 +238,27 @@ elseif ($rec == 'edit') {
     while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
         $typ[]=$row;
     }
-     $sql = "SELECT * FROM " . $GLOBALS['dou']->table('score');
-      $query = $GLOBALS['dou']->query($sql);
-        while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
-         $scores= $dou->get_one("SELECT min_score FROM " . $dou->table('sco_cou') . " WHERE sco_id = '$row[id]' and cou_id='$id'");
-        $score[] = array (
+    //小于5和大于5
+     $sql = "SELECT * FROM " . $GLOBALS['dou']->table('score')." where sort<5";
+     $query = $GLOBALS['dou']->query($sql);
+     while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
+        $scores= $dou->get_one("SELECT min_score FROM " . $dou->table('sco_cou') . " WHERE sco_id = '$row[id]' and cou_id='$id'");
+        $score0[] = array (
                 "id" => $row['id'],
                 "name" => $row['name'],
-                "scores" => $scores
+                "scores" => $scores,
+                'content'=>$row['content']
+        );
+    }
+    $sql = "SELECT * FROM " . $GLOBALS['dou']->table('score')." where sort>5 order by id asc";;
+    $query = $GLOBALS['dou']->query($sql);
+    while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
+        $scores= $dou->get_one("SELECT min_score FROM " . $dou->table('sco_cou') . " WHERE sco_id = '$row[id]' and cou_id='$id'");
+        $score1[] = array (
+            "id" => $row['id'],
+            "name" => $row['name'],
+            "scores" => $scores,
+            'content'=>$row['content']
         );
     }
     //查询对应的分数要求
@@ -245,7 +268,8 @@ elseif ($rec == 'edit') {
     //     $scores[]=$row;
     // }
     // 赋值给模板
-    $smarty->assign('score',$score);
+    $smarty->assign('score0',$score0);
+    $smarty->assign('score1',$score1);
     //$smarty->assign('scores',$scores);
     $smarty->assign('form_action', 'update');
     $smarty->assign('sty', $sty);
@@ -275,7 +299,7 @@ elseif ($rec == 'update') {
     
     // CSRF防御令牌验证
     $firewall->check_token($_POST['token']);
-    $sql = "SELECT * FROM " . $GLOBALS['dou']->table('score');
+    $sql = "SELECT * FROM " . $GLOBALS['dou']->table('score')." order by id asc";
       $query = $GLOBALS['dou']->query($sql);
     while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
         $scores[]=$row;

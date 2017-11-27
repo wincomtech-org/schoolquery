@@ -7,7 +7,7 @@
 <link href="templates/public.css" rel="stylesheet" type="text/css">
 {include file="javascript.htm"}
 <script type="text/javascript" src="images/jquery.autotextarea.js"></script>
-
+ 
 </head>
 <body>
 <div id="dcWrap">
@@ -180,8 +180,22 @@
       <tr>
        <td align="right">分数要求<br><span style="font-size: 12px;">没有要求不填即可</span></td>
        <td>
-       <!-- {foreach from=$score item=sco} -->
-            <input type="text"  name="score[]" placeholder="{$sco.name}" value="{$sco.scores}" size="20" class="inpMain" />
+       <!-- {foreach from=$score0 item=sco} -->
+         <div class="zzscore">
+         	<label for="zzscore{$sco.id}">{$sco.name}:</label>
+         	<input type="text"  id="zzscore{$sco.id}" name="score[]" placeholder="{$sco.name}-{$sco.content}" value="{$sco.scores}" size="20" class="inpMain" />
+       	 </div>
+         <!-- {/foreach}-->
+       </td>
+      </tr>
+      <tr>
+       <td align="right">各地高考分数要求<br><span style="font-size: 12px;">没有要求不填即可</span></td>
+       <td>
+       <!-- {foreach from=$score1 item=sco} -->
+         <div class="zzscore">
+         	<label for="zzscore{$sco.id}">{$sco.name}-{$sco.content}:</label>
+         	<input type="text"  id="zzscore{$sco.id}" name="score[]" placeholder="{$sco.name}-{$sco.content}" value="{$sco.scores}" size="20" class="inpMain" />
+       	 </div>
        <!-- {/foreach}-->
        </td>
       </tr>
