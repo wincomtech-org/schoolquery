@@ -32,6 +32,8 @@
 
             oDiv.style.top = t + 'px';
             oContainer.style.top = -scale * (oContainer.offsetHeight - oBox.offsetHeight) + 'px';//按比例滚动条滚到哪个位置文本滚到对应的
+
+
             
     }
 
