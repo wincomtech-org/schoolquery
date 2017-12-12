@@ -53,18 +53,18 @@ if($rec=='load'){
 		echo "<script>alert('户籍不能为空');history.go(-1);</script>"; 
 		exit; 
 	}
-	if(empty($_POST['shenfen'])){
-		echo "<script>alert('身份证号不能为空');history.go(-1);</script>";  
-		exit;
-	}
+	// if(empty($_POST['shenfen'])){
+	// 	echo "<script>alert('身份证号不能为空');history.go(-1);</script>";  
+	// 	exit;
+	// }
 	if(empty($_POST['txz'])){
 		echo "<script>alert('通行证号不能为空');history.go(-1);</script>";  
 		exit;
 	}
-	if(empty($_POST['neidi_tel'])){
-		echo "<script>alert('内地手机号不能为空');history.go(-1);</script>"; 
-		exit; 
-	}
+	// if(empty($_POST['neidi_tel'])){
+	// 	echo "<script>alert('内地手机号不能为空');history.go(-1);</script>"; 
+	// 	exit; 
+	// }
 	if(empty($_POST['address'])){
 		echo "<script>alert('内地住址不能为空');history.go(-1);</script>";
 		exit;  
@@ -92,10 +92,10 @@ if($rec=='load'){
 			echo "<script>alert('监护人英文名不能为空');history.go(-1);</script>"; 
 			exit; 
 		}
-		if(empty($_POST['tutor_shenfen'])){
-			echo "<script>alert('监护人身份证号不能为空');history.go(-1);</script>"; 
-			exit; 
-		}
+		// if(empty($_POST['tutor_shenfen'])){
+		// 	echo "<script>alert('监护人身份证号不能为空');history.go(-1);</script>"; 
+		// 	exit; 
+		// }
 		if(empty($_POST['tutor_txz'])){
 			echo "<script>alert('监护人通行证或护照号不能为空');history.go(-1);</script>"; 
 			exit; 
