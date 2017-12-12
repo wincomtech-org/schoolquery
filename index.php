@@ -56,12 +56,18 @@ while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
     $taste[]=$row;
 }
 //获取分数类型
-$sql = "SELECT * FROM " . $dou->table('score').'order by sort desc';
+$sql = "SELECT * FROM " . $dou->table('score').' where sort<5 order by sort asc';
 $query = $dou->query($sql);
 while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
-    $score[]=$row;
+    $score0[]=$row;
 }
-$smarty->assign('score', $score);
+$sql = "SELECT * FROM " . $dou->table('score').' where sort>5 order by sort asc';
+$query = $dou->query($sql);
+while ($row = $GLOBALS['dou']->fetch_assoc($query)) {
+    $score1[]=$row;
+}
+$smarty->assign('score0', $score0);
+$smarty->assign('score1', $score1);
 $smarty->assign('taste', $taste);//获取资讯
 
 $sql = "SELECT * FROM " . $dou->table('course').'order by sort desc limit 6';

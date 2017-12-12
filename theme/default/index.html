@@ -26,17 +26,18 @@
 						<input type="text" name="date" id="deadline" class="deadline lf" readonly placeholder="截止日期">
 						<select name="gradetype" class="gradetype rt">
 							<option value="0">分數類型</option>
-							<!-- {foreach from=$score item=sco} -->
+								<option value="-1">高考</option>
+							<!-- {foreach from=$score0 item=sco} -->
 								<option value="{$sco.id}">{$sco.name}</option>
 							<!-- {/foreach} -->
 						</select>
 					</div>
 					<div class="form-row">
 						<input type="text" placeholder="分數" name="grade" class="grade lf">
-						<select name="province" class="province rt" style="display:none;">
+						<select name="province" class="province rt" style="display:none">
 							<option value="0">选择省份</option>
-							<!-- {foreach from=$score item=sco} -->
-								<option value="{$sco.id}">{$sco.name}</option>
+							<!-- {foreach from=$score1 item=sco} -->
+								<option value="{$sco.id}">{$sco.content}</option>
 							<!-- {/foreach} -->
 						</select>
 					</div>
@@ -163,16 +164,16 @@
 
 {literal}
 <script>
-	$(document).delegate('.gradetype option','click',function(e){
-	
-		var sel_pro = $(this).val();
-		if(sel_pro == 1){
-			$('.province').show();
-		}else{
-			$('.province').hide();
-		}
-		e.preventDeafult();
-	})
+
+ 
+$('.gradetype').on('click',function(){
+	var sel_pro = $(this).val(); 
+	if(sel_pro == '-1'){ 
+		$('.province').show();
+	}else{
+		$('.province').hide();
+	}
+}) 
 </script>
 {/literal}
 </body>

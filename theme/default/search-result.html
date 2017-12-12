@@ -86,7 +86,12 @@
 						<div class="srform-row">
 							<select name="gradetype" class="gradetype">
 								<option value="0">分數類型</option>
-								<!-- {foreach from=$score item=sco} -->
+								<!-- {if $gradetype gt 5} -->
+								<option value="-1" selected="selected">高考</option>
+								<!-- {else} -->
+								<option value="-1">高考</option>
+								<!-- {/if} -->
+								<!-- {foreach from=$score0 item=sco} -->
 								<!-- {if $sco.id eq $gradetype} -->
 								<option value="{$sco.id}" selected="selected">{$sco.name}</option>
 								<!-- {else} -->
@@ -100,16 +105,18 @@
 						<div class="srform-row" style="display:none;">
 							<select  name="province" class="province" >
 								<option value="0">选择省份</option>
-								<!-- {foreach from=$score item=sco} -->
+								<!-- {foreach from=$score1 item=sco} -->
 								<!-- {if $sco.id eq $gradetype} -->
-								<option value="{$sco.id}" selected="selected">{$sco.name}</option>
+							 
+								<option value="{$sco.id}" selected="selected">{$sco.content}</option>
 								<!-- {else} -->
-								<option value="{$sco.id}" >{$sco.name}</option>
+							 
+								<option value="{$sco.id}">{$sco.content}</option>
 								<!-- {/if} -->
 								<!-- {/foreach} -->
 							</select>
 						</div>
-
+ 
 						<div class="srform-row">
 							<input type="text" placeholder="分數" name="grade" class="grade" value="{$grade}">
 						</div>
@@ -131,10 +138,9 @@
 
 {literal}
 <script>
-	$(function(){
-		var sel_pro = $('.gradetype  option:selected').val();
-		console.log(sel_pro)
-		if(sel_pro == 1){
+	$(function(){ 
+		var sel_pro = $('.gradetype').val();
+		if(sel_pro == '-1'){
 		
 			$('.province').parent().show();
 		}else{
@@ -142,9 +148,9 @@
 		}
 	})
 
-	$('.gradetype  option').on('click',function(){
+	$('.gradetype ').on('click',function(){
 		var sel_pro = $(this).val();
-		if(sel_pro == 1){
+		if(sel_pro == '-1'){
 		
 			$('.province').parent().show();
 		}else{
